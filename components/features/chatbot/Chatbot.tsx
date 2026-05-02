@@ -92,7 +92,7 @@ export default function Chatbot() {
           {!isOpen && (
             <motion.button
               onClick={() => setIsOpen(true)}
-              className="group relative rounded-full border border-ctp-surface0/60 bg-ctp-base/60 p-3 text-ctp-mauve shadow-lg shadow-ctp-crust/25 backdrop-blur-xl transition-colors hover:border-ctp-surface1 hover:bg-ctp-base/75"
+              className="group relative rounded-full border border-ctp-surface0/60 bg-ctp-base/60 p-3 text-ctp-maroon shadow-lg shadow-ctp-crust/25 backdrop-blur-xl transition-colors hover:border-ctp-surface1 hover:bg-ctp-base/75"
               exit={{ scale: 0, opacity: 0 }}
               whileHover={reducedMotion ? undefined : { y: -3, scale: 1.05 }}
               whileTap={reducedMotion ? { scale: 1 } : { scale: 0.94 }}
@@ -141,8 +141,8 @@ export default function Chatbot() {
                 {/* Header */}
                 <div className="flex items-center justify-between p-3.5 border-b border-ctp-surface0/60">
                   <div className="flex items-center gap-2.5">
-                    <div className="p-1.5 bg-ctp-mauve/10 rounded-lg">
-                      <Bot className="w-4 h-4 text-ctp-mauve" />
+                    <div className="p-1.5 bg-ctp-maroon/10 rounded-lg">
+                      <Bot className="w-4 h-4 text-ctp-maroon" />
                     </div>
                     <div>
                       <h3 className="text-sm font-display font-semibold text-ctp-text">
@@ -170,7 +170,7 @@ export default function Chatbot() {
                 >
                   {messages.length === 0 && (
                     <div className="text-center mt-10">
-                      <Bot className="w-10 h-10 mx-auto mb-2 text-ctp-mauve/60" />
+                      <Bot className="w-10 h-10 mx-auto mb-2 text-ctp-maroon/60" />
                       <p className="text-sm text-ctp-text font-medium mb-1">
                         {copy.chatbot.introTitle}
                       </p>
@@ -186,14 +186,14 @@ export default function Chatbot() {
                       className={`flex gap-2 ${message.role === "user" ? "justify-end" : "justify-start"}`}
                     >
                       {message.role === "assistant" && (
-                        <div className="shrink-0 w-6 h-6 bg-ctp-mauve/10 rounded-full flex items-center justify-center mt-0.5">
-                          <Bot className="w-3.5 h-3.5 text-ctp-mauve" />
+                        <div className="shrink-0 w-6 h-6 bg-ctp-maroon/10 rounded-full flex items-center justify-center mt-0.5">
+                          <Bot className="w-3.5 h-3.5 text-ctp-maroon" />
                         </div>
                       )}
                       <div
                         className={`max-w-[80%] px-3 py-2 rounded-xl text-sm leading-relaxed ${
                           message.role === "user"
-                            ? "bg-ctp-mauve text-ctp-crust rounded-br-sm"
+                            ? "bg-ctp-maroon text-ctp-crust rounded-br-sm"
                             : "bg-ctp-surface0/50 text-ctp-text rounded-bl-sm"
                         }`}
                       >
@@ -202,7 +202,7 @@ export default function Chatbot() {
                             return (
                               <div
                                 key={index}
-                                className="space-y-1.5 wrap-break-word [&_a]:text-ctp-blue [&_a]:underline-offset-2 hover:[&_a]:underline [&_li]:ml-4 [&_li]:list-disc [&_ol]:ml-4 [&_ol]:list-decimal"
+                                className="space-y-1.5 wrap-break-word [&_a]:text-ctp-red [&_a]:underline-offset-2 hover:[&_a]:underline [&_li]:ml-4 [&_li]:list-disc [&_ol]:ml-4 [&_ol]:list-decimal"
                               >
                                 <ReactMarkdown
                                   remarkPlugins={[remarkGfm]}
@@ -254,14 +254,14 @@ export default function Chatbot() {
 
                   {isLoading && (
                     <div className="flex gap-2">
-                      <div className="shrink-0 w-6 h-6 bg-ctp-mauve/10 rounded-full flex items-center justify-center">
-                        <Bot className="w-3.5 h-3.5 text-ctp-mauve" />
+                      <div className="shrink-0 w-6 h-6 bg-ctp-maroon/10 rounded-full flex items-center justify-center">
+                        <Bot className="w-3.5 h-3.5 text-ctp-maroon" />
                       </div>
                       <div className="bg-ctp-surface0/50 px-3 py-2 rounded-xl rounded-bl-sm flex gap-1">
                         {[0, 1, 2].map((i) => (
                           <motion.span
                             key={i}
-                            className="w-1.5 h-1.5 bg-ctp-mauve rounded-full"
+                            className="w-1.5 h-1.5 bg-ctp-maroon rounded-full"
                             animate={{ y: [0, -4, 0], opacity: [0.4, 1, 0.4] }}
                             transition={{
                               duration: 0.8,
@@ -291,12 +291,12 @@ export default function Chatbot() {
                       onChange={(e) => setInput(e.target.value)}
                       placeholder={copy.chatbot.placeholder}
                       disabled={isLoading}
-                      className="flex-1 px-3 py-2 bg-ctp-surface0/30 border border-ctp-surface0/60 rounded-lg text-ctp-text placeholder-ctp-overlay0 focus:outline-none focus:ring-2 focus:ring-ctp-mauve/50 focus:border-ctp-mauve transition-all text-sm disabled:opacity-50"
+                      className="flex-1 px-3 py-2 bg-ctp-surface0/30 border border-ctp-surface0/60 rounded-lg text-ctp-text placeholder-ctp-overlay0 focus:outline-none focus:ring-2 focus:ring-ctp-maroon/50 focus:border-ctp-maroon transition-all text-sm disabled:opacity-50"
                     />
                     <button
                       type="submit"
                       disabled={isLoading || !input?.trim()}
-                      className="shrink-0 p-2 bg-ctp-mauve hover:bg-ctp-pink text-ctp-crust rounded-lg transition-colors disabled:opacity-50"
+                      className="shrink-0 p-2 bg-ctp-maroon hover:bg-ctp-pink text-ctp-crust rounded-lg transition-colors disabled:opacity-50"
                       aria-label={copy.chatbot.sendMessageAria}
                     >
                       {isLoading ? (
@@ -315,3 +315,6 @@ export default function Chatbot() {
     </>
   );
 }
+
+
+

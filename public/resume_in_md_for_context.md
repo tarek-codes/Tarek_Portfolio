@@ -1,10 +1,10 @@
-# Sharif Md. Yousuf
+# Tarek Alam Bhuiyan
 
-## sharifdotg.me
+## tarek.dev
 
-Dhaka, Bangladesh
+Computer Science undergraduate with hands-on experience in Machine Learning, Data Science, Data Analytics & Annotation, Natural Language Processing, and full-stack development. Skilled in Python, JavaScript, and SQL, with experience developing ML pipelines, implementing deep learning architectures, and building scalable web applications. Passionate about continuous learning and solving real-world problems using data-driven approaches.
 
-## <sharifmdyousuf007@gmail.com> | +880 1622-296740 | github.com/SharifdotG | linkedin.com/in/sharifdotg
+## <tarekalambhuiyan@gmail.com> | +8801601070407 | github.com/2ManyFaces | linkedin.com/in/tarekalambhuiyan
 
 ## Experience
 

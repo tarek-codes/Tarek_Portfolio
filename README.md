@@ -156,9 +156,9 @@ Home page composition:
 
 ## Contact
 
-- GitHub: [@SharifdotG](https://github.com/SharifdotG)
-- LinkedIn: [sharifdotg](https://linkedin.com/in/sharifdotg)
-- Email: [sharifmdyousuf007@gmail.com](mailto:sharifmdyousuf007@gmail.com)
+- GitHub: [@2ManyFaces](https://github.com/2ManyFaces)
+- LinkedIn: [tarekalambhuiyan](https://linkedin.com/in/tarekalambhuiyan)
+- Email: [tarekalambhuiyan@gmail.com](mailto:tarekalambhuiyan@gmail.com)
 
 ## Acknowledgements
 

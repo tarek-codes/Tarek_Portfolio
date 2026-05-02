@@ -56,7 +56,7 @@ export default function SectionTitle({
           viewport={{ once: true }}
           transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
         >
-          <Sparkles className="w-4 h-4 text-ctp-green" />
+          <Sparkles className="w-4 h-4 text-ctp-maroon" />
           <span className="text-ctp-text font-medium">{badge}</span>
         </motion.div>
       )}
@@ -79,3 +79,6 @@ export default function SectionTitle({
     </motion.div>
   );
 }
+
+
+

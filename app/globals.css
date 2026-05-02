@@ -23,21 +23,21 @@
   --color-ctp-subtext0: #a6adc8;
   --color-ctp-subtext1: #bac2de;
 
-  /* Accent Colors */
-  --color-ctp-rosewater: #f5e0dc;
-  --color-ctp-flamingo: #f2cdcd;
-  --color-ctp-pink: #f5c2e7;
-  --color-ctp-mauve: #cba6f7;
-  --color-ctp-red: #f38ba8;
-  --color-ctp-maroon: #eba0ac;
-  --color-ctp-peach: #fab387;
-  --color-ctp-yellow: #f9e2af;
-  --color-ctp-green: #a6e3a1;
-  --color-ctp-teal: #94e2d5;
-  --color-ctp-sky: #89dceb;
-  --color-ctp-sapphire: #74c7ec;
-  --color-ctp-blue: #89b4fa;
-  --color-ctp-lavender: #b4befe;
+  /* Accent Colors - Blood Red Vibe */
+  --color-ctp-rosewater: #ffe4e6;
+  --color-ctp-flamingo: #be123c;
+  --color-ctp-pink: #9f1239;
+  --color-ctp-mauve: #7f1d1d;
+  --color-ctp-red: #dc2626;
+  --color-ctp-maroon: #991b1b;
+  --color-ctp-peach: #fb7185;
+  --color-ctp-yellow: #f43f5e;
+  --color-ctp-green: #9f1239;
+  --color-ctp-teal: #e11d48;
+  --color-ctp-sky: #fda4af;
+  --color-ctp-sapphire: #e11d48;
+  --color-ctp-blue: #dc2626;
+  --color-ctp-lavender: #f43f5e;
 
   /* Spacing */
   --spacing-section: 6rem;
@@ -61,32 +61,32 @@
   --color-ctp-subtext0: #6c6f85;
   --color-ctp-subtext1: #5c5f77;
 
-  --color-ctp-rosewater: #dc8a78;
-  --color-ctp-flamingo: #dd7878;
-  --color-ctp-pink: #ea76cb;
-  --color-ctp-mauve: #8839ef;
-  --color-ctp-red: #d20f39;
-  --color-ctp-maroon: #e64553;
-  --color-ctp-peach: #fe640b;
-  --color-ctp-yellow: #df8e1d;
-  --color-ctp-green: #40a02b;
-  --color-ctp-teal: #179299;
-  --color-ctp-sky: #04a5e5;
-  --color-ctp-sapphire: #209fb5;
-  --color-ctp-blue: #1e66f5;
-  --color-ctp-lavender: #7287fd;
+  --color-ctp-rosewater: #fff1f2;
+  --color-ctp-flamingo: #e11d48;
+  --color-ctp-pink: #be123c;
+  --color-ctp-mauve: #9f1239;
+  --color-ctp-red: #dc2626;
+  --color-ctp-maroon: #b91c1c;
+  --color-ctp-peach: #fb7185;
+  --color-ctp-yellow: #be123c;
+  --color-ctp-green: #991b1b;
+  --color-ctp-teal: #e11d48;
+  --color-ctp-sky: #f43f5e;
+  --color-ctp-sapphire: #991b1b;
+  --color-ctp-blue: #b91c1c;
+  --color-ctp-lavender: #e11d48;
 }
 
 .light body {
   background-image:
     radial-gradient(
       ellipse 80% 50% at 50% -20%,
-      rgba(30, 102, 245, 0.1),
+      rgba(185, 28, 28, 0.1),
       transparent
     ),
     radial-gradient(
       ellipse 60% 40% at 100% 100%,
-      rgba(136, 57, 239, 0.08),
+      rgba(153, 27, 27, 0.08),
       transparent
     );
 }
@@ -96,16 +96,16 @@
   border: 1px solid rgba(188, 192, 204, 0.5);
 }
 
-.light .glow-blue {
+.light .glow-red {
   box-shadow:
-    0 0 20px rgba(30, 102, 245, 0.2),
-    0 0 40px rgba(30, 102, 245, 0.08);
+    0 0 20px rgba(185, 28, 28, 0.2),
+    0 0 40px rgba(185, 28, 28, 0.08);
 }
 
-.light .glow-mauve {
+.light .glow-maroon {
   box-shadow:
-    0 0 20px rgba(136, 57, 239, 0.2),
-    0 0 40px rgba(136, 57, 239, 0.08);
+    0 0 20px rgba(153, 27, 27, 0.2),
+    0 0 40px rgba(153, 27, 27, 0.08);
 }
 
 /* Global Styles */
@@ -119,12 +119,12 @@ body {
   background-image:
     radial-gradient(
       ellipse 80% 50% at 50% -20%,
-      rgba(137, 180, 250, 0.15),
+      rgba(220, 38, 38, 0.15),
       transparent
     ),
     radial-gradient(
       ellipse 60% 40% at 100% 100%,
-      rgba(203, 166, 247, 0.1),
+      rgba(153, 27, 27, 0.1),
       transparent
     );
   min-height: 100vh;
@@ -140,7 +140,7 @@ body {
 }
 
 .font-mono {
-  font-family: var(--font-cascadia), "Hind Siliguri", monospace !important;
+  font-family: var(--font-jetbrains-mono), "Hind Siliguri", monospace !important;
 }
 
 .font-bengali {
@@ -152,21 +152,21 @@ html.locale-bn body {
 }
 
 /* Glow effect utility */
-.glow-blue {
+.glow-red {
   box-shadow:
-    0 0 20px rgba(137, 180, 250, 0.3),
-    0 0 40px rgba(137, 180, 250, 0.1);
+    0 0 20px rgba(220, 38, 38, 0.3),
+    0 0 40px rgba(220, 38, 38, 0.1);
 }
 
-.glow-mauve {
+.glow-maroon {
   box-shadow:
-    0 0 20px rgba(203, 166, 247, 0.3),
-    0 0 40px rgba(203, 166, 247, 0.1);
+    0 0 20px rgba(153, 27, 27, 0.3),
+    0 0 40px rgba(153, 27, 27, 0.1);
 }
 
 /* Gradient text utility */
 .gradient-text {
-  background: linear-gradient(135deg, #89b4fa 0%, #cba6f7 50%, #f5c2e7 100%);
+  background: linear-gradient(135deg, #dc2626 0%, #991b1b 50%, #fb7185 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -184,7 +184,7 @@ html.locale-bn body {
 }
 
 .animated-gradient {
-  background: linear-gradient(-45deg, #89b4fa, #cba6f7, #f5c2e7, #89dceb);
+  background: linear-gradient(-45deg, #dc2626, #991b1b, #fb7185, #be123c);
   background-size: 400% 400%;
   animation: gradient-shift 15s ease infinite;
 }
@@ -334,7 +334,7 @@ html.locale-bn body {
 }
 
 .animate-text-gradient {
-  background: linear-gradient(90deg, #89b4fa, #cba6f7, #f5c2e7, #89b4fa);
+  background: linear-gradient(90deg, #dc2626, #991b1b, #fb7185, #dc2626);
   background-size: 200% 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

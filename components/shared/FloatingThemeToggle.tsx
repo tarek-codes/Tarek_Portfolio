@@ -25,7 +25,7 @@ export default function FloatingThemeToggle() {
         whileHover={{ y: -3, scale: 1.08 }}
         whileTap={{ scale: 0.94 }}
         transition={springTransition}
-        className="relative rounded-full border border-ctp-surface0/60 bg-ctp-base/60 p-3 text-ctp-yellow shadow-lg backdrop-blur-xl transition-colors hover:border-ctp-surface1"
+        className="relative rounded-full border border-ctp-surface0/60 bg-ctp-base/60 p-3 text-ctp-red shadow-lg backdrop-blur-xl transition-colors hover:border-ctp-surface1"
         aria-label="Toggle theme"
       >
         <AnimatePresence mode="wait">
@@ -47,7 +47,7 @@ export default function FloatingThemeToggle() {
               exit={{ rotate: -90, opacity: 0 }}
               transition={{ duration: 0.2 }}
             >
-              <Moon className="h-5 w-5 text-ctp-blue" />
+              <Moon className="h-5 w-5 text-ctp-red" />
             </motion.div>
           )}
         </AnimatePresence>
@@ -55,3 +55,6 @@ export default function FloatingThemeToggle() {
     </motion.div>
   );
 }
+
+
+

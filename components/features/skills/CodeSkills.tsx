@@ -28,29 +28,29 @@ const getCategories = (locale: Locale) => {
       key: "languages" as const,
       label: copy.skills.languages,
       icon: Code2,
-      color: "text-ctp-blue",
-      bg: "bg-ctp-blue/10",
+      color: "text-ctp-red",
+      bg: "bg-ctp-red/10",
     },
     {
       key: "frameworks" as const,
       label: copy.skills.frameworks,
       icon: Globe,
-      color: "text-ctp-mauve",
-      bg: "bg-ctp-mauve/10",
+      color: "text-ctp-maroon",
+      bg: "bg-ctp-maroon/10",
     },
     {
       key: "tools" as const,
       label: copy.skills.tools,
       icon: Wrench,
-      color: "text-ctp-green",
-      bg: "bg-ctp-green/10",
+      color: "text-ctp-maroon",
+      bg: "bg-ctp-maroon/10",
     },
     {
       key: "fundamentals" as const,
       label: copy.skills.fundamentals,
       icon: BookOpen,
-      color: "text-ctp-yellow",
-      bg: "bg-ctp-yellow/10",
+      color: "text-ctp-red",
+      bg: "bg-ctp-red/10",
     },
   ];
 };
@@ -230,7 +230,7 @@ function InfiniteScrollingLogos() {
                   <button
                     key={`${logoKey}-${segmentIndex}`}
                     type="button"
-                    className="group relative shrink-0 snap-start rounded-lg cursor-default focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ctp-blue focus-visible:ring-offset-2 focus-visible:ring-offset-ctp-base"
+                    className="group relative shrink-0 snap-start rounded-lg cursor-default focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ctp-red focus-visible:ring-offset-2 focus-visible:ring-offset-ctp-base"
                     aria-label={`${logo.name} logo`}
                     aria-describedby={tooltipId}
                     onMouseEnter={() => handleLogoActivate(logoKey)}
@@ -245,7 +245,7 @@ function InfiniteScrollingLogos() {
                   >
                     <div className="relative flex h-16 w-16 items-center justify-center p-2">
                       {failedImages.has(logoKey) ? (
-                        <span className="text-xs font-semibold text-ctp-blue">
+                        <span className="text-xs font-semibold text-ctp-red">
                           {logo.name}
                         </span>
                       ) : (
@@ -329,8 +329,8 @@ export default function CodeSkills() {
         className="pointer-events-none absolute inset-0 -z-10"
         aria-hidden="true"
       >
-        <div className="absolute -left-10 top-10 h-56 w-56 rounded-full bg-ctp-blue/8 blur-3xl" />
-        <div className="absolute -right-8 bottom-0 h-60 w-60 rounded-full bg-ctp-green/8 blur-3xl" />
+        <div className="absolute -left-10 top-10 h-56 w-56 rounded-full bg-ctp-red/8 blur-3xl" />
+        <div className="absolute -right-8 bottom-0 h-60 w-60 rounded-full bg-ctp-maroon/8 blur-3xl" />
       </div>
 
       <SectionTitle
@@ -399,3 +399,6 @@ export default function CodeSkills() {
     </Section>
   );
 }
+
+
+

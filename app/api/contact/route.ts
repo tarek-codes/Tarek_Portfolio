@@ -25,8 +25,8 @@ export async function POST(req: NextRequest) {
 
     // Use env-driven sender/recipient with safe defaults (Resend sandbox domain)
     const fromAddress =
-      process.env.RESEND_FROM || "Sharif Portfolio <onboarding@resend.dev>";
-    const toAddress = process.env.RESEND_TO || "sharifmdyousuf007@gmail.com";
+      process.env.RESEND_FROM || "Tarek Portfolio <onboarding@resend.dev>";
+    const toAddress = process.env.RESEND_TO || "tarekalambhuiyan@gmail.com";
 
     // HTML escaping helper
     const escapeHtml = (str: string) =>
@@ -83,3 +83,6 @@ export async function POST(req: NextRequest) {
     );
   }
 }
+
+
+

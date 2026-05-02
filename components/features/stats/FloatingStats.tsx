@@ -44,25 +44,25 @@ export default function FloatingStats() {
       icon: TrendingUp,
       label: copy.stats.rating,
       value: codeforcesData?.rating || 0,
-      color: "text-ctp-blue",
+      color: "text-ctp-red",
     },
     {
       icon: Award,
       label: copy.stats.maxRating,
       value: codeforcesData?.maxRating || 0,
-      color: "text-ctp-yellow",
+      color: "text-ctp-red",
     },
     {
       icon: Trophy,
       label: copy.stats.rank,
       value: codeforcesData?.rank || copy.stats.unrated,
-      color: "text-ctp-green",
+      color: "text-ctp-maroon",
     },
     {
       icon: Target,
       label: copy.stats.maxRank,
       value: codeforcesData?.maxRank || copy.stats.unrated,
-      color: "text-ctp-mauve",
+      color: "text-ctp-maroon",
     },
   ];
 
@@ -71,7 +71,7 @@ export default function FloatingStats() {
       icon: Code2,
       label: copy.stats.solved,
       value: leetcodeData?.totalSolved || 0,
-      color: "text-ctp-blue",
+      color: "text-ctp-red",
     },
     {
       icon: Trophy,
@@ -79,7 +79,7 @@ export default function FloatingStats() {
       value: leetcodeData?.ranking
         ? `#${leetcodeData.ranking.toLocaleString()}`
         : "N/A",
-      color: "text-ctp-yellow",
+      color: "text-ctp-red",
     },
   ];
 
@@ -99,9 +99,8 @@ export default function FloatingStats() {
     if (!isExpanded || hasFetched) return;
 
     let isActive = true;
-    setLoading(true);
-
     async function fetchData() {
+      setLoading(true);
       try {
         const [codeforces, leetcode] = await Promise.all([
           getCodeforcesUser(PERSONAL_INFO.codeforcesHandle),
@@ -148,7 +147,7 @@ export default function FloatingStats() {
           {!isExpanded && (
             <motion.button
               onClick={() => setIsExpanded(true)}
-              className="group relative rounded-full border border-ctp-surface0/60 bg-ctp-base/60 p-3 text-ctp-blue shadow-lg shadow-ctp-crust/25 backdrop-blur-xl transition-colors hover:border-ctp-surface1 hover:bg-ctp-base/75"
+              className="group relative rounded-full border border-ctp-surface0/60 bg-ctp-base/60 p-3 text-ctp-red shadow-lg shadow-ctp-crust/25 backdrop-blur-xl transition-colors hover:border-ctp-surface1 hover:bg-ctp-base/75"
               exit={{ scale: 0, opacity: 0 }}
               whileHover={reducedMotion ? undefined : { y: -3, scale: 1.05 }}
               whileTap={reducedMotion ? { scale: 1 } : { scale: 0.94 }}
@@ -195,8 +194,8 @@ export default function FloatingStats() {
               {/* Header */}
               <div className="flex items-center justify-between mb-5">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-ctp-blue/10 rounded-lg">
-                    <Code2 className="w-5 h-5 text-ctp-blue" />
+                  <div className="p-2 bg-ctp-red/10 rounded-lg">
+                    <Code2 className="w-5 h-5 text-ctp-red" />
                   </div>
                   <div>
                     <h3 className="text-base font-display font-bold text-ctp-text">
@@ -218,7 +217,7 @@ export default function FloatingStats() {
 
               {loading ? (
                 <div className="text-center py-6 text-ctp-overlay0 text-sm">
-                  <div className="w-8 h-8 border-2 border-ctp-surface1 border-t-ctp-blue rounded-full mx-auto mb-2 animate-spin" />
+                  <div className="w-8 h-8 border-2 border-ctp-surface1 border-t-ctp-red rounded-full mx-auto mb-2 animate-spin" />
                   {copy.stats.loading}
                 </div>
               ) : (
@@ -233,7 +232,7 @@ export default function FloatingStats() {
                         href={PERSONAL_INFO.codeforcesUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-xs text-ctp-blue hover:text-ctp-sapphire transition-colors flex items-center gap-1"
+                        className="text-xs text-ctp-red hover:text-ctp-flamingo transition-colors flex items-center gap-1"
                       >
                         {copy.stats.profile}{" "}
                         <ExternalLink className="w-3 h-3" />
@@ -284,7 +283,7 @@ export default function FloatingStats() {
                         href={PERSONAL_INFO.leetcodeUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-xs text-ctp-blue hover:text-ctp-sapphire transition-colors flex items-center gap-1"
+                        className="text-xs text-ctp-red hover:text-ctp-flamingo transition-colors flex items-center gap-1"
                       >
                         {copy.stats.profile}{" "}
                         <ExternalLink className="w-3 h-3" />
@@ -335,3 +334,6 @@ export default function FloatingStats() {
     </>
   );
 }
+
+
+

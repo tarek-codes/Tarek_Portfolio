@@ -22,15 +22,15 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ref,
   ) => {
     const baseStyles =
-      "inline-flex items-center justify-center gap-2 font-medium transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-ctp-blue focus-visible:ring-offset-2 focus-visible:ring-offset-ctp-base disabled:opacity-50 disabled:cursor-not-allowed";
+      "inline-flex items-center justify-center gap-2 font-medium transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-ctp-red focus-visible:ring-offset-2 focus-visible:ring-offset-ctp-base disabled:opacity-50 disabled:cursor-not-allowed";
 
     const variants = {
       primary:
-        "bg-ctp-blue text-ctp-crust hover:bg-ctp-sapphire active:scale-95",
+        "bg-ctp-red text-ctp-crust hover:bg-ctp-flamingo active:scale-95",
       secondary:
         "bg-ctp-surface0 text-ctp-text hover:bg-ctp-surface1 active:scale-95",
       outline:
-        "border-2 border-ctp-blue text-ctp-blue hover:bg-ctp-blue hover:text-ctp-crust active:scale-95",
+        "border-2 border-ctp-red text-ctp-red hover:bg-ctp-red hover:text-ctp-crust active:scale-95",
       ghost: "text-ctp-subtext0 hover:text-ctp-text hover:bg-ctp-surface0/50",
     };
 
@@ -57,3 +57,6 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 Button.displayName = "Button";
 
 export default Button;
+
+
+

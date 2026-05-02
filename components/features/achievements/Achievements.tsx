@@ -52,50 +52,50 @@ const getTypeStyles = (
   return {
     competition: {
       icon: Trophy,
-      color: "text-ctp-yellow",
-      bg: "bg-ctp-yellow/10",
-      accent: "bg-ctp-yellow/70",
-      glow: "bg-ctp-yellow/15",
+      color: "text-ctp-red",
+      bg: "bg-ctp-red/10",
+      accent: "bg-ctp-red/70",
+      glow: "bg-ctp-red/15",
       label: copy.achievements.competition,
     },
     scholarship: {
       icon: Medal,
-      color: "text-ctp-blue",
-      bg: "bg-ctp-blue/10",
-      accent: "bg-ctp-blue/70",
-      glow: "bg-ctp-blue/15",
+      color: "text-ctp-red",
+      bg: "bg-ctp-red/10",
+      accent: "bg-ctp-red/70",
+      glow: "bg-ctp-red/15",
       label: copy.achievements.scholarship,
     },
     academic: {
       icon: GraduationCap,
-      color: "text-ctp-mauve",
-      bg: "bg-ctp-mauve/10",
-      accent: "bg-ctp-mauve/70",
-      glow: "bg-ctp-mauve/15",
+      color: "text-ctp-maroon",
+      bg: "bg-ctp-maroon/10",
+      accent: "bg-ctp-maroon/70",
+      glow: "bg-ctp-maroon/15",
       label: copy.achievements.academic,
     },
     rating: {
       icon: Star,
-      color: "text-ctp-green",
-      bg: "bg-ctp-green/10",
-      accent: "bg-ctp-green/70",
-      glow: "bg-ctp-green/15",
+      color: "text-ctp-maroon",
+      bg: "bg-ctp-maroon/10",
+      accent: "bg-ctp-maroon/70",
+      glow: "bg-ctp-maroon/15",
       label: copy.achievements.rating,
     },
     certification: {
       icon: BadgeCheck,
-      color: "text-ctp-teal",
-      bg: "bg-ctp-teal/10",
-      accent: "bg-ctp-teal/70",
-      glow: "bg-ctp-teal/15",
+      color: "text-ctp-flamingo",
+      bg: "bg-ctp-flamingo/10",
+      accent: "bg-ctp-flamingo/70",
+      glow: "bg-ctp-flamingo/15",
       label: copy.achievements.certification,
     },
     training: {
       icon: BookOpen,
-      color: "text-ctp-sapphire",
-      bg: "bg-ctp-sapphire/10",
-      accent: "bg-ctp-sapphire/70",
-      glow: "bg-ctp-sapphire/15",
+      color: "text-ctp-flamingo",
+      bg: "bg-ctp-flamingo/10",
+      accent: "bg-ctp-flamingo/70",
+      glow: "bg-ctp-flamingo/15",
       label: copy.achievements.training,
     },
     volunteer: {
@@ -252,7 +252,7 @@ function AchievementCard({
                 href={achievement.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-xs text-ctp-blue transition-colors hover:text-ctp-sapphire focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ctp-blue/60 focus-visible:ring-offset-2 focus-visible:ring-offset-ctp-base rounded"
+                className="inline-flex items-center gap-1 text-xs text-ctp-red transition-colors hover:text-ctp-flamingo focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ctp-red/60 focus-visible:ring-offset-2 focus-visible:ring-offset-ctp-base rounded"
               >
                 {copy.achievements.view}
                 <ExternalLink className="h-3 w-3" />
@@ -264,7 +264,7 @@ function AchievementCard({
                 <button
                   type="button"
                   onClick={() => onOpenCertificate(achievement)}
-                  className="inline-flex items-center gap-1 text-xs text-ctp-blue transition-colors hover:text-ctp-sapphire focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ctp-blue/60 focus-visible:ring-offset-2 focus-visible:ring-offset-ctp-base rounded"
+                  className="inline-flex items-center gap-1 text-xs text-ctp-red transition-colors hover:text-ctp-flamingo focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ctp-red/60 focus-visible:ring-offset-2 focus-visible:ring-offset-ctp-base rounded"
                   aria-label={`${copy.achievements.viewCertificateFor} ${achievement.title}`}
                 >
                   {copy.achievements.certificate}
@@ -322,8 +322,8 @@ export default function Achievements() {
   return (
     <Section id="achievements" className="relative overflow-x-clip">
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -top-10 right-0 h-52 w-52 rounded-full bg-ctp-yellow/10 blur-3xl" />
-        <div className="absolute -bottom-12 left-6 h-56 w-56 rounded-full bg-ctp-blue/10 blur-3xl" />
+        <div className="absolute -top-10 right-0 h-52 w-52 rounded-full bg-ctp-red/10 blur-3xl" />
+        <div className="absolute -bottom-12 left-6 h-56 w-56 rounded-full bg-ctp-red/10 blur-3xl" />
       </div>
 
       <SectionTitle
@@ -358,7 +358,7 @@ export default function Achievements() {
             <button
               type="button"
               onClick={() => setShowMoreAchievements((value) => !value)}
-              className="group mx-auto inline-flex items-center gap-2 rounded-full border border-ctp-surface0/60 bg-ctp-surface0/25 px-4 py-2 text-sm font-medium text-ctp-subtext0 transition-[color,border-color,background-color] duration-200 hover:border-ctp-surface1 hover:bg-ctp-surface0/40 hover:text-ctp-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ctp-blue/60 focus-visible:ring-offset-2 focus-visible:ring-offset-ctp-base"
+              className="group mx-auto inline-flex items-center gap-2 rounded-full border border-ctp-surface0/60 bg-ctp-surface0/25 px-4 py-2 text-sm font-medium text-ctp-subtext0 transition-[color,border-color,background-color] duration-200 hover:border-ctp-surface1 hover:bg-ctp-surface0/40 hover:text-ctp-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ctp-red/60 focus-visible:ring-offset-2 focus-visible:ring-offset-ctp-base"
               aria-expanded={showMoreAchievements}
               aria-controls="more-achievements-panel"
             >
@@ -450,7 +450,7 @@ export default function Achievements() {
               <button
                 type="button"
                 onClick={() => setSelectedAchievement(null)}
-                className="absolute right-4 top-4 z-10 rounded-full bg-ctp-surface0 p-2 text-ctp-text transition-colors hover:bg-ctp-surface1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ctp-blue/60 focus-visible:ring-offset-2 focus-visible:ring-offset-ctp-base"
+                className="absolute right-4 top-4 z-10 rounded-full bg-ctp-surface0 p-2 text-ctp-text transition-colors hover:bg-ctp-surface1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ctp-red/60 focus-visible:ring-offset-2 focus-visible:ring-offset-ctp-base"
                 aria-label={copy.achievements.closeCertificate}
               >
                 <X className="h-5 w-5" />
@@ -485,3 +485,6 @@ export default function Achievements() {
     </Section>
   );
 }
+
+
+

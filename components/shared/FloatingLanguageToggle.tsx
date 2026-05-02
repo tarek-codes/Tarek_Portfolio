@@ -28,13 +28,16 @@ export default function FloatingLanguageToggle() {
         whileHover={{ y: -3, scale: 1.06 }}
         whileTap={{ scale: 0.94 }}
         transition={springTransition}
-        className="rounded-full border border-ctp-surface0/60 bg-ctp-base/60 p-3 text-ctp-blue shadow-lg backdrop-blur-xl transition-colors hover:border-ctp-surface1"
+        className="rounded-full border border-ctp-surface0/60 bg-ctp-base/60 p-3 text-ctp-red shadow-lg backdrop-blur-xl transition-colors hover:border-ctp-surface1"
         aria-label={copy.common.toggleLanguage}
       >
         <Globe
-          className={`h-5 w-5 ${locale === "bn" ? "text-ctp-green" : ""}`}
+          className={`h-5 w-5 ${locale === "bn" ? "text-ctp-maroon" : ""}`}
         />
       </motion.button>
     </motion.div>
   );
 }
+
+
+

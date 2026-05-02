@@ -30,27 +30,27 @@ const getTypeConfig = (locale: Locale) => {
   return {
     work: {
       icon: Briefcase,
-      color: "text-ctp-blue",
-      bg: "bg-ctp-blue/10",
+      color: "text-ctp-red",
+      bg: "bg-ctp-red/10",
       label: copy.experience.work,
-      marker: "bg-ctp-blue",
-      rail: "bg-ctp-blue/70",
+      marker: "bg-ctp-red",
+      rail: "bg-ctp-red/70",
     },
     teaching: {
       icon: BookOpen,
-      color: "text-ctp-green",
-      bg: "bg-ctp-green/10",
+      color: "text-ctp-maroon",
+      bg: "bg-ctp-maroon/10",
       label: copy.experience.teaching,
-      marker: "bg-ctp-green",
-      rail: "bg-ctp-green/70",
+      marker: "bg-ctp-maroon",
+      rail: "bg-ctp-maroon/70",
     },
     education: {
       icon: GraduationCap,
-      color: "text-ctp-mauve",
-      bg: "bg-ctp-mauve/10",
+      color: "text-ctp-maroon",
+      bg: "bg-ctp-maroon/10",
       label: copy.experience.education,
-      marker: "bg-ctp-mauve",
-      rail: "bg-ctp-mauve/70",
+      marker: "bg-ctp-maroon",
+      rail: "bg-ctp-maroon/70",
     },
   };
 };
@@ -61,8 +61,8 @@ const getOrganizingCategoryConfig = (locale: Locale) => {
   return {
     organizer: {
       label: copy.experience.organizer,
-      badge: "bg-ctp-blue/10 text-ctp-blue",
-      dot: "bg-ctp-blue",
+      badge: "bg-ctp-red/10 text-ctp-red",
+      dot: "bg-ctp-red",
     },
     volunteer: {
       label: copy.experience.volunteer,
@@ -206,8 +206,8 @@ export default function Experience() {
   return (
     <Section id="experience" className="relative overflow-x-clip">
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute left-1/2 top-8 h-56 w-56 -translate-x-1/2 rounded-full bg-ctp-blue/10 blur-3xl" />
-        <div className="absolute -bottom-12 right-8 h-48 w-48 rounded-full bg-ctp-mauve/10 blur-3xl" />
+        <div className="absolute left-1/2 top-8 h-56 w-56 -translate-x-1/2 rounded-full bg-ctp-red/10 blur-3xl" />
+        <div className="absolute -bottom-12 right-8 h-48 w-48 rounded-full bg-ctp-maroon/10 blur-3xl" />
       </div>
 
       <SectionTitle
@@ -275,7 +275,7 @@ export default function Experience() {
                   · {translateDynamicText(locale, featuredExperience.location)}
                 </p>
 
-                <div className="inline-flex items-center gap-1.5 rounded-lg border border-ctp-surface1/60 bg-ctp-surface0/30 px-2.5 py-1 text-xs text-ctp-blue mb-4">
+                <div className="inline-flex items-center gap-1.5 rounded-lg border border-ctp-surface1/60 bg-ctp-surface0/30 px-2.5 py-1 text-xs text-ctp-red mb-4">
                   <Calendar className="w-3.5 h-3.5" />
                   {translateDynamicText(
                     locale,
@@ -371,7 +371,7 @@ export default function Experience() {
                             {translateDynamicText(locale, exp.location)}
                           </p>
 
-                          <span className="mt-2 inline-flex items-center gap-1.5 text-xs text-ctp-blue">
+                          <span className="mt-2 inline-flex items-center gap-1.5 text-xs text-ctp-red">
                             <Calendar className="w-3.5 h-3.5" />
                             {translateDynamicText(locale, exp.startDate)} –{" "}
                             {translateDynamicText(locale, exp.endDate)}
@@ -409,9 +409,9 @@ export default function Experience() {
             aria-expanded={showOrganizing}
             aria-controls={organizingPanelId}
             aria-label={`${showOrganizing ? copy.experience.hide : copy.experience.show} ${copy.experience.ariaOrganizingToggle}`}
-            className="group mx-auto inline-flex items-center gap-2 rounded-full border border-ctp-surface0/60 bg-ctp-surface0/25 px-4 py-2 text-sm font-medium text-ctp-subtext0 transition-[color,border-color,background-color] duration-200 hover:border-ctp-surface1 hover:bg-ctp-surface0/40 hover:text-ctp-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ctp-blue/60"
+            className="group mx-auto inline-flex items-center gap-2 rounded-full border border-ctp-surface0/60 bg-ctp-surface0/25 px-4 py-2 text-sm font-medium text-ctp-subtext0 transition-[color,border-color,background-color] duration-200 hover:border-ctp-surface1 hover:bg-ctp-surface0/40 hover:text-ctp-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ctp-red/60"
           >
-            <Award className="w-4 h-4 text-ctp-blue" />
+            <Award className="w-4 h-4 text-ctp-red" />
             {copy.experience.organizingButton} ({organizingCountLabel})
             <ChevronDown
               className={`w-4 h-4 transition-transform duration-200 ${
@@ -472,7 +472,7 @@ export default function Experience() {
                       className="rounded-xl border border-ctp-surface0/60 bg-ctp-surface0/20 p-4 transition-colors duration-200 hover:border-ctp-surface1"
                     >
                       <div className="mb-2 flex items-center justify-between gap-2">
-                        <span className="text-xs font-mono text-ctp-blue">
+                        <span className="text-xs font-mono text-ctp-red">
                           {translateDynamicText(locale, item.date)}
                         </span>
                         <span
@@ -502,3 +502,6 @@ export default function Experience() {
     </Section>
   );
 }
+
+
+

@@ -71,27 +71,27 @@ const getStatusConfig = (
   return {
     active: {
       label: copy.projects.active,
-      badge: "bg-ctp-green/12",
-      dot: "bg-ctp-green",
-      text: "text-ctp-green",
-      rail: "bg-ctp-green/70",
-      glow: "bg-ctp-green/12",
+      badge: "bg-ctp-maroon/12",
+      dot: "bg-ctp-maroon",
+      text: "text-ctp-maroon",
+      rail: "bg-ctp-maroon/70",
+      glow: "bg-ctp-maroon/12",
     },
     stable: {
       label: copy.projects.stable,
-      badge: "bg-ctp-blue/12",
-      dot: "bg-ctp-blue",
-      text: "text-ctp-blue",
-      rail: "bg-ctp-blue/70",
-      glow: "bg-ctp-blue/12",
+      badge: "bg-ctp-red/12",
+      dot: "bg-ctp-red",
+      text: "text-ctp-red",
+      rail: "bg-ctp-red/70",
+      glow: "bg-ctp-red/12",
     },
     prototype: {
       label: copy.projects.prototype,
-      badge: "bg-ctp-mauve/12",
-      dot: "bg-ctp-mauve",
-      text: "text-ctp-mauve",
-      rail: "bg-ctp-mauve/70",
-      glow: "bg-ctp-mauve/12",
+      badge: "bg-ctp-maroon/12",
+      dot: "bg-ctp-maroon",
+      text: "text-ctp-maroon",
+      rail: "bg-ctp-maroon/70",
+      glow: "bg-ctp-maroon/12",
     },
     research: {
       label: copy.projects.research,
@@ -237,9 +237,9 @@ export default function Projects() {
               key={f}
               onClick={() => setFilter(f)}
               aria-pressed={filter === f}
-              className={`flex items-center gap-2 rounded-lg px-5 py-2 text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:ring-ctp-blue focus-visible:ring-offset-2 focus-visible:ring-offset-ctp-base ${
+              className={`flex items-center gap-2 rounded-lg px-5 py-2 text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:ring-ctp-red focus-visible:ring-offset-2 focus-visible:ring-offset-ctp-base ${
                 filter === f
-                  ? "bg-ctp-blue text-ctp-crust"
+                  ? "bg-ctp-red text-ctp-crust"
                   : "text-ctp-subtext0 hover:text-ctp-text bg-ctp-surface0/30"
               }`}
             >
@@ -313,7 +313,7 @@ export default function Projects() {
                 />
                 <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-linear-to-t from-ctp-crust/75 via-ctp-crust/15 to-transparent" />
                 {project.featured && (
-                  <span className="absolute right-3 top-3 inline-flex items-center gap-1 rounded-full bg-ctp-yellow/90 px-2 py-0.5 text-xs font-medium text-ctp-crust">
+                  <span className="absolute right-3 top-3 inline-flex items-center gap-1 rounded-full bg-ctp-red/90 px-2 py-0.5 text-xs font-medium text-ctp-crust">
                     <Star className="w-3 h-3 fill-current" />
                     {copy.projects.featuredBadge}
                   </span>
@@ -341,9 +341,9 @@ export default function Projects() {
                   </span>
                 </div>
 
-                <h3 className="mb-2 text-lg font-display font-bold text-ctp-text transition-colors group-hover:text-ctp-blue sm:text-[1.2rem]">
+                <h3 className="mb-2 text-lg font-display font-bold text-ctp-text transition-colors group-hover:text-ctp-red sm:text-[1.2rem]">
                   {project.title}
-                  <span className="mt-1 block h-px origin-left scale-x-0 bg-linear-to-r from-ctp-blue via-ctp-mauve to-ctp-pink transition-transform duration-300 group-hover:scale-x-100" />
+                  <span className="mt-1 block h-px origin-left scale-x-0 bg-linear-to-r from-ctp-red via-ctp-maroon to-ctp-pink transition-transform duration-300 group-hover:scale-x-100" />
                 </h3>
 
                 <p
@@ -360,7 +360,7 @@ export default function Projects() {
                   >
                     {stats.stars > 0 ? (
                       <span className="flex items-center gap-1.5">
-                        <Star className="h-3.5 w-3.5 text-ctp-yellow" />
+                        <Star className="h-3.5 w-3.5 text-ctp-red" />
                         {formatNumber(stats.stars)}
                       </span>
                     ) : (
@@ -371,19 +371,19 @@ export default function Projects() {
                     )}
                     {stats.forks > 0 && (
                       <span className="flex items-center gap-1.5">
-                        <GitFork className="h-3.5 w-3.5 text-ctp-blue" />
+                        <GitFork className="h-3.5 w-3.5 text-ctp-red" />
                         {formatNumber(stats.forks)}
                       </span>
                     )}
                     {stats.downloads != null && stats.downloads > 0 && (
                       <span className="flex items-center gap-1.5">
-                        <Download className="h-3.5 w-3.5 text-ctp-green" />
+                        <Download className="h-3.5 w-3.5 text-ctp-maroon" />
                         {formatNumber(stats.downloads)}
                       </span>
                     )}
                     {stats.language && (
                       <span className="ml-auto flex items-center gap-1.5">
-                        <span className="h-2 w-2 rounded-full bg-ctp-mauve" />
+                        <span className="h-2 w-2 rounded-full bg-ctp-maroon" />
                         {stats.language}
                       </span>
                     )}
@@ -421,7 +421,7 @@ export default function Projects() {
                     href={project.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group/link flex flex-1 items-center justify-center gap-2 rounded-lg border border-ctp-surface1/50 bg-ctp-surface0/50 px-3 py-2 text-sm font-medium text-ctp-text transition-colors hover:bg-ctp-surface0 focus-visible:ring-2 focus-visible:ring-ctp-blue focus-visible:ring-offset-2 focus-visible:ring-offset-ctp-base"
+                    className="group/link flex flex-1 items-center justify-center gap-2 rounded-lg border border-ctp-surface1/50 bg-ctp-surface0/50 px-3 py-2 text-sm font-medium text-ctp-text transition-colors hover:bg-ctp-surface0 focus-visible:ring-2 focus-visible:ring-ctp-red focus-visible:ring-offset-2 focus-visible:ring-offset-ctp-base"
                   >
                     <Github className="h-4 w-4 transition-transform duration-200 group-hover/link:scale-110" />
                     {copy.projects.code}
@@ -431,7 +431,7 @@ export default function Projects() {
                       href={project.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group/live flex flex-1 items-center justify-center gap-2 rounded-lg bg-ctp-blue px-3 py-2 text-sm font-medium text-ctp-crust transition-colors hover:bg-ctp-sapphire focus-visible:ring-2 focus-visible:ring-ctp-blue focus-visible:ring-offset-2 focus-visible:ring-offset-ctp-base"
+                      className="group/live flex flex-1 items-center justify-center gap-2 rounded-lg bg-ctp-red px-3 py-2 text-sm font-medium text-ctp-crust transition-colors hover:bg-ctp-flamingo focus-visible:ring-2 focus-visible:ring-ctp-red focus-visible:ring-offset-2 focus-visible:ring-offset-ctp-base"
                     >
                       <ExternalLink className="h-4 w-4 transition-transform duration-200 group-hover/live:-translate-y-0.5 group-hover/live:scale-105" />
                       {copy.projects.live}
@@ -452,10 +452,10 @@ export default function Projects() {
         viewport={{ once: true }}
       >
         <a
-          href="https://github.com/SharifdotG"
+          href="https://github.com/2ManyFaces"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 rounded-lg border border-ctp-surface0/60 bg-ctp-surface0/30 px-6 py-2.5 text-sm font-medium text-ctp-text transition-colors hover:border-ctp-surface1 focus-visible:ring-2 focus-visible:ring-ctp-blue focus-visible:ring-offset-2 focus-visible:ring-offset-ctp-base"
+          className="inline-flex items-center gap-2 rounded-lg border border-ctp-surface0/60 bg-ctp-surface0/30 px-6 py-2.5 text-sm font-medium text-ctp-text transition-colors hover:border-ctp-surface1 focus-visible:ring-2 focus-visible:ring-ctp-red focus-visible:ring-offset-2 focus-visible:ring-offset-ctp-base"
         >
           <Github className="h-4 w-4" />
           {copy.projects.viewAllRepos}
@@ -465,3 +465,6 @@ export default function Projects() {
     </Section>
   );
 }
+
+
+

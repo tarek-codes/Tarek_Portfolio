@@ -81,14 +81,14 @@ export default function CodeBlock({ code, language }: CodeBlockProps) {
           onClick={handleCopy}
           whileHover={reducedMotion ? undefined : { y: -1, scale: 1.02 }}
           whileTap={reducedMotion ? { scale: 1 } : { scale: 0.95 }}
-          className="inline-flex items-center gap-1.5 rounded-md border border-ctp-surface0/60 bg-ctp-surface0/35 px-2 py-1 text-xs text-ctp-subtext0 transition-colors hover:border-ctp-surface1 hover:text-ctp-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ctp-mauve/60"
+          className="inline-flex items-center gap-1.5 rounded-md border border-ctp-surface0/60 bg-ctp-surface0/35 px-2 py-1 text-xs text-ctp-subtext0 transition-colors hover:border-ctp-surface1 hover:text-ctp-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ctp-maroon/60"
           aria-label="Copy code block"
         >
           <AnimatePresence mode="wait" initial={false}>
             {copyState === "copied" ? (
               <motion.span
                 key="copied"
-                className="inline-flex items-center gap-1.5 text-ctp-green"
+                className="inline-flex items-center gap-1.5 text-ctp-maroon"
                 initial={reducedMotion ? { opacity: 0 } : { opacity: 0, y: 4 }}
                 animate={reducedMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
                 exit={reducedMotion ? { opacity: 0 } : { opacity: 0, y: -4 }}
@@ -132,3 +132,6 @@ export default function CodeBlock({ code, language }: CodeBlockProps) {
     </div>
   );
 }
+
+
+

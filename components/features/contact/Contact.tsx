@@ -176,8 +176,8 @@ export default function Contact() {
       />
 
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -top-12 left-0 h-56 w-56 rounded-full bg-ctp-blue/10 blur-3xl" />
-        <div className="absolute bottom-0 right-0 h-56 w-56 rounded-full bg-ctp-mauve/10 blur-3xl" />
+        <div className="absolute -top-12 left-0 h-56 w-56 rounded-full bg-ctp-red/10 blur-3xl" />
+        <div className="absolute bottom-0 right-0 h-56 w-56 rounded-full bg-ctp-maroon/10 blur-3xl" />
       </div>
 
       <div className="grid lg:grid-cols-2 gap-10 max-w-5xl mx-auto">
@@ -213,10 +213,10 @@ export default function Contact() {
                       }
                 }
                 transition={{ duration: 0.22, ease }}
-                className="group flex items-center gap-4 p-4 rounded-xl border border-ctp-surface0/60 bg-ctp-surface0/30 hover:border-ctp-surface1 hover:bg-ctp-surface0/45 hover:shadow-md hover:shadow-ctp-blue/10 transition-[transform,border-color,background-color,box-shadow]"
+                className="group flex items-center gap-4 p-4 rounded-xl border border-ctp-surface0/60 bg-ctp-surface0/30 hover:border-ctp-surface1 hover:bg-ctp-surface0/45 hover:shadow-md hover:shadow-ctp-red/10 transition-[transform,border-color,background-color,box-shadow]"
               >
-                <div className="p-2 rounded-lg bg-ctp-blue/10 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:scale-105">
-                  <c.icon className="w-5 h-5 text-ctp-blue" />
+                <div className="p-2 rounded-lg bg-ctp-red/10 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:scale-105">
+                  <c.icon className="w-5 h-5 text-ctp-red" />
                 </div>
                 <div>
                   <p className="text-xs text-ctp-overlay0">{c.label}</p>
@@ -255,11 +255,11 @@ export default function Contact() {
                   }
                   whileTap={reducedMotion ? undefined : { scale: 0.97 }}
                   transition={{ duration: 0.2, ease }}
-                  className="group p-2.5 rounded-lg bg-ctp-surface0/30 border border-ctp-surface0/60 hover:border-ctp-surface1 hover:bg-ctp-surface0/45 hover:shadow-sm hover:shadow-ctp-blue/10 transition-[transform,border-color,background-color,box-shadow]"
+                  className="group p-2.5 rounded-lg bg-ctp-surface0/30 border border-ctp-surface0/60 hover:border-ctp-surface1 hover:bg-ctp-surface0/45 hover:shadow-sm hover:shadow-ctp-red/10 transition-[transform,border-color,background-color,box-shadow]"
                   aria-label={s.label}
                   title={s.label}
                 >
-                  <s.icon className="w-5 h-5 text-ctp-overlay0 group-hover:text-ctp-blue transition-colors duration-300" />
+                  <s.icon className="w-5 h-5 text-ctp-overlay0 group-hover:text-ctp-red transition-colors duration-300" />
                 </motion.a>
               ))}
             </motion.div>
@@ -276,11 +276,11 @@ export default function Contact() {
         >
           <form
             onSubmit={handleSubmit}
-            className="space-y-4 rounded-2xl border border-ctp-surface0/60 bg-ctp-surface0/30 backdrop-blur-sm p-6 transition-[border-color,box-shadow] hover:border-ctp-surface1 hover:shadow-md hover:shadow-ctp-blue/10"
+            className="space-y-4 rounded-2xl border border-ctp-surface0/60 bg-ctp-surface0/30 backdrop-blur-sm p-6 transition-[border-color,box-shadow] hover:border-ctp-surface1 hover:shadow-md hover:shadow-ctp-red/10"
             aria-busy={status === "loading"}
           >
             <h3 className="text-lg font-display font-semibold text-ctp-text flex items-center gap-2 mb-2">
-              <Send className="w-4 h-4 text-ctp-blue" />
+              <Send className="w-4 h-4 text-ctp-red" />
               {copy.contact.sendMessageTitle}
             </h3>
 
@@ -298,7 +298,7 @@ export default function Contact() {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-2.5 bg-ctp-base border border-ctp-surface1 rounded-lg text-ctp-text placeholder-ctp-overlay1 focus:outline-none focus:ring-2 focus:ring-ctp-blue/40 focus:border-ctp-blue focus:shadow-[0_0_0_3px_rgba(137,180,250,0.12)] transition-[border-color,box-shadow] text-sm"
+                className="w-full px-4 py-2.5 bg-ctp-base border border-ctp-surface1 rounded-lg text-ctp-text placeholder-ctp-overlay1 focus:outline-none focus:ring-2 focus:ring-ctp-red/40 focus:border-ctp-red focus:shadow-[0_0_0_3px_rgba(220,38,38,0.12)] transition-[border-color,box-shadow] text-sm"
                 placeholder={copy.contact.namePlaceholder}
               />
             </div>
@@ -317,7 +317,7 @@ export default function Contact() {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-2.5 bg-ctp-base border border-ctp-surface1 rounded-lg text-ctp-text placeholder-ctp-overlay1 focus:outline-none focus:ring-2 focus:ring-ctp-blue/40 focus:border-ctp-blue focus:shadow-[0_0_0_3px_rgba(137,180,250,0.12)] transition-[border-color,box-shadow] text-sm"
+                className="w-full px-4 py-2.5 bg-ctp-base border border-ctp-surface1 rounded-lg text-ctp-text placeholder-ctp-overlay1 focus:outline-none focus:ring-2 focus:ring-ctp-red/40 focus:border-ctp-red focus:shadow-[0_0_0_3px_rgba(220,38,38,0.12)] transition-[border-color,box-shadow] text-sm"
                 placeholder={copy.contact.emailPlaceholder}
               />
             </div>
@@ -336,7 +336,7 @@ export default function Contact() {
                 onChange={handleChange}
                 required
                 rows={4}
-                className="w-full px-4 py-2.5 bg-ctp-base border border-ctp-surface1 rounded-lg text-ctp-text placeholder-ctp-overlay1 focus:outline-none focus:ring-2 focus:ring-ctp-blue/40 focus:border-ctp-blue focus:shadow-[0_0_0_3px_rgba(137,180,250,0.12)] transition-[border-color,box-shadow] resize-none text-sm"
+                className="w-full px-4 py-2.5 bg-ctp-base border border-ctp-surface1 rounded-lg text-ctp-text placeholder-ctp-overlay1 focus:outline-none focus:ring-2 focus:ring-ctp-red/40 focus:border-ctp-red focus:shadow-[0_0_0_3px_rgba(220,38,38,0.12)] transition-[border-color,box-shadow] resize-none text-sm"
                 placeholder={copy.contact.messagePlaceholder}
               />
             </div>
@@ -349,7 +349,7 @@ export default function Contact() {
                   initial="hidden"
                   animate="visible"
                   exit="exit"
-                  className="flex items-center gap-2 p-3 bg-ctp-green/10 text-ctp-green rounded-lg text-sm"
+                  className="flex items-center gap-2 p-3 bg-ctp-maroon/10 text-ctp-maroon rounded-lg text-sm"
                   role="status"
                   aria-live="polite"
                 >
@@ -380,7 +380,7 @@ export default function Contact() {
               disabled={status === "loading"}
               whileTap={reducedMotion ? undefined : { scale: 0.985 }}
               transition={{ duration: 0.15, ease }}
-              className="w-full px-6 py-2.5 bg-ctp-blue hover:bg-ctp-sapphire text-ctp-crust font-semibold rounded-lg transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full px-6 py-2.5 bg-ctp-red hover:bg-ctp-flamingo text-ctp-crust font-semibold rounded-lg transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
               aria-busy={status === "loading"}
             >
               {status === "loading" ? (
@@ -401,3 +401,6 @@ export default function Contact() {
     </Section>
   );
 }
+
+
+

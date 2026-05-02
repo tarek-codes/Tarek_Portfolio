@@ -111,9 +111,9 @@ export default function Header() {
           <nav className="isolate flex items-center gap-1 rounded-[999px] bg-ctp-base/55 px-2 py-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.07)] backdrop-blur-2xl">
             <a
               href="#hero"
-              className="rounded-full px-3 py-1.5 text-sm font-display font-bold text-ctp-blue transition-colors hover:text-ctp-sapphire"
+              className="rounded-full px-3 py-1.5 text-sm font-display font-bold text-ctp-red transition-colors hover:text-ctp-flamingo"
             >
-              SharifdotG
+              2ManyFaces
             </a>
 
             <div className="mx-1 h-5 w-px bg-ctp-surface0/40" />
@@ -131,14 +131,14 @@ export default function Header() {
                   transition={springTransition}
                   className={`relative rounded-full px-3 py-1.5 text-sm font-medium transition-colors ${
                     isActive
-                      ? "text-ctp-blue"
+                      ? "text-ctp-red"
                       : "text-ctp-subtext0 hover:text-ctp-text"
                   }`}
                 >
                   {isActive && (
                     <motion.div
                       layoutId="activeNavDesktop"
-                      className="absolute inset-0.5 rounded-full border border-ctp-blue/25 bg-ctp-blue/12"
+                      className="absolute inset-0.5 rounded-full border border-ctp-red/25 bg-ctp-red/12"
                       transition={springTransition}
                     />
                   )}
@@ -159,7 +159,7 @@ export default function Header() {
               aria-label={copy.common.toggleLanguage}
             >
               <Globe
-                className={`h-4 w-4 ${locale === "bn" ? "text-ctp-green" : ""}`}
+                className={`h-4 w-4 ${locale === "bn" ? "text-ctp-maroon" : ""}`}
               />
             </motion.button>
 
@@ -231,7 +231,7 @@ export default function Header() {
                   transition={springTransition}
                   className={`relative rounded-full p-2 transition-colors ${
                     isActive
-                      ? "text-ctp-blue"
+                      ? "text-ctp-red"
                       : "text-ctp-subtext0 hover:text-ctp-text"
                   }`}
                   aria-label={label}
@@ -239,7 +239,7 @@ export default function Header() {
                   {isActive && (
                     <motion.div
                       layoutId="activeNavMobile"
-                      className="absolute inset-0.5 rounded-full border border-ctp-blue/25 bg-ctp-blue/12"
+                      className="absolute inset-0.5 rounded-full border border-ctp-red/25 bg-ctp-red/12"
                       transition={springTransition}
                     />
                   )}
@@ -253,3 +253,6 @@ export default function Header() {
     </>
   );
 }
+
+
+

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
-import { Bricolage_Grotesque, DM_Sans, Cascadia_Code } from "next/font/google";
+import { Bricolage_Grotesque, DM_Sans, JetBrains_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { LanguageProvider } from "@/components/providers/LanguageProvider";
 import Header from "@/components/shared/Header";
@@ -11,6 +11,7 @@ import {
   LOCALE_COOKIE_NAME,
   resolveLocale,
 } from "@/lib/i18n/translations";
+import { PERSONAL_INFO } from "@/lib/constants";
 import "./globals.css";
 
 // Display Font - Bricolage Grotesque for headings
@@ -29,10 +30,10 @@ const dmSans = DM_Sans({
   weight: ["400", "500", "600", "700"],
 });
 
-// Monospace Font - Cascadia Code for code snippets
-const cascadiaCode = Cascadia_Code({
+// Monospace Font - JetBrains Mono for code snippets
+const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
-  variable: "--font-cascadia",
+  variable: "--font-jetbrains-mono",
   display: "swap",
   weight: ["400", "500", "600", "700"],
 });
@@ -43,39 +44,38 @@ export async function generateMetadata(): Promise<Metadata> {
   const copy = getCopy(locale);
 
   return {
-    metadataBase: new URL("https://www.sharifdotg.me"),
+    metadataBase: new URL("https://tarek.dev"),
     title: copy.metadata.title,
     description: copy.metadata.description,
     keywords: [
-      "Sharif Md. Yousuf",
-      "SharifdotG",
-      "competitive programming",
-      "ICPC",
-      "Codeforces",
-      "web development",
-      "Next.js",
-      "React",
-      "TypeScript",
-      "University of Asia Pacific",
+      "Tarek Alam Bhuiyan",
+      "2ManyFaces",
+      "Machine Learning",
+      "Data Science",
+      "NLP",
+      "Python",
+      "BRAC University",
       "Bangladesh",
+      "Software Engineering",
+      "Full-stack Developer",
     ],
     authors: [
-      { name: "Sharif Md. Yousuf", url: "https://github.com/SharifdotG" },
+      { name: "Tarek Alam Bhuiyan", url: "https://github.com/2ManyFaces" },
     ],
-    creator: "Sharif Md. Yousuf",
+    creator: "Tarek Alam Bhuiyan",
     openGraph: {
       type: "website",
       locale: locale === "bn" ? "bn_BD" : "en_US",
-      url: "https://www.sharifdotg.me",
+      url: "https://tarek.dev",
       title: copy.metadata.title,
       description: copy.metadata.ogDescription,
-      siteName: "Sharif's Portfolio",
+      siteName: "Tarek's Portfolio",
       images: [
         {
-          url: "/og-image.png",
+          url: PERSONAL_INFO.profileImageUrl,
           width: 1200,
-          height: 630,
-          alt: "Sharif Md. Yousuf Portfolio",
+          height: 1200,
+          alt: "Tarek Alam Bhuiyan Portfolio",
         },
       ],
     },
@@ -83,7 +83,7 @@ export async function generateMetadata(): Promise<Metadata> {
       card: "summary_large_image",
       title: copy.metadata.title,
       description: copy.metadata.ogDescription,
-      images: ["/og-image.png"],
+      images: [PERSONAL_INFO.profileImageUrl],
     },
     robots: {
       index: true,
@@ -113,7 +113,7 @@ export default async function RootLayout({
     <html
       lang={initialLocale}
       suppressHydrationWarning
-      className={`${bricolage.variable} ${dmSans.variable} ${cascadiaCode.variable} ${initialLocale === "bn" ? "locale-bn" : ""}`}
+      className={`${bricolage.variable} ${dmSans.variable} ${jetbrainsMono.variable} ${initialLocale === "bn" ? "locale-bn" : ""}`}
     >
       <body className={`${dmSans.className} antialiased`}>
         <ThemeProvider>
@@ -128,3 +128,6 @@ export default async function RootLayout({
     </html>
   );
 }
+
+
+

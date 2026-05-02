@@ -62,7 +62,7 @@ export default function Footer() {
               className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between"
             >
               <p className="text-center text-sm text-ctp-subtext0 lg:text-left">
-                &copy; {currentYear} Sharif Md. Yousuf
+                &copy; {currentYear} Tarek Alam Bhuiyan
               </p>
 
               <nav
@@ -85,7 +85,7 @@ export default function Footer() {
                     className="group text-sm text-ctp-subtext0 transition-colors hover:text-ctp-text"
                   >
                     {copy.nav[item.key]}
-                    <span className="mt-1 block h-px origin-left scale-x-0 bg-ctp-blue transition-transform duration-300 group-hover:scale-x-100" />
+                    <span className="mt-1 block h-px origin-left scale-x-0 bg-ctp-red transition-transform duration-300 group-hover:scale-x-100" />
                   </motion.a>
                 ))}
               </nav>
@@ -168,3 +168,6 @@ export default function Footer() {
     </footer>
   );
 }
+
+
+

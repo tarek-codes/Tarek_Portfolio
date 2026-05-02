@@ -42,22 +42,22 @@ const toneMap: Record<
   }
 > = {
   blue: {
-    icon: "text-ctp-blue",
-    badge: "bg-ctp-blue/10",
-    dot: "bg-ctp-blue",
-    accent: "bg-ctp-blue/70",
+    icon: "text-ctp-red",
+    badge: "bg-ctp-red/10",
+    dot: "bg-ctp-red",
+    accent: "bg-ctp-red/70",
   },
   green: {
-    icon: "text-ctp-green",
-    badge: "bg-ctp-green/10",
-    dot: "bg-ctp-green",
-    accent: "bg-ctp-green/70",
+    icon: "text-ctp-maroon",
+    badge: "bg-ctp-maroon/10",
+    dot: "bg-ctp-maroon",
+    accent: "bg-ctp-maroon/70",
   },
   yellow: {
-    icon: "text-ctp-yellow",
-    badge: "bg-ctp-yellow/10",
-    dot: "bg-ctp-yellow",
-    accent: "bg-ctp-yellow/70",
+    icon: "text-ctp-red",
+    badge: "bg-ctp-red/10",
+    dot: "bg-ctp-red",
+    accent: "bg-ctp-red/70",
   },
   pink: {
     icon: "text-ctp-pink",
@@ -66,10 +66,10 @@ const toneMap: Record<
     accent: "bg-ctp-pink/70",
   },
   mauve: {
-    icon: "text-ctp-mauve",
-    badge: "bg-ctp-mauve/10",
-    dot: "bg-ctp-mauve",
-    accent: "bg-ctp-mauve/70",
+    icon: "text-ctp-maroon",
+    badge: "bg-ctp-maroon/10",
+    dot: "bg-ctp-maroon",
+    accent: "bg-ctp-maroon/70",
   },
   red: {
     icon: "text-ctp-red",
@@ -151,8 +151,8 @@ export default function About() {
   return (
     <Section id="about" className="relative overflow-x-clip">
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -top-10 left-0 h-52 w-52 rounded-full bg-ctp-blue/10 blur-3xl" />
-        <div className="absolute -bottom-8 right-6 h-56 w-56 rounded-full bg-ctp-mauve/10 blur-3xl" />
+        <div className="absolute -top-10 left-0 h-52 w-52 rounded-full bg-ctp-red/10 blur-3xl" />
+        <div className="absolute -bottom-8 right-6 h-56 w-56 rounded-full bg-ctp-maroon/10 blur-3xl" />
       </div>
 
       <SectionTitle
@@ -231,3 +231,6 @@ export default function About() {
     </Section>
   );
 }
+
+
+

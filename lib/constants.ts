@@ -1,27 +1,28 @@
 export const PERSONAL_INFO = {
-  name: "Sharif Md. Yousuf",
-  nameBn: "শরীফ মো. ইউসুফ",
-  username: "SharifdotG",
-  title: "Competitive Programmer & Software Developer",
-  location: "Dhaka, Bangladesh",
-  email: "sharifmdyousuf007@gmail.com",
-  phone: "+880 1622-296740",
-  university: "University of Asia Pacific",
-  degree: "BSc (Eng.) in Computer Science and Engineering",
-  cgpa: "3.81 / 4.00",
-  graduation: "Expected 2026",
-  codeforcesHandle: "SharifdotG",
-  leetcodeHandle: "SharifdotG",
-  codechefHandle: "sharifdotg",
-  githubUrl: "https://github.com/SharifdotG",
-  linkedinUrl: "https://linkedin.com/in/sharifdotg",
-  twitterUrl: "https://twitter.com/SharifdotG",
-  facebookUrl: "https://facebook.com/SharifdotG",
-  instagramUrl: "https://instagram.com/sharifdotg",
-  discordUrl: "https://discord.com/users/SharifdotG",
-  codeforcesUrl: "https://codeforces.com/profile/SharifdotG",
-  leetcodeUrl: "https://leetcode.com/SharifdotG",
-  codechefUrl: "https://www.codechef.com/users/sharifdotg",
+  name: "Tarek Alam Bhuiyan",
+  nameBn: "তারেক আলম ভুইয়া",
+  username: "2ManyFaces",
+  title: "Machine Learning | Data Science | Software Engineering",
+  location: "Mohammadpur, Dhaka - 1207",
+  email: "tarekalambhuiyan@gmail.com",
+  phone: "+8801601070407",
+  university: "BRAC University",
+  degree: "Bachelor of Science (BSc.) in Computer Science and Engineering",
+  cgpa: "3.37",
+  graduation: "January 2026",
+  profileImageUrl: "/profile-v2.jpg",
+  codeforcesHandle: "",
+  leetcodeHandle: "2ManyFaces",
+  codechefHandle: "",
+  githubUrl: "https://github.com/2ManyFaces",
+  linkedinUrl: "https://www.linkedin.com/in/tarekalambhuiyan",
+  twitterUrl: "",
+  facebookUrl: "",
+  instagramUrl: "",
+  discordUrl: "",
+  codeforcesUrl: "",
+  leetcodeUrl: "https://leetcode.com/u/2ManyFaces/",
+  codechefUrl: "",
 };
 
 export type AboutCardIconKey =
@@ -44,13 +45,13 @@ export type AboutCardLayoutKey = "default" | "feature";
 
 export type AboutCardContent =
   | {
-      kind: "paragraph";
-      text: string;
-    }
+    kind: "paragraph";
+    text: string;
+  }
   | {
-      kind: "list";
-      items: string[];
-    };
+    kind: "list";
+    items: string[];
+  };
 
 export interface AboutCard {
   id: string;
@@ -72,7 +73,7 @@ export const ABOUT_CARDS: AboutCard[] = [
     layout: "feature",
     content: {
       kind: "paragraph",
-      text: "A full-stack developer and a competitive programmer from Bangladesh, focused on turning complex ideas into clean, efficient products, from ICPC problem solving to practical web applications.",
+      text: "Computer Science undergraduate with hands-on experience in Machine Learning, Data Science, Data Analytics, NLP, and full-stack development. Skilled in Python, JavaScript, and SQL, with experience developing ML pipelines and building scalable web applications.",
     },
   },
   {
@@ -87,24 +88,23 @@ export const ABOUT_CARDS: AboutCard[] = [
       items: [
         PERSONAL_INFO.degree,
         PERSONAL_INFO.university,
-        `CGPA ${PERSONAL_INFO.cgpa} - 7th Semester`,
+        "2022 – 2026",
       ],
     },
   },
   {
     id: "competitive",
-    eyebrow: "Performance",
-    label: "Competitive Programming",
+    eyebrow: "Coding",
+    label: "Problem Solving",
     icon: "competitive",
     tone: "yellow",
     layout: "default",
     content: {
       kind: "list",
       items: [
-        "ICPC Dhaka Regionalist 2024",
-        "Pariticipated in multiple IUPCs",
-        "Codeforces Specialist (1438)",
-        "CodeChef 3 Star (1635)",
+        "LeetCode: 2ManyFaces",
+        "Active on GitHub",
+        "ML pipelines & Deep learning",
       ],
     },
   },
@@ -133,7 +133,7 @@ export const ABOUT_CARDS: AboutCard[] = [
     layout: "feature",
     content: {
       kind: "paragraph",
-      text: "Trainee Software Engineer (Intern) at Bangladesh Software Solution, learning and building modern web applications for international clients while refining engineering workflows.",
+      text: "Trainee Technology Specialist at Betopia Limited, selected among the top 40 candidates for the Betopia Tech Recruitment Program (BTRP), working on software, data, and AI-related solutions.",
     },
   },
   {
@@ -146,10 +146,10 @@ export const ABOUT_CARDS: AboutCard[] = [
     content: {
       kind: "list",
       items: [
-        "Agent Assisted Development and Agents",
-        "AI/ML and systems design",
-        "Open-source and developer tooling",
-        "Teaching and problem solving",
+        "Machine Learning & Deep Learning",
+        "Natural Language Processing",
+        "Data Science & Analytics",
+        "Full-stack Web Development",
       ],
     },
   },
@@ -157,38 +157,41 @@ export const ABOUT_CARDS: AboutCard[] = [
 
 export const SKILLS = {
   languages: [
-    { name: "C", level: "Advanced", category: "Programming Language" },
-    { name: "C++", level: "Advanced", category: "Programming Language" },
-    { name: "Python", level: "Intermediate", category: "Programming Language" },
-    { name: "JavaScript", level: "Beginner", category: "Programming Language" },
-    { name: "TypeScript", level: "Beginner", category: "Programming Language" },
-    { name: "C#", level: "Beginner", category: "Programming Language" },
-    { name: "Java", level: "Beginner", category: "Programming Language" },
+    { name: "Python", level: "Advanced", category: "Programming Language" },
+    { name: "HTML", level: "Intermediate", category: "Programming Language" },
+    { name: "CSS", level: "Intermediate", category: "Programming Language" },
+    { name: "JavaScript", level: "Intermediate", category: "Programming Language" },
+    { name: "TypeScript", level: "Intermediate", category: "Programming Language" },
+    { name: "PHP", level: "Intermediate", category: "Programming Language" },
+    { name: "C", level: "Intermediate", category: "Programming Language" },
+    { name: "C++", level: "Intermediate", category: "Programming Language" },
+    { name: "SQL", level: "Intermediate", category: "Programming Language" },
   ],
   frameworks: [
     { name: "Next.js", level: "Intermediate", category: "Framework" },
-    { name: "React", level: "Intermediate", category: "Framework" },
+    { name: "Laravel", level: "Intermediate", category: "Framework" },
     { name: "Django", level: "Intermediate", category: "Framework" },
-    { name: ".NET", level: "Beginner", category: "Framework" },
-    { name: "Angular", level: "Beginner", category: "Framework" },
-    { name: "Tailwind CSS", level: "Advanced", category: "Framework" },
-    { name: "Bootstrap", level: "Intermediate", category: "Framework" },
+    { name: "Tensorflow", level: "Intermediate", category: "Framework" },
+    { name: "Pytorch", level: "Intermediate", category: "Framework" },
   ],
   tools: [
-    { name: "SQLite", level: "Intermediate", category: "Database" },
-    { name: "MySQL", level: "Intermediate", category: "Database" },
     { name: "PostgreSQL", level: "Intermediate", category: "Database" },
-    { name: "Convex", level: "Beginner", category: "Database" },
-    { name: "Supabase", level: "Intermediate", category: "Database" },
+    { name: "MySQL", level: "Intermediate", category: "Database" },
+    { name: "MongoDB", level: "Intermediate", category: "Database" },
+    { name: "Docker", level: "Intermediate", category: "Database" },
     { name: "Git", level: "Advanced", category: "Tool" },
-    { name: "Linux", level: "Intermediate", category: "Tool" },
-    { name: "Markdown", level: "Advanced", category: "Tool" },
+    { name: "GitHub", level: "Advanced", category: "Tool" },
+    { name: "Excel", level: "Intermediate", category: "Tool" },
+    { name: "Figma", level: "Beginner", category: "Tool" },
   ],
   fundamentals: [
     { name: "OOP", level: "Advanced", category: "Fundamental" },
-    { name: "Data Structures", level: "Advanced", category: "Fundamental" },
-    { name: "Algorithms", level: "Advanced", category: "Fundamental" },
-    { name: "System Design", level: "Beginner", category: "Fundamental" },
+    { name: "DSA", level: "Intermediate", category: "Fundamental" },
+    { name: "DBMS", level: "Intermediate", category: "Fundamental" },
+    { name: "System Design", level: "Intermediate", category: "Fundamental" },
+    { name: "OS", level: "Advanced", category: "Fundamental" },
+    { name: "Networking", level: "Intermediate", category: "Fundamental" },
+
   ],
 };
 
@@ -219,215 +222,83 @@ export interface Project {
 }
 
 export const SKILL_LOGOS: SkillLogo[] = [
-  { name: "C", path: "/tech-logos/c.svg" },
-  { name: "C++", path: "/tech-logos/cpp.svg" },
   { name: "Python", path: "/tech-logos/python.svg" },
+  { name: "HTML", path: "/tech-logos/html.svg" },
+  { name: "CSS", path: "/tech-logos/css.svg" },
   { name: "JavaScript", path: "/tech-logos/javascript.svg" },
   { name: "TypeScript", path: "/tech-logos/typescript.svg" },
-  { name: "C#", path: "/tech-logos/csharp.svg" },
-  { name: "Java", path: "/tech-logos/java.svg" },
+  { name: "PHP", path: "/tech-logos/php.svg" },
+  { name: "C", path: "/tech-logos/c.svg" },
+  { name: "C++", path: "/tech-logos/cpp.svg" },
   { name: "Next.js", path: "/tech-logos/nextjs.svg" },
-  {
-    name: "React",
-    darkPath: "/tech-logos/react-d.svg",
-    lightPath: "/tech-logos/react-l.svg",
-  },
+  { name: "Laravel", path: "/tech-logos/laravel.svg" },
   { name: "Django", path: "/tech-logos/django.svg" },
-  { name: ".NET", path: "/tech-logos/dotnet.svg" },
-  { name: "Angular", path: "/tech-logos/angular.svg" },
-  { name: "Tailwind CSS", path: "/tech-logos/tailwindcss.svg" },
-  { name: "Bootstrap", path: "/tech-logos/bootstrap.svg" },
-  { name: "SQLite", path: "/tech-logos/sqlite.svg" },
+  { name: "Tensorflow", path: "/tech-logos/tensorflow.svg" },
+  { name: "Pytorch", path: "/tech-logos/pytorch.svg" },
+  { name: "PostgreSQL", path: "/tech-logos/postgresql.svg" },
   {
     name: "MySQL",
     darkPath: "/tech-logos/mysql-d.svg",
     lightPath: "/tech-logos/mysql-l.svg",
   },
-  { name: "PostgreSQL", path: "/tech-logos/postgresql.svg" },
-  { name: "Convex", path: "/tech-logos/convex.svg" },
-  { name: "Supabase", path: "/tech-logos/supabase.svg" },
+  { name: "MongoDB", path: "/tech-logos/mongodb.svg" },
+  { name: "Docker", path: "/tech-logos/docker.svg" },
   { name: "Git", path: "/tech-logos/git.svg" },
-  { name: "Linux", path: "/tech-logos/linux.svg" },
-  {
-    name: "Markdown",
-    darkPath: "/tech-logos/markdown-d.svg",
-    lightPath: "/tech-logos/markdown-l.svg",
-  },
+  { name: "GitHub", path: "/tech-logos/github.svg" },
+  { name: "Excel", path: "/tech-logos/excel.svg" },
+  { name: "Figma", path: "/tech-logos/figma.svg" },
 ];
 
 export const PROJECTS: Project[] = [
   {
-    title: "BlogsdotG",
+    title: "MycoPredict",
     description:
-      "A Next.js 16 and React 19 powered personal blog featuring a hidden Convex CMS, Tiptap rich-text management, view tracking, and Framer Motion animations within a shadcn/ui light/dark interface.",
-    techStack: [
-      "Next.js 16",
-      "React 19",
-      "Convex",
-      "Tiptap",
-      "Tailwind CSS",
-      "Framer Motion",
-    ],
-    githubUrl: "https://github.com/SharifdotG/BlogsdotG",
-    githubRepo: "SharifdotG/BlogsdotG",
-    liveUrl: "https://blogsdotg.vercel.app/",
+      "Mushroom edibility classification using ML on the UCI Mushroom Dataset (8,124 samples, 22 features). Includes EDA, feature engineering with label encoding, and training of multiple models evaluated by accuracy, F1-score, recall, and AUC.",
+    techStack: ["NumPy", "Pandas", "Matplotlib", "Seaborn", "Scikit-learn"],
+    githubUrl: "https://github.com/2ManyFaces/MycoPredict-Mushroom-Edibility-Prediction-Using-ML",
+    githubRepo: "2ManyFaces/MycoPredict-Mushroom-Edibility-Prediction-Using-ML",
+    liveUrl: null,
     featured: true,
     wide: true,
-    image: "/projects/blogsdotg.png",
-    category: "Web Development",
-    status: "prototype",
-    tags: ["Blogging", "Real-time", "Rich Text"],
-    highlight: "Modern editor with real-time syncing",
-  },
-  {
-    title: "dotG Mono",
-    description:
-      "A monospaced programming font based on Iosevka, designed for optimal readability and coding experience.",
-    techStack: ["Monospaced", "Build Tools", "Iosevka Font"],
-    githubUrl: "https://github.com/SharifdotG/dotG-Mono",
-    githubRepo: "SharifdotG/dotG-Mono",
-    liveUrl: null,
-    featured: true,
-    image: "/projects/dotg-mono.png",
-    category: "Tools & Extensions",
-    status: "prototype",
-    tags: ["Typography", "Developer Tooling", "Open Source"],
-    highlight: "Readability-first coding font",
-  },
-  {
-    title: "TechReform BD 2",
-    description:
-      "PC-component e-commerce platform featuring a product catalog, CRUD operations, cart functionality, PC builder, and an admin panel.",
-    techStack: ["Django", "Python", "Tailwind CSS", "SQLite"],
-    githubUrl: "https://github.com/SharifdotG/TechReform-BD-2",
-    githubRepo: "SharifdotG/TechReform-BD-2",
-    liveUrl: null,
-    featured: true,
-    image: "/projects/techreform.png",
-    category: "Web Development",
+    image: "/projects/mycopredict.png",
+    category: "Machine Learning",
     status: "stable",
-    tags: ["E-commerce", "Admin", "PC Builder"],
-    highlight: "Commerce workflow from catalog to checkout",
+    tags: ["Classification", "EDA", "Scikit-learn"],
+    highlight: "Multi-model ML classifier with AUC evaluation",
   },
   {
-    title: "DevStudy AI Suite",
+    title: "Word2Sense",
     description:
-      "Student-focused web application providing an AI chat assistant, file utilities, PDF summarization, and multiple developer tools.",
-    techStack: [
-      "Next.js 15",
-      "React 19",
-      "TypeScript",
-      "Tailwind CSS",
-      "Supabase",
-      "OpenRouter",
-    ],
-    githubUrl: "https://github.com/SharifdotG/DevStudy-AI-Suite-Web",
-    githubRepo: "SharifdotG/DevStudy-AI-Suite-Web",
-    liveUrl: "http://dev-study-ai-suite-web.vercel.app/",
-    featured: true,
-    wide: true,
-    image: "/projects/devstudy-ai.png",
-    category: "Web Development",
-    status: "active",
-    tags: ["AI Assistant", "Productivity", "Student-first"],
-    highlight: "All-in-one AI learning platform",
-  },
-  {
-    title: "Catppuccin Dark Pro",
-    description:
-      "Developer-focused VSCode theme that combines the aesthetics of the Catppuccin Mocha theme and the syntax highlighting of the One Dark Pro theme. 4,800+ downloads.",
-    techStack: ["JSON", "VSCode Extension", "Theme Development"],
-    githubUrl: "https://github.com/SharifdotG/catppuccin-dark-pro",
-    githubRepo: "SharifdotG/catppuccin-dark-pro",
-    liveUrl:
-      "https://marketplace.visualstudio.com/items?itemName=SharifdotG.catppuccin-dark-pro",
-    extensionId: "SharifdotG.catppuccin-dark-pro",
-    featured: true,
-    wide: true,
-    image: "/projects/catppuccin-dark-pro.png",
-    category: "Tools & Extensions",
-    status: "stable",
-    tags: ["VS Code", "Theme", "Developer Experience"],
-    highlight: "4800+ installs on Marketplace",
-  },
-  {
-    title: "SharifdotG's CodeVault",
-    description:
-      "GitHub repository of 2,000+ competitive programming solutions from Codeforces, LeetCode, and 25+ other online judges.",
-    techStack: ["C", "C++", "Python", "Algorithms", "Data Structures"],
-    githubUrl: "https://github.com/SharifdotG/SharifdotG-s-CodeVault",
-    githubRepo: "SharifdotG/SharifdotG-s-CodeVault",
+      "Comparative study of word representations (BoW, TF-IDF, GloVe, Skip-gram) with ML and neural models on ~340k QA pairs across 10 categories. Best result: BiLSTM + Skip-gram → 0.725 accuracy.",
+    techStack: ["NumPy", "Pandas", "Matplotlib", "TensorFlow", "Keras", "Scikit-learn"],
+    githubUrl: "https://github.com/2ManyFaces/Word2Sense_Multi-Class-Text-Classification",
+    githubRepo: "2ManyFaces/Word2Sense_Multi-Class-Text-Classification",
     liveUrl: null,
     featured: true,
-    image: "/projects/codevault.png",
-    category: "Competitive Programming",
-    status: "active",
-    tags: ["2000+ Solutions", "Competitive", "Algorithms"],
-    highlight: "Large indexed competitive programming archive",
-  },
-  {
-    title: "Handwritten Digit Recognition",
-    description:
-      "CNN-based machine learning model for recognizing handwritten digits using the MNIST dataset with high accuracy.",
-    techStack: ["Python", "TensorFlow", "Keras", "CNN", "Machine Learning"],
-    githubUrl:
-      "https://github.com/SharifdotG/Handwritten-Digit-Recognition-Using-CNN",
-    githubRepo: "SharifdotG/Handwritten-Digit-Recognition-Using-CNN",
-    liveUrl: null,
-    featured: false,
-    image: "/projects/handwritten-digit-recognition.png",
+    wide: true,
+    image: "/projects/word2sense.png",
     category: "Machine Learning",
     status: "research",
-    tags: ["Deep Learning", "Computer Vision", "MNIST"],
-    highlight: "CNN benchmark on handwritten digits",
+    tags: ["NLP", "BiLSTM", "Text Classification"],
+    highlight: "BiLSTM + Skip-gram achieving 0.725 accuracy",
   },
   {
-    title: "Quantum Tunnels AI Game",
+    title: "PetSphere",
     description:
-      "AI-powered TUI game implementing pathfinding algorithms and game theory concepts in a quantum-themed puzzle environment.",
-    techStack: ["Python", "Pygame", "AI Algorithms", "TUI", "Game Development"],
-    githubUrl: "https://github.com/SharifdotG/Quantum-Tunnels-AI-Game-Project",
-    githubRepo: "SharifdotG/Quantum-Tunnels-AI-Game-Project",
+      "Comprehensive pet adoption and management system with health tracking, REST APIs, JWT authentication, role-based dashboards, and real-time chat via Socket.IO. Built collaboratively in an agile 4-member team.",
+    techStack: ["Node.js", "Express.js", "Tailwind CSS", "MongoDB"],
+    githubUrl: "https://github.com/2ManyFaces/PetSphere_CSE471_Section06_Group07",
+    githubRepo: "2ManyFaces/PetSphere_CSE471_Section06_Group07",
     liveUrl: null,
-    featured: false,
-    image: "/projects/quantum-tunnels-ai-game.png",
-    category: "Game Development",
-    status: "research",
-    tags: ["Pathfinding", "Game AI", "Puzzle"],
-    highlight: "Algorithmic gameplay in a TUI setting",
-  },
-  {
-    title: "A* Algorithm Search",
-    description:
-      "Implementation of A* pathfinding algorithm with visualization for solving search problems efficiently.",
-    techStack: ["Python", "Algorithm Visualization", "Data Structures"],
-    githubUrl: "https://github.com/SharifdotG/A_Star-Algorithm-Search-Project",
-    githubRepo: "SharifdotG/A_Star-Algorithm-Search-Project",
-    liveUrl: null,
-    featured: false,
-    image: "/projects/a-star-algorithm-search.png",
-    category: "Algorithms",
-    status: "research",
-    tags: ["A*", "Visualization", "Pathfinding"],
-    highlight: "Interactive shortest-path visualization",
-  },
-  {
-    title: "COD Weapon Knowledgebase",
-    description:
-      "Prolog-based expert system knowledgebase for Call of Duty weapons with inference engine for weapon recommendations.",
-    techStack: ["Prolog", "Expert Systems", "Logic Programming"],
-    githubUrl:
-      "https://github.com/SharifdotG/Call-of-Duty-Weapon-Knowledgebase-Prolog-Project",
-    githubRepo: "SharifdotG/Call-of-Duty-Weapon-Knowledgebase-Prolog-Project",
-    liveUrl: null,
-    featured: false,
-    image: "/projects/cod-weapon-knowledgebase.png",
-    category: "AI & Logic",
-    status: "research",
-    tags: ["Prolog", "Expert System", "Inference"],
-    highlight: "Rule-based recommendation engine",
+    featured: true,
+    image: "/projects/petsphere.png",
+    category: "Web Development",
+    status: "stable",
+    tags: ["Full-stack", "Socket.IO", "JWT"],
+    highlight: "Real-time pet adoption platform with role-based access",
   },
 ];
+
 
 export type AchievementType =
   | "competition"
@@ -454,321 +325,94 @@ export interface Achievement {
 
 export const ACHIEVEMENTS: Achievement[] = [
   {
-    title: "ICPC Dhaka Regionalist 2024",
-    organization: "ICPC",
-    date: "November 2024",
-    description:
-      "Competed in the prestigious ICPC Asia West Continent Dhaka Regional Contest",
-    link: null,
-    certificateImage: "/certificates/icpc-dhaka-2024.jpg",
-    type: "competition",
-    viewType: "image",
-    featured: true,
-  },
-  {
-    title: "KUET BITFEST 2025",
-    organization: "Khulna University of Engineering & Technology",
-    date: "January 4, 2024",
-    description: "Participated in KUET BITFEST programming contest",
-    link: null,
-    certificateImage: "/certificates/kuet-bitfest-2025.jpg",
-    type: "competition",
-    viewType: "image",
-  },
-  {
-    title: "BUBT IUCPC 2025",
-    organization: "Bangladesh University of Business & Technology",
-    date: "2025",
-    description:
-      "Participated in BUBT Inter University Collaborative Programming Contest 2025",
-    link: null,
-    certificateImage: "/certificates/bubt-biucpc-2025.jpg",
-    type: "competition",
-    viewType: "image",
-  },
-  {
-    title: "UAP Inter University Collaborative Programming Contest 1.0",
-    organization: "University of Asia Pacific",
-    date: "January 27, 2024",
-    description:
-      "Participated in the first Inter University Collaborative Programming Contest at UAP",
-    link: null,
-    certificateImage: "/certificates/uap-contest-2024.jpg",
-    type: "competition",
-    viewType: "image",
-  },
-  {
-    title: "ICPC Jamilur Reza Chowdhury Scholarship",
-    organization: "ICPC Foundation",
-    date: "3 Semesters",
-    description:
-      "Received scholarship for 3 semesters (Spring 2023, Fall 2023, Spring 2024) for Competitive Programming excellence",
-    link: null,
-    certificateImage: "/certificates/jrc-scholarship.jpg",
-    type: "scholarship",
-    viewType: "image",
-    featured: true,
-  },
-  {
-    title: "Vice Chancellor Awards (2x) & Dean's Awards (4x)",
-    organization: "University of Asia Pacific",
-    date: "2022-2025",
-    description:
-      "Received academic excellence awards for maintaining high CGPA across multiple semesters",
-    link: null,
-    certificateImage: "/certificates/vc-deans-awards.jpg",
-    type: "academic",
-    viewType: "image",
-    featured: true,
-  },
-  {
-    title: "Champion, Ekushey Intra Department Programming Contest 2023",
-    organization: "University of Asia Pacific",
-    date: "February 2023",
-    description: "Won first place in the Intra Department Programming Contest",
-    link: null,
-    certificateImage: "/certificates/ekushey-2023.jpg",
-    type: "competition",
-    viewType: "image",
-    featured: true,
-  },
-  {
-    title: "Codeforces Specialist (Max Rating: 1438)",
-    organization: "Codeforces",
+    title: "LeetCode Profile - 2ManyFaces",
+    organization: "LeetCode",
     date: "Ongoing",
-    description:
-      "Achieved Specialist rank on Codeforces competitive programming platform",
-    link: "https://codeforces.com/profile/SharifdotG",
+    description: "Active competitive programming profile on LeetCode",
+    link: "https://leetcode.com/u/2ManyFaces/",
     certificateImage: null,
     type: "rating",
     viewType: "link",
     featured: true,
   },
   {
-    title: "CodeChef 3 Stars (Max Rating: 1635)",
-    organization: "CodeChef",
-    date: "Ongoing",
-    description:
-      "Achieved 3-star rating on CodeChef competitive programming platform",
-    link: "https://www.codechef.com/users/sharifdotg",
-    certificateImage: null,
-    type: "rating",
-    viewType: "link",
-  },
-  {
-    title: "HackerRank Problem Solving (Basic)",
-    organization: "HackerRank",
-    date: "August 2, 2024",
-    description:
-      "Completed HackerRank Problem Solving certification at Basic level",
-    link: "https://www.hackerrank.com/certificates/0e0b3a6b156d",
-    certificateImage: null,
-    type: "certification",
-    viewType: "link",
-  },
-  {
-    title: "HackerRank Python (Basic)",
-    organization: "HackerRank",
-    date: "September 25, 2024",
-    description: "Completed HackerRank Python certification at Basic level",
-    link: "https://www.hackerrank.com/certificates/e69d1f3ead28",
-    certificateImage: null,
-    type: "certification",
-    viewType: "link",
-  },
-  {
-    title: "Foundational C# with Microsoft Certification",
-    organization: "freeCodeCamp",
+    title: "AI Fundamentals",
+    organization: "DataCamp",
     date: "2024",
-    description:
-      "Completed the Foundational C# certification program in collaboration with Microsoft",
-    link: "https://www.freecodecamp.org/certification/sharifdotg/foundational-c-sharp-with-microsoft",
+    description: "Certification in fundamental concepts of Artificial Intelligence",
+    link: null,
     certificateImage: null,
     type: "certification",
     viewType: "link",
   },
   {
-    title: "Machine Learning Training Program",
-    organization: "Department of CSE, University of Asia Pacific",
-    date: "June 4 - July 2, 2023",
-    description: "Completed comprehensive machine learning training program",
+    title: "Intermediate SQL",
+    organization: "DataCamp",
+    date: "2024",
+    description: "Certification in intermediate level SQL for data analysis",
     link: null,
-    certificateImage: "/certificates/ml-training-2023.jpg",
-    type: "training",
-    viewType: "image",
+    certificateImage: null,
+    type: "certification",
+    viewType: "link",
   },
   {
-    title: "EEE TECH FEST 2.0 Programming Contest",
-    organization: "University of Asia Pacific",
-    date: "June 3, 2024",
-    description:
-      "Participated in EEE TECH FEST 2.0 Intra University Programming Contest",
+    title: "93% in English (Mentors After SSC)",
+    organization: "Mentors",
+    date: "2021",
+    description: "Exceptional performance in the Mentors After SSC English program",
     link: null,
-    certificateImage: "/certificates/eee-fest-2.jpg",
-    type: "competition",
-    viewType: "image",
+    certificateImage: null,
+    type: "academic",
+    viewType: "link",
   },
   {
-    title: "EEE TECH FEST 2023 Intra University Programming Contest",
-    organization: "University of Asia Pacific",
-    date: "March 29, 2023",
-    description:
-      "Participated in EEE TECH FEST 2023 Intra University Programming Contest",
+    title: "Duke of Edinburgh's International Award - Bronze",
+    organization: "The Duke of Edinburgh's Award Foundation",
+    date: "2019",
+    description: "Bronze level achievement in the international youth awards program",
     link: null,
-    certificateImage: "/certificates/eee-fest-2023.jpg",
-    type: "competition",
-    viewType: "image",
-  },
-  {
-    title: "5th Place, Inter Department Math Olympiad 3.0 & 4.0",
-    organization: "University of Asia Pacific",
-    date: "2023, 2024",
-    description:
-      "Secured 5th position in university math olympiad for two consecutive years",
-    link: null,
-    certificateImage: "/certificates/math-olympiad.jpg",
-    type: "competition",
-    viewType: "image",
-  },
-  {
-    title: "Volunteer - 11th Convocation of University of Asia Pacific",
-    organization: "University of Asia Pacific",
-    date: "July 26, 2025",
-    description:
-      "Volunteered in organizing and coordinating the university's convocation ceremony",
-    link: null,
-    certificateImage: "/certificates/convocation-volunteer-2025.jpg",
-    type: "volunteer",
-    viewType: "image",
-  },
-  {
-    title:
-      "Volunteer - National IT Competition for Youth with Disabilities 2025",
-    organization: "Government of Bangladesh",
-    date: "May 31, 2025",
-    description:
-      "Supported participants and technical arrangements for inclusive technology competition",
-    link: null,
-    certificateImage: "/certificates/it-disability-volunteer-2025.png",
-    type: "volunteer",
-    viewType: "image",
-  },
-  {
-    title: "Volunteer - Prize Giving Ceremony for WMTC Winners",
-    organization: "World Mathematics Team Championship",
-    date: "February 8, 2025",
-    description:
-      "Coordinated prize distribution for World Mathematics Team Championship winners",
-    link: null,
-    certificateImage: "/certificates/wmtc-volunteer-2025.jpg",
-    type: "volunteer",
-    viewType: "image",
+    certificateImage: null,
+    type: "scholarship",
+    viewType: "link",
   },
 ];
+
 
 export const EXPERIENCE = [
   {
     title: "BSc (Eng.) in Computer Science and Engineering",
-    organization: "University of Asia Pacific",
+    organization: "BRAC University",
     location: "Dhaka, Bangladesh",
-    startDate: "July 2022",
-    endDate: "July 2026 (Expected)",
+    startDate: "2022",
+    endDate: "2026",
     description: [
-      "CGPA: 3.81 / 4.00 (after 7 semesters)",
-      "Received 2 Vice Chancellor Awards and 4 Dean's Awards",
-      "Focus areas: Software Engineering, Web Development, AI/ML, Data Structures & Algorithms",
+      "CGPA: 3.37",
+      "Focus areas: Machine Learning, Data Science, NLP, Full-stack Development",
     ],
     type: "education",
   },
   {
-    title: "Trainee Software Engineer (Intern)",
-    organization: "Bangladesh Software Solution",
+    title: "Trainee Technology Specialist",
+    organization: "Betopia Limted",
     location: "Dhaka, Bangladesh",
     startDate: "February 2026",
     endDate: "Present",
     description: [
-      "Working on full-stack web development projects with an experienced team",
-      "Learning industry-standard software engineering practices from experienced mentors",
-      "Collaborating with cross-functional teams on international client projects",
+      "Working on software development and technical solutions",
+      "Selected for competitive industry recruitment program",
     ],
     type: "work",
   },
-  {
-    title: "Competitive Programming Trainer & Mentor",
-    organization: "University of Asia Pacific",
-    location: "Dhaka, Bangladesh",
-    startDate: "July 2024",
-    endDate: "Present",
-    description: [
-      "Training and mentoring students in competitive programming and problem-solving",
-      "Conducting multiple weekly training and practice sessions",
-      "Helping students prepare for national and international programming contests",
-      "Building a strong competitive programming community at UAP",
-    ],
-    type: "teaching",
-  },
+
 ];
 
-export const ORGANIZING_VOLUNTEERING = [
-  {
-    title:
-      "Organizer at the UAP Inter University Collaborative Programming Contest 1.0",
-    date: "January 26 & 27, 2024",
-    organization: "University of Asia Pacific",
-    description:
-      "Organized Inter University programming contest bringing together students from multiple private universities",
-    category: "organizer",
-  },
-  {
-    title: "Organizer at the Intra University Math Fest 3.0",
-    date: "May 6, 2025",
-    organization: "University of Asia Pacific",
-    description:
-      "Organized third edition of math olympiad fostering problem-solving culture",
-    category: "organizer",
-  },
-  {
-    title: "Organizer at the Intra University Math Fest 2.0",
-    date: "October 28, 2024",
-    organization: "University of Asia Pacific",
-    description:
-      "Organized second edition of university math olympiad with increased participation",
-    category: "organizer",
-  },
-  {
-    title: "Organizer at the JRC Memorial 1st Intra University Math Fest 2023",
-    date: "March 28, 2023",
-    organization: "University of Asia Pacific",
-    description:
-      "Organized inaugural math olympiad in memory of Professor Jamilur Reza Chowdhury",
-    category: "organizer",
-  },
-  {
-    title: "Volunteer at the Prize Giving Ceremony for WMTC Winners",
-    date: "February 8, 2025",
-    organization: "World Mathematics Team Championship",
-    description:
-      "Coordinated prize distribution for World Mathematics Team Championship winners",
-    category: "volunteer",
-  },
-  {
-    title: "Volunteer at the 11th Convocation of University of Asia Pacific",
-    date: "July 26, 2025",
-    organization: "University of Asia Pacific",
-    description:
-      "Assisted in organizing and coordinating the university's convocation ceremony",
-    category: "volunteer",
-  },
-  {
-    title:
-      "Volunteer at the National IT Competition for Youth with Disabilities 2025",
-    date: "May 31, 2025",
-    organization: "National Initiative",
-    description:
-      "Supported participants and technical arrangements for inclusive technology competition",
-    category: "volunteer",
-  },
-];
+export const ORGANIZING_VOLUNTEERING: {
+  title: string;
+  date: string;
+  organization: string;
+  description: string;
+  category: string;
+}[] = [];
 
 export const BENGALI_TERM_OVERRIDES: ReadonlyArray<readonly [string, string]> =
   [
@@ -826,7 +470,7 @@ export const BENGALI_TERM_OVERRIDES: ReadonlyArray<readonly [string, string]> =
     ["semester", "সেমিস্টার"],
     ["Dhaka", "ঢাকা"],
     ["Bangladesh", "বাংলাদেশ"],
-    ["University of Asia Pacific", "ইউনিভার্সিটি অব এশিয়া প্যাসিফিক"],
+    ["BRAC University", "ব্র্যাক ইউনিভার্সিটি"],
     [
       "World Mathematics Team Championship",
       "ওয়ার্ল্ড ম্যাথেমেটিক্স টিম চ্যাম্পিয়নশিপ",
@@ -860,3 +504,6 @@ export const BENGALI_DIGIT_MAP: Readonly<Record<string, string>> = {
   "8": "৮",
   "9": "৯",
 };
+
+
+

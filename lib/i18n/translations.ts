@@ -163,11 +163,11 @@ type TranslationSchema = {
 export const translations: Record<Locale, TranslationSchema> = {
   en: {
     metadata: {
-      title: "Sharif Md. Yousuf - Competitive Programmer & Software Developer",
+      title: "Tarek Alam Bhuiyan - ML | Data Science | Software Engineering",
       description:
-        "Portfolio of Sharif Md. Yousuf, a competitive programmer and CSE student at University of Asia Pacific. ICPC Dhaka Regionalist 2024, showcasing web development projects and programming achievements.",
+        "Portfolio of Tarek Alam Bhuiyan, a Computer Science undergraduate at BRAC University with hands-on experience in Machine Learning, Data Science, NLP, and full-stack development.",
       ogDescription:
-        "ICPC Dhaka Regionalist 2024 | CSE Student at UAP | Full-Stack Developer",
+        "ML & Data Science | CSE Student at BRAC University | Full-Stack Developer",
     },
     nav: {
       home: "Home",
@@ -184,7 +184,7 @@ export const translations: Record<Locale, TranslationSchema> = {
     hero: {
       hello: "Hello, I'm",
       roleLine:
-        "Trainee Software Engineer Intern • Competitive Programmer • Computer Science Student",
+        "Trainee Technology Specialist @ Betopia Limited",
       viewWork: "View My Work",
       resume: "Resume",
       location: "Dhaka, Bangladesh",
@@ -291,25 +291,25 @@ export const translations: Record<Locale, TranslationSchema> = {
     chatbot: {
       open: "Open AI assistant",
       title: "AI Assistant",
-      subtitle: "Ask me about Sharif",
+      subtitle: "Ask me about Tarek",
       close: "Close chat",
-      introTitle: "Hi! I'm SharifdotG's AI assistant",
+      introTitle: "Hi! I'm Tarek's AI assistant",
       introSubtitle:
         "Ask me about his skills, projects, experience, or anything else!",
       placeholder: "Ask me anything...",
       sendMessageAria: "Send message",
     },
     footer: {
-      builtWith: "dotG for Life ᓚᘏᗢ",
+      builtWith: "Built with ❤️ by Tarek",
     },
   },
   bn: {
     metadata: {
-      title: "শরীফ মো. ইউসুফ - কম্পিটিটিভ প্রোগ্রামার ও সফটওয়্যার ডেভেলপার",
+      title: "তারেক আলম ভুইয়া - ML | ডেটা সায়েন্স | সফটওয়্যার ইঞ্জিনিয়ারিং",
       description:
-        "শরীফ মো. ইউসুফের পোর্টফোলিও। তিনি ইউনিভার্সিটি অব এশিয়া প্যাসিফিকের CSE শিক্ষার্থী ও কম্পিটিটিভ প্রোগ্রামার। এখানে ওয়েব ডেভেলপমেন্ট প্রজেক্ট এবং প্রোগ্রামিং অর্জনগুলো তুলে ধরা হয়েছে।",
+        "তারেক আলম ভুইয়ার পোর্টফোলিও। ব্র্যাক ইউনিভার্সিটির CSE শিক্ষার্থী এবং ML, Data Science, NLP ও ফুল-স্ট্যাক ডেভেলপার।",
       ogDescription:
-        "ICPC Dhaka Regionalist 2024 | UAP CSE শিক্ষার্থী | ফুল-স্ট্যাক ডেভেলপার",
+        "ML ও Data Science | ব্র্যাক ইউনিভার্সিটি CSE শিক্ষার্থী | ফুল-স্ট্যাক ডেভেলপার",
     },
     nav: {
       home: "হোম",
@@ -326,7 +326,7 @@ export const translations: Record<Locale, TranslationSchema> = {
     hero: {
       hello: "হ্যালো, আমি",
       roleLine:
-        "ট্রেইনি সফটওয়্যার ইঞ্জিনিয়ার ইন্টার্ন • কম্পিটিটিভ প্রোগ্রামার • কম্পিউটার সায়েন্স স্টুডেন্ট",
+        "ট্রেইনি টেকনোলজি স্পেশালিস্ট @ বিটোপিয়া লিমিটেড",
       viewWork: "আমার কাজ দেখুন",
       resume: "রেজুমে",
       location: "ঢাকা, বাংলাদেশ",
@@ -433,16 +433,16 @@ export const translations: Record<Locale, TranslationSchema> = {
     chatbot: {
       open: "AI সহকারী খুলুন",
       title: "AI সহকারী",
-      subtitle: "শরীফ সম্পর্কে জিজ্ঞেস করুন",
+      subtitle: "তারেক সম্পর্কে জিজ্ঞেস করুন",
       close: "চ্যাট বন্ধ করুন",
-      introTitle: "হাই! আমি SharifdotG-এর AI সহকারী",
+      introTitle: "হাই! আমি তারেকের AI সহকারী",
       introSubtitle:
         "তার দক্ষতা, প্রজেক্ট, অভিজ্ঞতা বা যেকোনো বিষয় জানতে প্রশ্ন করুন!",
       placeholder: "যেকোনো কিছু জিজ্ঞেস করুন...",
       sendMessageAria: "বার্তা পাঠান",
     },
     footer: {
-      builtWith: "ডটজি ফর লাইফ ᓚᘏᗢ",
+      builtWith: "তারেক দ্বারা তৈরি ❤️",
     },
   },
 };
@@ -475,12 +475,20 @@ const dynamicBnMap: Record<string, string> = {
   "AI/ML and systems design": "এআই/এমএল এবং সিস্টেম ডিজাইন",
   "Open-source and developer tooling": "ওপেন-সোর্স ও ডেভেলপার টুলিং",
   "Teaching and problem solving": "টিচিং এবং প্রবলেম সলভিং",
-  "Trainee Software Engineer (Intern) at Bangladesh Software Solution, learning and building modern web applications for international clients while refining engineering workflows.":
-    "Bangladesh Software Solution-এ Trainee Software Engineer (Intern) হিসেবে আন্তর্জাতিক ক্লায়েন্টদের জন্য মডার্ন ওয়েব অ্যাপ্লিকেশন বিল্ড করছি এবং ইঞ্জিনিয়ারিং ওয়ার্কফ্লো রিফাইন করছি।",
+  "Trainee Technology Specialist at Betopia Limited, selected among the top 40 candidates for the Betopia Tech Recruitment Program (BTRP), working on software, data, and AI-related solutions.":
+    "বিটোপিয়া লিমিটেডের ট্রেইনি টেকনোলজি স্পেশালিস্ট, বেটোপিয়া টেক রিক্রুটমেন্ট প্রোগ্রামের (BTRP) শীর্ষ ৪০ জন প্রার্থীর মধ্যে নির্বাচিত, সফটওয়্যার, ডেটা এবং এআই-সম্পর্কিত সমাধান নিয়ে কাজ করছি।",
+  "Trainee Technology Specialist – Software, Data & AI Solutions":
+    "ট্রেইনি টেকনোলজি স্পেশালিস্ট – সফটওয়্যার, ডেটা এবং এআই সমাধান",
+  "Selected among the top 40 candidates for the Betopia Tech Recruitment Program (BTRP)":
+    "বিটোপিয়া টেক রিক্রুটমেন্ট প্রোগ্রামের (BTRP) শীর্ষ ৪০ জন প্রার্থীর মধ্যে নির্বাচিত",
+  "Working on software, data, and AI-related solutions":
+    "সফটওয়্যার, ডেটা এবং এআই-সম্পর্কিত সমাধান নিয়ে কাজ করছি।",
+  "Computer Science undergraduate with hands-on experience in Machine Learning, Data Science, NLP, and full-stack development. Skilled in Python, JavaScript, and SQL, passionate about solving real-world problems using data-driven approaches.":
+    "মেশিন লার্নিং, ডেটা সায়েন্স, এনএলপি এবং ফুল-স্ট্যাক ডেভেলপমেন্টে বাস্তব অভিজ্ঞতাসম্পন্ন কম্পিউটার সায়েন্স আন্ডারগ্রাজুয়েট। পাইথন, জাভাস্ক্রিপ্ট এবং এসকিউএল-এ দক্ষ, ডেটা-চালিত পদ্ধতির মাধ্যমে বাস্তব-জগতের সমস্যা সমাধানে আগ্রহী।",
   "BSc (Eng.) in Computer Science and Engineering":
     "কম্পিউটার সায়েন্স অ্যান্ড ইঞ্জিনিয়ারিংয়ে BSc (Eng.)",
   "CGPA: 3.81 / 4.00 (after 7 semesters)":
-    "সিজিপিএ: 3.81 / 4.00 (৭ম সেমিস্টার শেষে)",
+    "সিজিপিএ: ৩.৩৭",
   "Received 2 Vice Chancellor Awards and 4 Dean's Awards":
     "২টি ভাইস চ্যান্সেলর অ্যাওয়ার্ড এবং ৪টি ডিনস অ্যাওয়ার্ড অর্জন",
   "Focus areas: Software Engineering, Web Development, AI/ML, Data Structures & Algorithms":
@@ -501,22 +509,24 @@ const dynamicBnMap: Record<string, string> = {
     "প্রতি সপ্তাহে একাধিক ট্রেনিং ও প্র্যাকটিস সেশন পরিচালনা",
   "Helping students prepare for national and international programming contests":
     "জাতীয় ও আন্তর্জাতিক প্রোগ্রামিং প্রতিযোগিতার জন্য শিক্ষার্থীদের প্রস্তুত করা",
-  "Building a strong competitive programming community at UAP":
-    "UAP-এ শক্তিশালী কম্পিটিটিভ প্রোগ্রামিং কমিউনিটি গড়ে তোলা",
-  "Organizer at the UAP Inter University Collaborative Programming Contest 1.0":
-    "UAP Inter University Collaborative Programming Contest 1.0-এ আয়োজক",
-  "Organizer at the Intra University Math Fest 3.0":
-    "Intra University Math Fest 3.0-এ আয়োজক",
-  "Organizer at the Intra University Math Fest 2.0":
-    "Intra University Math Fest 2.0-এ আয়োজক",
-  "Organizer at the JRC Memorial 1st Intra University Math Fest 2023":
-    "JRC Memorial 1st Intra University Math Fest 2023-এ আয়োজক",
-  "Volunteer at the Prize Giving Ceremony for WMTC Winners":
-    "WMTC বিজয়ীদের পুরস্কার বিতরণ অনুষ্ঠানে স্বেচ্ছাসেবক",
-  "Volunteer at the 11th Convocation of University of Asia Pacific":
-    "University of Asia Pacific-এর ১১তম সমাবর্তনে স্বেচ্ছাসেবক",
-  "Volunteer at the National IT Competition for Youth with Disabilities 2025":
-    "National IT Competition for Youth with Disabilities 2025-এ স্বেচ্ছাসেবক",
+  "Building a strong AI and Data Science community":
+    "একটি শক্তিশালী এআই এবং ডেটা সায়েন্স কমিউনিটি গড়ে তোলা",
+  "Active competitive programming profile on LeetCode":
+    "লিটকোডে (LeetCode) সক্রিয় কম্পিটিটিভ প্রোগ্রামিং প্রোফাইল",
+  "Selected among the top 40 candidates for BTRP – a competitive industry recruitment program focused on software, data, and AI solutions":
+    "BTRP-এর শীর্ষ ৪০ প্রার্থীর মধ্যে নির্বাচিত – সফটওয়্যার, ডেটা এবং এআই সমাধানের ওপর দৃষ্টি নিবদ্ধ করা একটি প্রতিযোগিতামূলক শিল্প নিয়োগ প্রোগ্রাম",
+  "Mushroom edibility classification using ML on the UCI Mushroom Dataset (8,124 samples, 22 features). Includes EDA, feature engineering with label encoding, and training of multiple models evaluated by accuracy, F1-score, recall, and AUC.":
+    "UCI মাশরুম ডেটাসেট (৮,১২৪টি নমুনা, ২২টি বৈশিষ্ট্য) ব্যবহার করে মাশরুমের ভক্ষণযোগ্যতা ক্লাসিফিকেশন। এতে EDA, লেবেল এনকোডিংয়ের মাধ্যমে ফিচার ইঞ্জিনিয়ারিং এবং নির্ভুলতা, F1-স্কোর, রিকল এবং AUC দ্বারা মূল্যায়িত একাধিক মডেলের প্রশিক্ষণ অন্তর্ভুক্ত।",
+  "Comparative study of word representations (BoW, TF-IDF, GloVe, Skip-gram) with ML and neural models on ~340k QA pairs across 10 categories. Best result: BiLSTM + Skip-gram → 0.725 accuracy.":
+    "১০টি ক্যাটাগরিতে প্রায় ৩৪০ হাজার QA জোড়ার ওপর ML এবং নিউরাল মডেলের মাধ্যমে শব্দ উপস্থাপনার (BoW, TF-IDF, GloVe, Skip-gram) তুলনামূলক অধ্যয়ন। সেরা ফলাফল: BiLSTM + Skip-gram → ০.৭২৫ নির্ভুলতা।",
+  "Comprehensive pet adoption and management system with health tracking, REST APIs, JWT authentication, role-based dashboards, and real-time chat via Socket.IO. Built collaboratively in an agile 4-member team.":
+    "হেলথ ট্র্যাকিং, REST API, JWT অথেন্টিকেশন, রোল-ভিত্তিক ড্যাশবোর্ড এবং Socket.IO-র মাধ্যমে রিয়েল-টাইম চ্যাটসহ একটি ব্যাপক পোষা প্রাণী দত্তক এবং ব্যবস্থাপনা সিস্টেম। একটি চটপটে ৪-সদস্যের দলে সহযোগিতামূলকভাবে তৈরি।",
+  "Multi-model ML classifier with AUC evaluation":
+    "AUC মূল্যায়নসহ মাল্টি-মডেল ML ক্লাসিফায়ার",
+  "BiLSTM + Skip-gram achieving 0.725 accuracy":
+    "BiLSTM + Skip-gram ০.৭২৫ নির্ভুলতা অর্জন করেছে",
+  "Real-time pet adoption platform with role-based access":
+    "রোল-ভিত্তিক অ্যাক্সেসসহ রিয়েল-টাইম পোষা প্রাণী দত্তক নেওয়ার প্ল্যাটফর্ম",
   "A Next.js 16 and React 19 powered personal blog featuring a hidden Convex CMS, Tiptap rich-text management, view tracking, and Framer Motion animations within a shadcn/ui light/dark interface.":
     "Next.js 16 এবং React 19 ভিত্তিক ব্যক্তিগত ব্লগ; এতে হিডেন Convex CMS, Tiptap rich-text management, view tracking এবং shadcn/ui light/dark ইন্টারফেসে Framer Motion অ্যানিমেশন রয়েছে।",
   "A monospaced programming font based on Iosevka, designed for optimal readability and coding experience.":
@@ -606,6 +616,17 @@ const dynamicBnMap: Record<string, string> = {
   "Game Development": "গেম ডেভেলপমেন্ট",
   Algorithms: "অ্যালগরিদমস",
   "AI & Logic": "এআই ও লজিক",
+  "AI Fundamentals": "এআই ফান্ডামেন্টালস",
+  "Intermediate SQL": "ইন্টারমিডিয়েট এসকিউএল",
+  "93% in English (Mentors After SSC)": "ইংরেজিতে ৯৩% (মেন্টরস আফটার এসএসসি)",
+  "Duke of Edinburgh's International Award - Bronze": "ডিউক অফ এডিনবার্গ’স ইন্টারন্যাশনাল অ্যাওয়ার্ড - ব্রোঞ্জ",
+  DataCamp: "ডে্যাক্যাম্প",
+  Mentors: "মেন্টরস",
+  "The Duke of Edinburgh's Award Foundation": "দ্য ডিউক অফ এডিনবার্গ’স অ্যাওয়ার্ড ফাউন্ডেশন",
+  "Certification in fundamental concepts of Artificial Intelligence": "আর্টিফিশিয়াল ইন্টেলিজেন্সের মৌলিক ধারণার ওপর সার্টিফিকেশন",
+  "Certification in intermediate level SQL for data analysis": "ডেটা অ্যানালাইসিসের জন্য ইন্টারমিডিয়েট লেভেল এসকিউএল সার্টিফিকেশন",
+  "Exceptional performance in the Mentors After SSC English program": "মেন্টরস আফটার এসএসসি ইংলিশ প্রোগ্রামে অসাধারণ পারফরম্যান্স",
+  "Bronze level achievement in the international youth awards program": "আন্তর্জাতিক যুব পুরস্কার প্রোগ্রামে ব্রোঞ্জ স্তরের অর্জন",
 };
 
 const escapeRegex = (value: string) =>
@@ -638,3 +659,6 @@ export const translateDynamicText = (locale: Locale, text: string): string => {
 
   return applyBengaliDigits(withOverrides);
 };
+
+
+
