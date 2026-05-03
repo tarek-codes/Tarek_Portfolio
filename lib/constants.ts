@@ -260,7 +260,7 @@ export const PROJECTS: Project[] = [
     liveUrl: null,
     featured: true,
     wide: true,
-    image: "/projects/mycopredict.png",
+    image: "/projects/mycopredict-v2.png",
     category: "Machine Learning",
     status: "stable",
     tags: ["Classification", "EDA", "Scikit-learn"],
@@ -276,7 +276,7 @@ export const PROJECTS: Project[] = [
     liveUrl: null,
     featured: true,
     wide: true,
-    image: "/projects/word2sense.png",
+    image: "/projects/word2sense-v2.png",
     category: "Machine Learning",
     status: "research",
     tags: ["NLP", "BiLSTM", "Text Classification"],
@@ -291,7 +291,7 @@ export const PROJECTS: Project[] = [
     githubRepo: "2ManyFaces/PetSphere_CSE471_Section06_Group07",
     liveUrl: null,
     featured: true,
-    image: "/projects/petsphere.png",
+    image: "/projects/petsphere-v2.jpg",
     category: "Web Development",
     status: "stable",
     tags: ["Full-stack", "Socket.IO", "JWT"],
@@ -324,17 +324,7 @@ export interface Achievement {
 }
 
 export const ACHIEVEMENTS: Achievement[] = [
-  {
-    title: "LeetCode Profile - 2ManyFaces",
-    organization: "LeetCode",
-    date: "Ongoing",
-    description: "Active competitive programming profile on LeetCode",
-    link: "https://leetcode.com/u/2ManyFaces/",
-    certificateImage: null,
-    type: "rating",
-    viewType: "link",
-    featured: true,
-  },
+
   {
     title: "AI Fundamentals",
     organization: "DataCamp",
