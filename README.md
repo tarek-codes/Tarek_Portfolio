@@ -1,4 +1,4 @@
-# portfolio-dotg
+# portfolio-tarek.dev
 
 A modern personal portfolio built with Next.js 16 App Router, React 19, TypeScript, and Tailwind CSS v4, featuring bilingual UI (English/Bangla), an AI chatbot, and live competitive programming stats.
 
@@ -8,7 +8,6 @@ A modern personal portfolio built with Next.js 16 App Router, React 19, TypeScri
 
 ## Screenshots and Highlights
 
-- Catppuccin token-based theming (light/dark)
 - Mobile-first responsive sections with motion
 - Floating AI chatbot with streaming responses
 - Floating competitive programming stats panel (Codeforces + LeetCode)
@@ -165,6 +164,5 @@ Home page composition:
 - Next.js
 - Tailwind CSS
 - Framer Motion
-- Catppuccin
 - OpenRouter
 - Resend
