@@ -69,10 +69,6 @@ git checkout -b feat/mobile-stats-panel
 - Keep motion subtle on mobile and respect reduced-motion behavior.
 - Avoid introducing continuous animations without pause/disable strategy.
 
-## Code of Conduct
-
-By participating, you agree to follow [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
-
 ## Security
-
-For sensitive issues, contact: [sharifmdyousuf007@gmail.com](mailto:sharifmdyousuf007@gmail.com)
+ 
+For sensitive issues, contact: [tarekalambhuiyan@gmail.com](mailto:tarekalambhuiyan@gmail.com)
