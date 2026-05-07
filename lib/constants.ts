@@ -297,6 +297,21 @@ export const PROJECTS: Project[] = [
     tags: ["Full-stack", "Socket.IO", "JWT"],
     highlight: "Real-time pet adoption platform with role-based access",
   },
+  {
+    title: "VibeSpot",
+    description:
+      "A dynamic social hangout platform designed to connect people based on shared 'vibes' and local activities. Features real-time discovery, interactive maps, and event coordination, built with a focus on modern user experience and scalable architecture.",
+    techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Node.js"],
+    githubUrl: "https://github.com/betopia-btrp/VibeSpot-Hangout-Platform",
+    githubRepo: "betopia-btrp/VibeSpot-Hangout-Platform",
+    liveUrl: null,
+    featured: true,
+    image: "/projects/vibespot.png",
+    category: "Web Development",
+    status: "active",
+    tags: ["Social", "Real-time", "Full-stack"],
+    highlight: "Interactive social discovery & hangout platform",
+  },
 ];
 
 
