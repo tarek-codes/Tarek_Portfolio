@@ -633,6 +633,10 @@ const dynamicBnMap: Record<string, string> = {
   "Certification in intermediate level SQL for data analysis": "ডেটা অ্যানালাইসিসের জন্য ইন্টারমিডিয়েট লেভেল এসকিউএল সার্টিফিকেশন",
   "Exceptional performance in the Mentors After SSC English program": "মেন্টরস আফটার এসএসসি ইংলিশ প্রোগ্রামে অসাধারণ পারফরম্যান্স",
   "Bronze level achievement in the international youth awards program": "আন্তর্জাতিক যুব পুরস্কার প্রোগ্রামে ব্রোঞ্জ স্তরের অর্জন",
+  "Introduction to Git": "ইন্ট্রোডাকশন টু গিট",
+  "Supervised Learning with Scikit-learn": "সুপারভাইজড লার্নিং উইথ সাইকিট-লার্ন",
+  "Certification in version control and collaboration using Git": "গিট ব্যবহার করে ভার্সন কন্ট্রোল এবং কোলাবরেশনের ওপর সার্টিফিকেশন",
+  "Certification in building and evaluating supervised machine learning models": "সুপারভাইজড মেশিন লার্নিং মডেল তৈরি এবং মূল্যায়নের ওপর সার্টিফিকেশন",
 };
 
 const escapeRegex = (value: string) =>
