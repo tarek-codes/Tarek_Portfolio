@@ -277,7 +277,7 @@ export const PROJECTS: Project[] = [
     featured: true,
     wide: true,
     image: "/projects/word2sense-v2.png",
-    category: "Machine Learning",
+    category: "Natural Language Processing",
     status: "research",
     tags: ["NLP", "BiLSTM", "Text Classification"],
     highlight: "BiLSTM + Skip-gram achieving 0.725 accuracy",
@@ -346,7 +346,7 @@ export const ACHIEVEMENTS: Achievement[] = [
     viewType: "link",
   },
   {
-    title: "93% in English (Mentors After SSC)",
+    title: "93% in English (Mentors' After SSC Speaking Course)",
     organization: "Mentors",
     date: "2021",
     description: "Exceptional performance in the Mentors After SSC English program",
@@ -366,7 +366,6 @@ export const ACHIEVEMENTS: Achievement[] = [
     viewType: "link",
   },
 ];
-
 
 export const EXPERIENCE = [
   {
@@ -494,6 +493,3 @@ export const BENGALI_DIGIT_MAP: Readonly<Record<string, string>> = {
   "8": "৮",
   "9": "৯",
 };
-
-
-
