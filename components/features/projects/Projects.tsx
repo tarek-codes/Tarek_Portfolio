@@ -12,6 +12,8 @@ import {
   Layers,
   CircleDot,
   ArrowUpRight,
+  Code2,
+  BrainCircuit,
   type LucideIcon,
 } from "lucide-react";
 import Image from "next/image";
@@ -36,19 +38,25 @@ type ProjectStats = {
   downloads?: number;
 };
 
+type FilterType = "all" | "web" | "ai";
+
 const getFilterConfig = (
   locale: Locale,
-): Record<"featured" | "all", { label: string; icon: LucideIcon }> => {
+): Record<FilterType, { label: string; icon: LucideIcon }> => {
   const copy = getCopy(locale);
 
   return {
-    featured: {
-      label: copy.projects.featuredTab,
-      icon: Sparkles,
-    },
     all: {
       label: copy.projects.allTab,
       icon: Layers,
+    },
+    web: {
+      label: copy.projects.webTab,
+      icon: Code2,
+    },
+    ai: {
+      label: copy.projects.aiTab,
+      icon: BrainCircuit,
     },
   };
 };
@@ -150,15 +158,15 @@ const getMetaVariants = (reducedMotion: boolean): Variants => ({
 });
 
 const getCardLayout = (project: ProjectItem, index: number) => {
-  const prominent = Boolean(
-    project.featured && (project.wide ?? index % 3 === 0),
-  );
+  const prominent = Boolean(project.featured);
 
   return {
     prominent,
-    spanClass: prominent ? "md:col-span-2 lg:col-span-4" : "lg:col-span-2",
-    imageClass: "h-52 sm:h-56",
-    descClampClass: prominent ? "line-clamp-3" : "line-clamp-2",
+    spanClass: prominent 
+      ? "md:col-span-2 lg:col-span-3" 
+      : "md:col-span-1 lg:col-span-2",
+    imageClass: prominent ? "h-60 sm:h-64" : "h-52 sm:h-56",
+    descClampClass: prominent ? "line-clamp-4" : "line-clamp-2",
   };
 };
 
@@ -169,7 +177,7 @@ export default function Projects() {
   const copy = getCopy(locale);
   const filterConfig = getFilterConfig(locale);
   const statusConfig = getStatusConfig(locale);
-  const [filter, setFilter] = useState<"all" | "featured">("featured");
+  const [filter, setFilter] = useState<FilterType>("all");
   const [projectStats, setProjectStats] = useState<
     Record<string, ProjectStats>
   >(() =>
@@ -179,8 +187,16 @@ export default function Projects() {
     }, {}),
   );
 
-  const filteredProjects =
-    filter === "featured" ? PROJECTS.filter((p) => p.featured) : PROJECTS;
+  const filteredProjects = PROJECTS.filter((p) => {
+    if (filter === "all") return true;
+    if (filter === "web") return p.category === "Web Development";
+    if (filter === "ai")
+      return (
+        p.category === "Machine Learning" ||
+        p.category === "Natural Language Processing"
+      );
+    return true;
+  });
   const formatNumber = (value: number) =>
     locale === "bn" ? value.toLocaleString("bn-BD") : value.toLocaleString();
 
@@ -227,8 +243,8 @@ export default function Projects() {
       />
 
       {/* Filter */}
-      <div className="flex justify-center gap-2 mb-10">
-        {(["featured", "all"] as const).map((f) => {
+      <div className="flex flex-wrap justify-center gap-3 mb-12">
+        {(["all", "web", "ai"] as const).map((f) => {
           const config = filterConfig[f];
           const Icon = config.icon;
 
@@ -237,13 +253,15 @@ export default function Projects() {
               key={f}
               onClick={() => setFilter(f)}
               aria-pressed={filter === f}
-              className={`flex items-center gap-2 rounded-lg px-5 py-2 text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:ring-ctp-red focus-visible:ring-offset-2 focus-visible:ring-offset-ctp-base ${
+              className={`group flex items-center gap-2.5 rounded-xl px-6 py-2.5 text-sm font-medium transition-all duration-300 focus-visible:ring-2 focus-visible:ring-ctp-red focus-visible:ring-offset-2 focus-visible:ring-offset-ctp-base ${
                 filter === f
-                  ? "bg-ctp-red text-ctp-crust"
-                  : "text-ctp-subtext0 hover:text-ctp-text bg-ctp-surface0/30"
+                  ? "bg-ctp-red text-ctp-crust shadow-[0_0_20px_-5px_rgba(237,135,150,0.4)]"
+                  : "text-ctp-subtext0 hover:text-ctp-text bg-ctp-surface0/40 hover:bg-ctp-surface0/60"
               }`}
             >
-              <Icon className="w-4 h-4" />
+              <Icon
+                className={`w-4 h-4 transition-transform duration-300 ${filter === f ? "scale-110" : "group-hover:scale-110"}`}
+              />
               {config.label}
             </button>
           );

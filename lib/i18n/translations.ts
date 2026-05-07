@@ -84,6 +84,8 @@ type TranslationSchema = {
     subtitle: string;
     featuredTab: string;
     allTab: string;
+    webTab: string;
+    aiTab: string;
     featuredBadge: string;
     active: string;
     stable: string;
@@ -225,6 +227,8 @@ export const translations: Record<Locale, TranslationSchema> = {
       subtitle: "Building innovative ideas through code",
       featuredTab: "Featured",
       allTab: "All Projects",
+      webTab: "Web Development",
+      aiTab: "AI/ML",
       featuredBadge: "Featured",
       active: "Active",
       stable: "Stable",
@@ -367,6 +371,8 @@ export const translations: Record<Locale, TranslationSchema> = {
       subtitle: "কোডের মাধ্যমে ইনোভেটিভ আইডিয়া বিল্ডিং",
       featuredTab: "নির্বাচিত",
       allTab: "সব প্রজেক্ট",
+      webTab: "ওয়েব ডেভেলপমেন্ট",
+      aiTab: "এআই/এমএল",
       featuredBadge: "ফিচার্ড",
       active: "চলমান",
       stable: "স্থিতিশীল",
