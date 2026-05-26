@@ -91,5 +91,8 @@ export async function getLeetCodeStats(
   }
 }
 
-
-
+export async function fetchLeetCodeStatsServer(
+  username: string,
+): Promise<LeetCodeStats | null> {
+  return getLeetCodeStats(username);
+}

@@ -9,6 +9,15 @@ import {
   ChevronRight,
   Grid3x3,
   X,
+  Trophy,
+  Medal,
+  GraduationCap,
+  Star,
+  BookOpen,
+  Heart,
+  Calendar,
+  FileImage,
+  ExternalLink,
   type LucideIcon,
 } from "lucide-react";
 import Section from "@/components/ui/Section";
@@ -16,6 +25,7 @@ import SectionTitle from "@/components/ui/SectionTitle";
 import {
   ACHIEVEMENTS,
   type Achievement,
+  type AchievementType,
 } from "@/lib/constants";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import {
