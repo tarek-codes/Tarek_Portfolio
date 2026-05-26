@@ -89,7 +89,6 @@ const socialLinks = [
   { icon: Facebook, href: PERSONAL_INFO.facebookUrl, label: "Facebook" },
   { icon: Instagram, href: PERSONAL_INFO.instagramUrl, label: "Instagram" },
   { icon: DiscordIcon, href: PERSONAL_INFO.discordUrl, label: "Discord" },
-  { icon: Code2, href: PERSONAL_INFO.codeforcesUrl, label: "Codeforces" },
   { icon: Code2, href: PERSONAL_INFO.leetcodeUrl, label: "LeetCode" },
 ];
 
@@ -167,7 +166,17 @@ export default function Contact() {
   };
 
   return (
-    <Section id="contact" className="relative overflow-x-clip">
+    <Section id="contact" className="relative">
+      {/* Watermark */}
+      <div
+        className="pointer-events-none absolute inset-0 -z-10 flex items-center justify-center overflow-hidden"
+        aria-hidden="true"
+      >
+        <span className="font-display select-none text-[5rem] font-black uppercase leading-none text-ctp-red/8 opacity-12 sm:text-[8rem] lg:text-[11rem] xl:text-[14rem] mix-blend-overlay">
+          CONTACT
+        </span>
+      </div>
+
       <SectionTitle
         badge={copy.contact.badge}
         title={copy.contact.title}
@@ -175,9 +184,28 @@ export default function Contact() {
         subtitle={copy.contact.subtitle}
       />
 
+      <motion.div
+        className="mx-auto mb-8 max-w-5xl"
+        initial={{ opacity: 0, y: reducedMotion ? 0 : 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-60px" }}
+        transition={{ duration: reducedMotion ? 0.2 : 0.4, ease }}
+      >
+        <div className="flex items-center justify-center gap-3 rounded-xl border border-emerald-500/20 bg-emerald-500/5 px-5 py-3 backdrop-blur-sm">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+          </span>
+          <p className="text-sm font-medium text-emerald-400">
+            Currently available for freelance projects &amp; open-source
+            collaboration
+          </p>
+        </div>
+      </motion.div>
+
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -top-12 left-0 h-56 w-56 rounded-full bg-ctp-red/10 blur-3xl" />
-        <div className="absolute bottom-0 right-0 h-56 w-56 rounded-full bg-ctp-maroon/10 blur-3xl" />
+        <div className="absolute -top-12 left-0 h-56 w-56 rounded-full bg-ctp-red/10 opacity-12" />
+        <div className="absolute bottom-0 right-0 h-56 w-56 rounded-full bg-ctp-maroon/10 opacity-10" />
       </div>
 
       <div className="grid lg:grid-cols-2 gap-10 max-w-5xl mx-auto">
@@ -398,9 +426,25 @@ export default function Contact() {
           </form>
         </motion.div>
       </div>
+
+      <motion.div
+        className="mx-auto mt-16 max-w-2xl text-center"
+        initial={{ opacity: 0, y: reducedMotion ? 0 : 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-60px" }}
+        transition={{ duration: reducedMotion ? 0.25 : 0.5, ease }}
+      >
+        <div className="relative px-6 py-5 rounded-2xl border border-ctp-surface0/60 bg-ctp-surface0/20 backdrop-blur-sm">
+          <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full border border-ctp-surface0/80 bg-ctp-base px-3 py-0.5 text-xs font-display text-ctp-red">
+            &ldquo;&rdquo;
+          </div>
+          <p className="text-sm italic text-ctp-subtext0 leading-relaxed">
+            &ldquo;The only way to do great work is to love what you do. If you
+            haven&apos;t found it yet, keep looking.&rdquo;
+          </p>
+          <p className="mt-2 text-xs text-ctp-overlay0">— Steve Jobs</p>
+        </div>
+      </motion.div>
     </Section>
   );
 }
-
-
-

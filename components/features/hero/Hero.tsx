@@ -10,6 +10,7 @@ import {
   Twitter,
   Facebook,
   Instagram,
+  GraduationCap,
 } from "lucide-react";
 import Image from "next/image";
 import { PERSONAL_INFO } from "@/lib/constants";
@@ -133,7 +134,9 @@ export default function Hero() {
           <motion.div
             className="order-1 flex justify-center lg:order-2 lg:justify-end"
             variants={imageVariants}
-            whileHover={reduceVisualEffects ? undefined : { y: -4, scale: 1.015 }}
+            whileHover={
+              reduceVisualEffects ? undefined : { y: -4, scale: 1.015 }
+            }
             transition={springTransition}
           >
             <div className="relative w-[min(66vw,16rem)] sm:w-80 md:w-96 lg:w-100">
@@ -162,6 +165,24 @@ export default function Hero() {
                   />
                 </div>
               </div>
+              
+              {/* Available for Work Badge (Outside overflow-hidden context) */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.5, duration: 0.4, ease }}
+                className="absolute bottom-6 right-2 z-50 sm:bottom-8 sm:right-6 lg:bottom-10 lg:right-4"
+              >
+                <div className="relative flex items-center gap-1.5 rounded-full bg-gradient-to-r from-emerald-500 to-emerald-600 px-3 py-1.5 border border-emerald-400/50 shadow-lg shadow-emerald-500/40 backdrop-blur-md">
+                  <span className="relative flex h-2 w-2">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-200 opacity-75" />
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-white shadow-[0_0_8px_rgba(255,255,255,0.8)]" />
+                  </span>
+                  <span className="text-[11px] font-bold text-white whitespace-nowrap tracking-wider">
+                    Available
+                  </span>
+                </div>
+              </motion.div>
             </div>
           </motion.div>
 
@@ -169,18 +190,25 @@ export default function Hero() {
           <div className="order-2 space-y-6 text-center lg:order-1 lg:text-left">
             <motion.div
               variants={itemVariants}
-              className="inline-flex items-center gap-2 rounded-full border border-ctp-surface0/80 bg-ctp-surface0/35 px-4 py-2 text-sm backdrop-blur-sm"
+              className="flex flex-wrap items-center justify-center gap-3 lg:justify-start"
             >
-              <span className="font-mono text-ctp-red">{copy.hero.hello}</span>
+              {/* Education badge */}
+              <span className="inline-flex items-center gap-2 rounded-full border border-ctp-surface1/60 bg-ctp-surface0/40 px-4 py-2 text-sm font-medium backdrop-blur-md shadow-sm">
+                <GraduationCap className="h-4 w-4 text-ctp-red" />
+                <span className="text-ctp-subtext1">
+                  CSE Graduate · BRACU
+                </span>
+              </span>
             </motion.div>
 
             <motion.h1
               variants={itemVariants}
-              className="font-display text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl leading-[1.35]"
+              className="font-display text-5xl font-bold tracking-tight sm:text-6xl lg:text-[5.5rem] leading-[1.15]"
             >
               <span
-                className={`inline-block animate-text-gradient ${locale === "bn" ? "translate-y-[0.04em]" : ""
-                  }`}
+                className={`inline-block animate-text-gradient ${
+                  locale === "bn" ? "translate-y-[0.04em]" : ""
+                }`}
               >
                 {heroName.first}
               </span>{" "}
@@ -190,14 +218,14 @@ export default function Hero() {
 
             <motion.p
               variants={itemVariants}
-              className="mx-auto max-w-xl font-body text-lg leading-relaxed text-ctp-subtext0 lg:mx-0"
+              className="mx-auto max-w-2xl font-body text-lg sm:text-xl leading-relaxed text-ctp-subtext1 lg:mx-0"
             >
               {copy.hero.roleLine}
             </motion.p>
 
             <motion.div
               variants={itemVariants}
-              className="flex items-center justify-center gap-2 text-sm text-ctp-subtext0 lg:justify-start"
+              className="flex items-center justify-center gap-2 text-base text-ctp-subtext0 lg:justify-start"
             >
               <span
                 className="inline-block h-3.5 w-5 overflow-hidden rounded-sm"
@@ -218,7 +246,7 @@ export default function Hero() {
 
             <motion.div
               variants={ctaVariants}
-              className="flex flex-wrap items-center justify-center gap-3 pt-2 lg:justify-start"
+              className="flex flex-wrap items-center justify-center gap-4 pt-4 lg:justify-start"
             >
               <motion.button
                 onClick={() =>
@@ -230,19 +258,19 @@ export default function Hero() {
                   ...(reduceVisualEffects
                     ? {}
                     : {
-                      y: -4,
-                      scale: 1.03,
-                      boxShadow: "0 20px 42px -22px rgba(220,38,38,0.95)",
-                    }),
+                        y: -2,
+                        scale: 1.02,
+                        boxShadow: "0 14px 28px -10px rgba(220,38,38,0.6)",
+                      }),
                 }}
-                whileTap={{ scale: 0.97 }}
+                whileTap={{ scale: 0.98 }}
                 transition={springTransition}
-                className="group relative overflow-hidden rounded-xl bg-ctp-red px-6 py-2.5 font-body font-semibold text-ctp-crust transition-colors hover:bg-ctp-flamingo"
+                className="group relative overflow-hidden rounded-xl bg-ctp-red px-7 py-3.5 font-body font-semibold text-ctp-crust transition-all duration-300 hover:bg-ctp-flamingo text-base shadow-[0_4px_14px_-2px_rgba(220,38,38,0.3)]"
               >
-                <span className="pointer-events-none absolute inset-0 -translate-x-full bg-linear-to-r from-transparent via-ctp-surface0/35 to-transparent transition-transform duration-600 group-hover:translate-x-full" />
+                <span className="pointer-events-none absolute inset-0 -translate-x-full bg-linear-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full" />
                 <span className="relative z-10 flex items-center gap-2">
                   {copy.hero.viewWork}
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </span>
               </motion.button>
 
@@ -254,19 +282,16 @@ export default function Hero() {
                   ...(reduceVisualEffects
                     ? {}
                     : {
-                      y: -4,
-                      scale: 1.03,
-                      borderColor: "rgba(220,38,38,0.8)",
-                      boxShadow: "0 16px 36px -24px rgba(220,38,38,0.9)",
-                    }),
+                        y: -2,
+                        scale: 1.02,
+                      }),
                 }}
-                whileTap={{ scale: 0.97 }}
+                whileTap={{ scale: 0.98 }}
                 transition={springTransition}
-                className="group relative overflow-hidden rounded-xl border border-ctp-surface1 bg-transparent px-6 py-2.5 font-body font-semibold text-ctp-text transition-all hover:border-ctp-red hover:bg-ctp-red/5"
+                className="group relative overflow-hidden rounded-xl border border-ctp-surface2/50 bg-ctp-surface0/30 px-7 py-3.5 font-body font-semibold text-ctp-text transition-all duration-300 hover:border-ctp-red/50 hover:bg-ctp-red/10 text-base backdrop-blur-md"
               >
-                <span className="pointer-events-none absolute inset-0 scale-95 rounded-xl bg-ctp-red/0 opacity-0 blur-md transition-all duration-400 group-hover:scale-100 group-hover:bg-ctp-red/10 group-hover:opacity-100" />
                 <span className="relative z-10 flex items-center gap-2">
-                  <FileText className="h-4 w-4" />
+                  <FileText className="h-4 w-4 text-ctp-subtext0 transition-colors group-hover:text-ctp-red" />
                   {copy.hero.resume}
                 </span>
               </motion.a>
@@ -290,9 +315,21 @@ export default function Hero() {
                   className="text-ctp-overlay0 transition-colors hover:text-ctp-red"
                   aria-label={social.label}
                 >
-                  <social.icon className="h-5 w-5" />
+                  <social.icon className="h-6 w-6" />
                 </motion.a>
               ))}
+            </motion.div>
+
+            <motion.div
+              variants={itemVariants}
+              className="border-l-2 border-ctp-red/30 pl-3 text-center lg:text-left"
+            >
+              <p className="text-sm italic text-ctp-overlay0">
+                &ldquo;Talk is cheap. Show me the code.&rdquo;
+              </p>
+              <p className="text-xs not-italic text-ctp-overlay0/60">
+                &mdash; Linus Torvalds
+              </p>
             </motion.div>
           </div>
         </motion.div>
@@ -325,6 +362,3 @@ export default function Hero() {
     </section>
   );
 }
-
-
-

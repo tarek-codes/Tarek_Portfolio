@@ -36,6 +36,7 @@ type TranslationSchema = {
     skills: string;
     projects: string;
     achievements: string;
+    certifications: string;
     contact: string;
   };
   common: {
@@ -178,6 +179,7 @@ export const translations: Record<Locale, TranslationSchema> = {
       skills: "Skills",
       projects: "Projects",
       achievements: "Achievements",
+      certifications: "Certifications",
       contact: "Contact",
     },
     common: {
@@ -278,9 +280,9 @@ export const translations: Record<Locale, TranslationSchema> = {
       sendMessageButton: "Send Message",
     },
     stats: {
-      openStatsAria: "View competitive programming stats",
+      openStatsAria: "View problem solving stats",
       closeStatsAria: "Close stats",
-      heading: "Competitive Programming",
+      heading: "Problem Solving Stats",
       liveStats: "Live Stats",
       loading: "Loading stats...",
       rating: "Rating",
@@ -322,6 +324,7 @@ export const translations: Record<Locale, TranslationSchema> = {
       skills: "স্কিলস",
       projects: "প্রজেক্টস",
       achievements: "অর্জন",
+      certifications: "সার্টিফিকেশন",
       contact: "যোগাযোগ",
     },
     common: {
@@ -422,9 +425,9 @@ export const translations: Record<Locale, TranslationSchema> = {
       sendMessageButton: "বার্তা পাঠান",
     },
     stats: {
-      openStatsAria: "কম্পিটিটিভ প্রোগ্রামিং পরিসংখ্যান দেখুন",
+      openStatsAria: "সমস্যা সমাধান পরিসংখ্যান দেখুন",
       closeStatsAria: "পরিসংখ্যান বন্ধ করুন",
-      heading: "কম্পিটিটিভ প্রোগ্রামিং",
+      heading: "সমস্যা সমাধান পরিসংখ্যান",
       liveStats: "লাইভ পরিসংখ্যান",
       loading: "পরিসংখ্যান লোড হচ্ছে...",
       rating: "রেটিং",

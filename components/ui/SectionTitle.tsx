@@ -50,28 +50,28 @@ export default function SectionTitle({
     >
       {badge && (
         <motion.div
-          className="inline-flex items-center gap-2 px-4 py-2 bg-ctp-surface0/50 backdrop-blur-sm border border-ctp-surface1 rounded-full text-sm mb-6"
-          initial={{ scale: 0 }}
-          whileInView={{ scale: 1 }}
+          className="inline-flex items-center gap-2 px-5 py-2.5 bg-ctp-surface0/40 backdrop-blur-md border border-ctp-surface1/60 rounded-full shadow-sm text-sm font-medium mb-8"
+          initial={{ scale: 0.9, opacity: 0 }}
+          whileInView={{ scale: 1, opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+          transition={{ delay: 0.1, type: "spring", stiffness: 220, damping: 20 }}
         >
-          <Sparkles className="w-4 h-4 text-ctp-maroon" />
-          <span className="text-ctp-text font-medium">{badge}</span>
+          <Sparkles className="w-4 h-4 text-ctp-red animate-pulse" />
+          <span className="text-ctp-text tracking-wide">{badge.toUpperCase()}</span>
         </motion.div>
       )}
 
-      <h2 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-ctp-text mb-6">
+      <h2 className="text-4xl md:text-5xl lg:text-7xl font-display font-bold text-ctp-text tracking-tight mb-6 !leading-[1.15]">
         {renderTitle()}
       </h2>
 
       {subtitle && (
         <motion.p
-          className="text-base sm:text-lg text-ctp-subtext0 max-w-2xl mx-auto leading-relaxed"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          className="text-lg md:text-xl text-ctp-subtext1 max-w-2xl mx-auto leading-relaxed"
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.4, delay: 0.3 }}
+          transition={{ duration: 0.5, delay: 0.2, ease: [0.25, 1, 0.5, 1] }}
         >
           {subtitle}
         </motion.p>
@@ -79,6 +79,3 @@ export default function SectionTitle({
     </motion.div>
   );
 }
-
-
-

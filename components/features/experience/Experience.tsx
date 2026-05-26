@@ -4,12 +4,12 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useState } from "react";
 import {
   Award,
-  BookOpen,
   Briefcase,
-  Calendar,
   ChevronDown,
   GraduationCap,
+  MapPin,
 } from "lucide-react";
+import Image from "next/image";
 import Section from "@/components/ui/Section";
 import SectionTitle from "@/components/ui/SectionTitle";
 import { EXPERIENCE, ORGANIZING_VOLUNTEERING } from "@/lib/constants";
@@ -22,42 +22,33 @@ import {
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-type ExperienceItem = (typeof EXPERIENCE)[number];
+/* ─── Helpers ───────────────────────────────────────────────────────────── */
 
-const getTypeConfig = (locale: Locale) => {
-  const copy = getCopy(locale);
-
-  return {
-    work: {
-      icon: Briefcase,
-      color: "text-ctp-red",
-      bg: "bg-ctp-red/10",
-      label: copy.experience.work,
-      marker: "bg-ctp-red",
-      rail: "bg-ctp-red/70",
-    },
-    teaching: {
-      icon: BookOpen,
-      color: "text-ctp-maroon",
-      bg: "bg-ctp-maroon/10",
-      label: copy.experience.teaching,
-      marker: "bg-ctp-maroon",
-      rail: "bg-ctp-maroon/70",
-    },
-    education: {
-      icon: GraduationCap,
-      color: "text-ctp-maroon",
-      bg: "bg-ctp-maroon/10",
-      label: copy.experience.education,
-      marker: "bg-ctp-maroon",
-      rail: "bg-ctp-maroon/70",
-    },
-  };
+const parseYear = (value: string) => {
+  const match = value.match(/\d{4}/);
+  return match ? Number(match[0]) : 0;
 };
+
+const getExperienceSortScore = (startDate: string, endDate: string) => {
+  if (/present/i.test(endDate)) return 9999;
+  return parseYear(endDate) || parseYear(startDate);
+};
+
+const orderedExperience = [...EXPERIENCE].sort(
+  (a, b) =>
+    getExperienceSortScore(b.startDate, b.endDate) -
+    getExperienceSortScore(a.startDate, a.endDate),
+);
+
+const workExperience = orderedExperience.filter((e) => e.type === "work");
+const educationExperience = orderedExperience.filter(
+  (e) => e.type === "education",
+);
+
+/* ─── Organising category config ────────────────────────────────────────── */
 
 const getOrganizingCategoryConfig = (locale: Locale) => {
   const copy = getCopy(locale);
-
   return {
     organizer: {
       label: copy.experience.organizer,
@@ -72,142 +63,308 @@ const getOrganizingCategoryConfig = (locale: Locale) => {
   };
 };
 
-const resolveExperienceTypeConfig = (
-  type: string,
-  config: ReturnType<typeof getTypeConfig>,
-) => {
-  if (type === "teaching") return config.teaching;
-  if (type === "education") return config.education;
-  return config.work;
-};
-
 const resolveOrganizingCategoryConfig = (
   category: string,
   config: ReturnType<typeof getOrganizingCategoryConfig>,
-) => {
-  if (category === "organizer") return config.organizer;
-  return config.volunteer;
-};
+) => (category === "organizer" ? config.organizer : config.volunteer);
 
-const parseYear = (value: string) => {
-  const match = value.match(/\d{4}/);
-  return match ? Number(match[0]) : 0;
-};
+/* ─── Animation variants ────────────────────────────────────────────────── */
 
-const getExperienceSortScore = (startDate: string, endDate: string) => {
-  if (/present/i.test(endDate)) {
-    return 9999;
+const cardVariants = (rm: boolean) => ({
+  hidden: { opacity: 0, y: rm ? 0 : 28 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: rm ? 0.3 : 0.55, ease },
+  },
+});
+
+const rowVariants = (rm: boolean) => ({
+  hidden: { opacity: 0, x: rm ? 0 : -10 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: rm ? 0.2 : 0.3, ease },
+  },
+});
+
+const stagger = (delay = 0, rm = false) => ({
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: rm ? 0.02 : 0.07,
+      delayChildren: rm ? 0 : delay,
+    },
+  },
+});
+
+/* ─── Status badge ──────────────────────────────────────────────────────── */
+
+function StatusBadge({ endDate, type }: { endDate: string; type: string }) {
+  const isActive = /present/i.test(endDate);
+  const isEducation = type === "education";
+
+  let label: string;
+  let cls: string;
+
+  if (isActive) {
+    label = "ACTIVE";
+    cls = "border-ctp-red/30 bg-ctp-red/10 text-ctp-red";
+  } else if (isEducation) {
+    label = "GRADUATED";
+    cls = "border-ctp-maroon/30 bg-ctp-maroon/10 text-ctp-maroon";
+  } else {
+    label = "CONCLUDED";
+    cls = "border-ctp-surface1/60 bg-ctp-surface0/40 text-ctp-overlay0";
   }
 
-  return parseYear(endDate) || parseYear(startDate);
+  return (
+    <span
+      className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 font-display text-[10px] font-medium tracking-wider ${cls}`}
+    >
+      {isActive ? (
+        <span className="relative flex h-1.5 w-1.5">
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-ctp-red opacity-60" />
+          <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-ctp-red" />
+        </span>
+      ) : (
+        <span className="h-1.5 w-1.5 rounded-full bg-current opacity-70" />
+      )}
+      {label}
+    </span>
+  );
+}
+
+/* ─── Org logo ─────────────────────────────────────────────────────────── */
+
+const ORG_LOGOS: Record<string, string> = {
+  "Betopia Limted":
+    "https://www.betopialimited.com/favicon.ico?favicon.10dld~._d741r.ico",
+  "Betopia Limited":
+    "https://www.betopialimited.com/favicon.ico?favicon.10dld~._d741r.ico",
+  "BRAC University":
+    "https://www.bracu.ac.bd/sites/default/files/resources/media/bracu_logo_12-0-2022.png",
 };
 
-const orderedExperience = [...EXPERIENCE].sort(
-  (a, b) =>
-    getExperienceSortScore(b.startDate, b.endDate) -
-    getExperienceSortScore(a.startDate, a.endDate),
-);
+function OrgLogo({
+  organization,
+  type,
+}: {
+  organization: string;
+  type: string;
+}) {
+  const [failed, setFailed] = useState(false);
+  const logoPath = ORG_LOGOS[organization];
 
-const featuredExperience: ExperienceItem | null =
-  orderedExperience.find(
-    (exp) => exp.type === "work" && /present/i.test(exp.endDate),
-  ) ??
-  orderedExperience.find((exp) => /present/i.test(exp.endDate)) ??
-  null;
+  const initials = organization
+    .split(" ")
+    .slice(0, 2)
+    .map((w) => w[0])
+    .join("")
+    .toUpperCase();
 
-const timelineExperience = orderedExperience.filter(
-  (exp) => exp.title !== featuredExperience?.title,
-);
+  const bg = type === "education" ? "bg-[#7c1d1d]" : "bg-[#0f172a]";
 
-const getContainerVariants = (reducedMotion: boolean) => ({
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      delayChildren: reducedMotion ? 0 : 0.04,
-      staggerChildren: reducedMotion ? 0.04 : 0.08,
-    },
-  },
-});
+  if (!logoPath || failed) {
+    return (
+      <div
+        className={`flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl ${bg} border border-white/10 shadow-xl`}
+      >
+        <span className="font-display text-xl font-black text-white">
+          {initials}
+        </span>
+      </div>
+    );
+  }
 
-const getFeaturedCardVariants = (reducedMotion: boolean) => ({
-  hidden: {
-    opacity: 0,
-    y: reducedMotion ? 0 : 24,
-    filter: reducedMotion ? "none" : "blur(6px)",
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    filter: "blur(0px)",
-    transition: {
-      duration: reducedMotion ? 0.3 : 0.55,
-      ease,
-    },
-  },
-});
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.5, x: 20 }}
+      whileInView={{ opacity: 1, scale: 1, x: 0 }}
+      whileHover={{
+        scale: 1.1,
+        rotate: -3,
+        filter: "brightness(1.1) contrast(1.1)",
+        boxShadow: "0 0 40px rgba(220, 38, 38, 0.4)",
+      }}
+      viewport={{ once: true }}
+      className="relative flex h-24 w-24 shrink-0 items-center justify-center overflow-hidden rounded-3xl border border-white/20 bg-white/10 p-3 shadow-2xl backdrop-blur-xl transition-all hover:border-ctp-red/60 mt-1"
+    >
+      {/* Subtle background glow inside the logo box */}
+      <div className="absolute inset-0 bg-radial-gradient from-ctp-red/20 to-transparent opacity-60" />
 
-const getTimelineItemVariants = (reducedMotion: boolean) => ({
-  hidden: {
-    opacity: 0,
-    y: reducedMotion ? 0 : 20,
-    x: reducedMotion ? 0 : -8,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    x: 0,
-    transition: {
-      duration: reducedMotion ? 0.28 : 0.45,
-      ease,
-    },
-  },
-});
+      <Image
+        src={logoPath}
+        alt={`${organization} logo`}
+        width={96}
+        height={96}
+        className="relative z-10 h-full w-full object-contain drop-shadow-2xl"
+        unoptimized
+        onError={() => setFailed(true)}
+      />
+    </motion.div>
+  );
+}
 
-const getMarkerVariants = (reducedMotion: boolean) => ({
-  hidden: {
-    opacity: 0,
-    scale: reducedMotion ? 1 : 0.8,
-  },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: {
-      duration: reducedMotion ? 0.2 : 0.35,
-      ease,
-    },
-  },
-});
+/* ─── Experience card ───────────────────────────────────────────────────── */
+
+function ExperienceCard({
+  exp,
+  rm,
+  locale,
+  isWork,
+}: {
+  exp: (typeof EXPERIENCE)[number];
+  rm: boolean;
+  locale: Locale;
+  isWork: boolean;
+}) {
+  const implementationLabel = isWork
+    ? "// Technical Implementation"
+    : "// Academic Details";
+
+  return (
+    <motion.div
+      variants={cardVariants(rm)}
+      className="group relative overflow-hidden rounded-2xl border border-ctp-surface0/60 bg-ctp-surface0/20 p-6 backdrop-blur-sm transition-[border-color,box-shadow] duration-300 hover:border-ctp-surface1 hover:shadow-lg hover:shadow-ctp-crust/20 sm:p-8"
+    >
+      {/* Corner glow */}
+      <div
+          className={`pointer-events-none absolute -right-12 -top-12 h-32 w-32 rounded-full transition-opacity duration-300 opacity-0 group-hover:opacity-100 ${
+            isWork ? "bg-ctp-red/15" : "bg-ctp-maroon/15"
+          }`}
+      />
+
+      {/* Date range */}
+      <p
+        className={`mb-3 font-display text-sm font-medium ${
+          isWork ? "text-ctp-red" : "text-ctp-maroon"
+        }`}
+      >
+        / {translateDynamicText(locale, exp.startDate)} –{" "}
+        {translateDynamicText(locale, exp.endDate)}
+      </p>
+
+      <div className="mb-4 flex flex-col-reverse justify-between gap-4 sm:flex-row sm:items-start">
+        <h3 className="font-display text-2xl font-black tracking-wide text-ctp-text sm:text-3xl lg:text-4xl">
+          {translateDynamicText(locale, exp.organization)}
+        </h3>
+        <div className="flex justify-end sm:block">
+          <OrgLogo organization={exp.organization} type={exp.type} />
+        </div>
+      </div>
+
+      {/* Role / degree */}
+      <p className="mb-4 text-base text-ctp-subtext0">
+        {translateDynamicText(locale, exp.title)}
+      </p>
+
+      {/* Meta row: location + status */}
+      <div className="mb-5 flex flex-wrap items-center gap-3">
+        <span className="flex items-center gap-1.5 text-xs text-ctp-overlay0">
+          <MapPin className="h-3.5 w-3.5" />
+          {translateDynamicText(locale, exp.location)}
+        </span>
+        <StatusBadge endDate={exp.endDate} type={exp.type} />
+      </div>
+
+      {/* Implementation / details header */}
+      <div className="mb-3 flex items-center gap-3">
+        <span className="font-display text-[10px] tracking-[0.18em] uppercase text-ctp-overlay0">
+          {implementationLabel}
+        </span>
+        <div className="h-px flex-1 bg-ctp-surface1/40" />
+      </div>
+
+      {/* Bullet points */}
+      <motion.ul
+        className="space-y-2"
+        variants={stagger(0.1, rm)}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        {exp.description.map((item) => (
+          <motion.li
+            key={item}
+            variants={rowVariants(rm)}
+            className="flex items-start gap-2.5 text-sm leading-relaxed text-ctp-subtext0"
+          >
+            <span
+              className={`mt-[0.4rem] h-1.5 w-1.5 shrink-0 rounded-full ${
+                isWork ? "bg-ctp-red" : "bg-ctp-maroon"
+              }`}
+            />
+            <span>{translateDynamicText(locale, item)}</span>
+          </motion.li>
+        ))}
+      </motion.ul>
+    </motion.div>
+  );
+}
+
+/* ─── Section group header ──────────────────────────────────────────────── */
+
+function GroupHeader({
+  icon: Icon,
+  label,
+  rm,
+}: {
+  icon: React.ElementType;
+  label: string;
+  rm: boolean;
+}) {
+  return (
+    <motion.div
+      className="mb-5 flex items-center gap-3"
+      initial={{ opacity: 0, x: rm ? 0 : -16 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: rm ? 0.2 : 0.4, ease }}
+    >
+      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-ctp-red/10">
+        <Icon className="h-4 w-4 text-ctp-red" />
+      </div>
+      <span className="font-display text-[11px] font-semibold tracking-[0.22em] uppercase text-ctp-overlay0">
+        {label}
+      </span>
+      <div className="h-px flex-1 bg-ctp-surface0/70" />
+    </motion.div>
+  );
+}
+
+/* ─── Main component ────────────────────────────────────────────────────── */
 
 export default function Experience() {
   const prefersReducedMotion = useReducedMotion();
-  const reducedMotion = Boolean(prefersReducedMotion);
+  const rm = Boolean(prefersReducedMotion);
   const { locale } = useLanguage();
   const copy = getCopy(locale);
-  const typeConfig = getTypeConfig(locale);
   const organizingCategoryConfig = getOrganizingCategoryConfig(locale);
   const [showOrganizing, setShowOrganizing] = useState(false);
   const organizingPanelId = "experience-organizing-panel";
 
-  const containerVariants = getContainerVariants(reducedMotion);
-  const featuredCardVariants = getFeaturedCardVariants(reducedMotion);
-  const timelineItemVariants = getTimelineItemVariants(reducedMotion);
-  const markerVariants = getMarkerVariants(reducedMotion);
-
-  const featuredConfig = featuredExperience
-    ? resolveExperienceTypeConfig(featuredExperience.type, typeConfig)
-    : typeConfig.work;
-  const FeaturedIcon = featuredConfig.icon;
   const organizingCountLabel =
     locale === "bn"
       ? ORGANIZING_VOLUNTEERING.length.toLocaleString("bn-BD")
       : String(ORGANIZING_VOLUNTEERING.length);
 
   return (
-    <Section id="experience" className="relative overflow-x-clip">
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute left-1/2 top-8 h-56 w-56 -translate-x-1/2 rounded-full bg-ctp-red/10 blur-3xl" />
-        <div className="absolute -bottom-12 right-8 h-48 w-48 rounded-full bg-ctp-maroon/10 blur-3xl" />
+    <Section id="experience" className="relative">
+      {/* Ambient */}
+      <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute left-1/2 top-8 h-56 w-56 -translate-x-1/2 rounded-full bg-ctp-red/8 opacity-12" />
+        <div className="absolute -bottom-12 right-8 h-48 w-48 rounded-full bg-ctp-maroon/8 opacity-10" />
+      </div>
+
+      {/* Watermark */}
+      <div
+        className="pointer-events-none absolute inset-0 -z-10 flex items-center justify-center overflow-hidden"
+        aria-hidden="true"
+      >
+        <span className="font-display select-none text-[5rem] font-black uppercase leading-none text-ctp-red/8 opacity-12 sm:text-[8rem] lg:text-[11rem] xl:text-[14rem] mix-blend-overlay">
+          EXPERIENCE
+        </span>
       </div>
 
       <SectionTitle
@@ -217,291 +374,143 @@ export default function Experience() {
         subtitle={copy.experience.subtitle}
       />
 
-      <motion.div
-        className="max-w-3xl mx-auto"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-60px" }}
-        variants={containerVariants}
-      >
-        {featuredExperience && (
-          <motion.article
-            variants={featuredCardVariants}
-            whileHover={
-              reducedMotion
-                ? undefined
-                : {
-                    y: -4,
-                  }
-            }
-            transition={{ duration: 0.25, ease }}
-            className="group relative overflow-hidden rounded-2xl border border-ctp-surface0/70 bg-ctp-surface0/35 p-6 sm:p-7 backdrop-blur-sm transition-[border-color,background-color] duration-300 hover:border-ctp-surface1 hover:bg-ctp-surface0/45"
-          >
-            <div
-              className={`pointer-events-none absolute -right-16 -top-16 h-36 w-36 rounded-full ${featuredConfig.bg} opacity-0 blur-3xl transition-opacity duration-300 group-hover:opacity-100`}
-            />
-
-            <div className="mb-4 flex flex-wrap items-center gap-2">
-              <span
-                className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium ${featuredConfig.bg} ${featuredConfig.color}`}
-              >
-                <span
-                  className={`h-1.5 w-1.5 rounded-full ${featuredConfig.marker}`}
+      <div className="mx-auto max-w-3xl space-y-12">
+        {/* ── Work Experience ──────────────────────────────────────── */}
+        {workExperience.length > 0 && (
+          <div>
+            <GroupHeader icon={Briefcase} label="Work Experience" rm={rm} />
+            <motion.div
+              className="space-y-5"
+              variants={stagger(0.04, rm)}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-60px" }}
+            >
+              {workExperience.map((exp) => (
+                <ExperienceCard
+                  key={`${exp.title}-${exp.startDate}`}
+                  exp={exp}
+                  rm={rm}
+                  locale={locale}
+                  isWork={true}
                 />
-                {copy.experience.currentWork}
-              </span>
-            </div>
-
-            <div className="flex items-start gap-4">
-              <div
-                className={`mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl transition-transform duration-300 ${featuredConfig.bg} ${
-                  reducedMotion
-                    ? ""
-                    : "group-hover:-translate-y-0.5 group-hover:scale-105"
-                }`}
-              >
-                <FeaturedIcon className={`h-5 w-5 ${featuredConfig.color}`} />
-              </div>
-
-              <div className="flex-1 min-w-0">
-                <h3 className="text-xl font-display font-bold text-ctp-text leading-tight mb-1">
-                  {translateDynamicText(locale, featuredExperience.title)}
-                </h3>
-                <p className="text-sm text-ctp-subtext0 mb-3">
-                  {translateDynamicText(
-                    locale,
-                    featuredExperience.organization,
-                  )}{" "}
-                  · {translateDynamicText(locale, featuredExperience.location)}
-                </p>
-
-                <div className="inline-flex items-center gap-1.5 rounded-lg border border-ctp-surface1/60 bg-ctp-surface0/30 px-2.5 py-1 text-xs text-ctp-red mb-4">
-                  <Calendar className="w-3.5 h-3.5" />
-                  {translateDynamicText(
-                    locale,
-                    featuredExperience.startDate,
-                  )} –{" "}
-                  {translateDynamicText(locale, featuredExperience.endDate)}
-                </div>
-
-                <ul className="space-y-2">
-                  {featuredExperience.description.map((item) => (
-                    <li
-                      key={item}
-                      className="flex items-start gap-2 text-sm leading-relaxed text-ctp-subtext0"
-                    >
-                      <span
-                        className={`mt-[0.42rem] h-1.5 w-1.5 shrink-0 rounded-full ${featuredConfig.marker}`}
-                      />
-                      <span>{translateDynamicText(locale, item)}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </motion.article>
+              ))}
+            </motion.div>
+          </div>
         )}
 
-        {timelineExperience.length > 0 && (
-          <motion.div variants={featuredCardVariants} className="mt-8">
-            <div className="mb-4 flex items-center gap-2">
-              <div className="h-px flex-1 bg-ctp-surface1/70" />
-              <span className="text-xs font-mono tracking-wide uppercase text-ctp-overlay0">
-                {copy.experience.timeline}
-              </span>
-              <div className="h-px flex-1 bg-ctp-surface1/70" />
+        {/* ── Education ────────────────────────────────────────────── */}
+        {educationExperience.length > 0 && (
+          <div>
+            <GroupHeader icon={GraduationCap} label="Education" rm={rm} />
+            <motion.div
+              className="space-y-5"
+              variants={stagger(0.04, rm)}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-60px" }}
+            >
+              {educationExperience.map((exp) => (
+                <ExperienceCard
+                  key={`${exp.title}-${exp.startDate}`}
+                  exp={exp}
+                  rm={rm}
+                  locale={locale}
+                  isWork={false}
+                />
+              ))}
+            </motion.div>
+          </div>
+        )}
+
+        {/* ── Other types (teaching, etc.) ─────────────────────────── */}
+        {orderedExperience
+          .filter((e) => e.type !== "work" && e.type !== "education")
+          .map((exp) => (
+            <ExperienceCard
+              key={`${exp.title}-${exp.startDate}`}
+              exp={exp}
+              rm={rm}
+              locale={locale}
+              isWork={false}
+            />
+          ))}
+
+        {/* ── Organising & Volunteering toggle ─────────────────────── */}
+        {ORGANIZING_VOLUNTEERING.length > 0 && (
+          <div>
+            <div className="text-center">
+              <button
+                type="button"
+                onClick={() => setShowOrganizing(!showOrganizing)}
+                aria-expanded={showOrganizing}
+                aria-controls={organizingPanelId}
+                className="group mx-auto inline-flex items-center gap-2 rounded-full border border-ctp-surface0/60 bg-ctp-surface0/25 px-4 py-2 text-sm font-medium text-ctp-subtext0 transition-[color,border-color,background-color] duration-200 hover:border-ctp-surface1 hover:bg-ctp-surface0/40 hover:text-ctp-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ctp-red/60"
+              >
+                <Award className="w-4 h-4 text-ctp-red" />
+                {copy.experience.organizingButton} ({organizingCountLabel})
+                <ChevronDown
+                  className={`w-4 h-4 transition-transform duration-200 ${showOrganizing ? "rotate-180" : ""}`}
+                />
+              </button>
             </div>
 
-            <div className="relative pl-7 sm:pl-8">
-              <div className="absolute left-2 top-2 bottom-2 w-px bg-ctp-surface1/70" />
-
-              <div className="space-y-4">
-                {timelineExperience.map((exp) => {
-                  const config = resolveExperienceTypeConfig(
-                    exp.type,
-                    typeConfig,
-                  );
-                  const Icon = config.icon;
-
-                  return (
-                    <motion.article
-                      key={`${exp.title}-${exp.startDate}`}
-                      variants={timelineItemVariants}
-                      whileHover={
-                        reducedMotion
-                          ? undefined
-                          : {
-                              y: -3,
-                            }
-                      }
-                      transition={{ duration: 0.25, ease }}
-                      className="group relative overflow-hidden rounded-2xl border border-ctp-surface0/60 bg-ctp-surface0/30 p-5 sm:p-6 backdrop-blur-sm transition-[border-color,background-color] duration-300 hover:border-ctp-surface1 hover:bg-ctp-surface0/40"
-                    >
-                      <motion.span
-                        variants={markerVariants}
-                        className={`absolute -left-[1.38rem] top-7 h-3 w-3 rounded-full border-2 border-ctp-base ${config.marker}`}
-                      />
-
-                      <div
-                        className={`pointer-events-none absolute -left-9 top-2 h-14 w-14 rounded-full ${config.bg} opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-80`}
-                      />
-
-                      <div className="flex items-start gap-3 mb-3">
-                        <div
-                          className={`p-2.5 rounded-xl ${config.bg} shrink-0`}
+            <AnimatePresence initial={false}>
+              {showOrganizing && (
+                <motion.div
+                  id={organizingPanelId}
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: rm ? 0.2 : 0.32, ease }}
+                  className="overflow-hidden"
+                >
+                  <motion.div
+                    className="grid sm:grid-cols-2 gap-3 mt-6"
+                    initial="hidden"
+                    animate="visible"
+                    variants={stagger(0.04, rm)}
+                  >
+                    {ORGANIZING_VOLUNTEERING.map((item) => {
+                      const category = resolveOrganizingCategoryConfig(
+                        item.category,
+                        organizingCategoryConfig,
+                      );
+                      return (
+                        <motion.div
+                          key={`${item.title}-${item.date}`}
+                          variants={cardVariants(rm)}
+                          className="rounded-xl border border-ctp-surface0/60 bg-ctp-surface0/20 p-4 transition-colors hover:border-ctp-surface1"
                         >
-                          <Icon className={`w-4 h-4 ${config.color}`} />
-                        </div>
-
-                        <div className="min-w-0 flex-1">
-                          <div className="flex flex-wrap items-start justify-between gap-2">
-                            <h3 className="text-base sm:text-lg font-display font-semibold text-ctp-text leading-snug">
-                              {translateDynamicText(locale, exp.title)}
-                            </h3>
-
+                          <div className="mb-2 flex items-center justify-between gap-2">
+                            <span className="text-xs font-display text-ctp-red">
+                              {translateDynamicText(locale, item.date)}
+                            </span>
                             <span
-                              className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${config.bg} ${config.color}`}
+                              className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-medium ${category.badge}`}
                             >
-                              {config.label}
+                              <span
+                                className={`h-1.5 w-1.5 rounded-full ${category.dot}`}
+                              />
+                              {category.label}
                             </span>
                           </div>
-
-                          <p className="mt-1 text-sm text-ctp-subtext0">
-                            {translateDynamicText(locale, exp.organization)} ·{" "}
-                            {translateDynamicText(locale, exp.location)}
+                          <h4 className="text-sm font-semibold text-ctp-text leading-snug line-clamp-2">
+                            {translateDynamicText(locale, item.title)}
+                          </h4>
+                          <p className="text-xs text-ctp-subtext0 mt-1 line-clamp-2">
+                            {translateDynamicText(locale, item.organization)}
                           </p>
-
-                          <span className="mt-2 inline-flex items-center gap-1.5 text-xs text-ctp-red">
-                            <Calendar className="w-3.5 h-3.5" />
-                            {translateDynamicText(locale, exp.startDate)} –{" "}
-                            {translateDynamicText(locale, exp.endDate)}
-                          </span>
-                        </div>
-                      </div>
-
-                      <ul className="space-y-1.5">
-                        {exp.description.map((item) => (
-                          <li
-                            key={item}
-                            className="flex items-start gap-2 text-sm text-ctp-subtext0"
-                          >
-                            <span
-                              className={`mt-[0.42rem] h-1.5 w-1.5 shrink-0 rounded-full ${config.marker}`}
-                            />
-                            <span>{translateDynamicText(locale, item)}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </motion.article>
-                  );
-                })}
-              </div>
-            </div>
-          </motion.div>
+                        </motion.div>
+                      );
+                    })}
+                  </motion.div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         )}
-      </motion.div>
-
-      <div className="max-w-3xl mx-auto mt-12">
-        <div className="text-center">
-          <button
-            type="button"
-            onClick={() => setShowOrganizing(!showOrganizing)}
-            aria-expanded={showOrganizing}
-            aria-controls={organizingPanelId}
-            aria-label={`${showOrganizing ? copy.experience.hide : copy.experience.show} ${copy.experience.ariaOrganizingToggle}`}
-            className="group mx-auto inline-flex items-center gap-2 rounded-full border border-ctp-surface0/60 bg-ctp-surface0/25 px-4 py-2 text-sm font-medium text-ctp-subtext0 transition-[color,border-color,background-color] duration-200 hover:border-ctp-surface1 hover:bg-ctp-surface0/40 hover:text-ctp-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ctp-red/60"
-          >
-            <Award className="w-4 h-4 text-ctp-red" />
-            {copy.experience.organizingButton} ({organizingCountLabel})
-            <ChevronDown
-              className={`w-4 h-4 transition-transform duration-200 ${
-                showOrganizing ? "rotate-180" : ""
-              }`}
-            />
-          </button>
-        </div>
-
-        <AnimatePresence initial={false}>
-          {showOrganizing && (
-            <motion.div
-              id={organizingPanelId}
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: reducedMotion ? 0.2 : 0.32, ease }}
-              className="overflow-hidden"
-            >
-              <motion.div
-                className="grid sm:grid-cols-2 gap-3 mt-6"
-                initial="hidden"
-                animate="visible"
-                variants={{
-                  hidden: { opacity: 0 },
-                  visible: {
-                    opacity: 1,
-                    transition: {
-                      delayChildren: reducedMotion ? 0 : 0.04,
-                      staggerChildren: reducedMotion ? 0.03 : 0.05,
-                    },
-                  },
-                }}
-              >
-                {ORGANIZING_VOLUNTEERING.map((item) => {
-                  const category = resolveOrganizingCategoryConfig(
-                    item.category,
-                    organizingCategoryConfig,
-                  );
-
-                  return (
-                    <motion.div
-                      key={`${item.title}-${item.date}`}
-                      variants={{
-                        hidden: {
-                          opacity: 0,
-                          y: reducedMotion ? 0 : 10,
-                        },
-                        visible: {
-                          opacity: 1,
-                          y: 0,
-                          transition: {
-                            duration: reducedMotion ? 0.2 : 0.3,
-                            ease,
-                          },
-                        },
-                      }}
-                      className="rounded-xl border border-ctp-surface0/60 bg-ctp-surface0/20 p-4 transition-colors duration-200 hover:border-ctp-surface1"
-                    >
-                      <div className="mb-2 flex items-center justify-between gap-2">
-                        <span className="text-xs font-mono text-ctp-red">
-                          {translateDynamicText(locale, item.date)}
-                        </span>
-                        <span
-                          className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-medium ${category.badge}`}
-                        >
-                          <span
-                            className={`h-1.5 w-1.5 rounded-full ${category.dot}`}
-                          />
-                          {category.label}
-                        </span>
-                      </div>
-
-                      <h4 className="text-sm font-semibold text-ctp-text leading-snug line-clamp-2">
-                        {translateDynamicText(locale, item.title)}
-                      </h4>
-                      <p className="text-xs text-ctp-subtext0 mt-1 line-clamp-2">
-                        {translateDynamicText(locale, item.organization)}
-                      </p>
-                    </motion.div>
-                  );
-                })}
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </div>
     </Section>
   );
 }
-
-
-

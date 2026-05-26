@@ -74,7 +74,7 @@ vercel --prod
   3. Give it a name (e.g., "Portfolio GitHub Token")
   4. Select scopes: `public_repo` (read-only)
   5. Generate and copy the token
-- **Benefit**: Prevents rate limiting for Codeforces/GitHub data fetching
+ - **Benefit**: Prevents rate limiting for GitHub/LeetCode data fetching
 
 ## Post-Deployment Configuration
 
@@ -86,7 +86,7 @@ After deployment, verify:
 - ✅ Dark/Light theme toggle works
 - ✅ All navigation links work
 - ✅ AI Chatbot responds (test with "Tell me about Sharif")
-- ✅ Codeforces dashboard loads data
+ - ✅ LeetCode stats load correctly
 - ✅ Contact form submits successfully
 - ✅ Projects section displays correctly
 - ✅ Mobile responsive design works
@@ -236,16 +236,15 @@ bun run build
 3. View Vercel function logs for errors
 4. Test API route directly: `https://yoursite.vercel.app/api/chat`
 
-### Codeforces Data Not Loading
+### LeetCode Data Not Loading
 
-**Issue**: Dashboard shows "Loading..." indefinitely
+**Issue**: LeetCode stats do not appear or show fallback values
 
 **Solution**:
 
-1. Update Codeforces handle in `lib/constants.ts`
-2. Verify handle exists and is public
-3. Check browser console for CORS errors
-4. Codeforces API may be rate-limited (wait and retry)
+1. Verify `leetcodeHandle` in `lib/constants.ts` is correct
+2. Check browser console for network/CORS errors
+3. LeetCode API may be rate-limited; wait and retry or add caching/proxy
 
 ### Environment Variables Not Working
 
@@ -335,7 +334,7 @@ Before going live:
 - [ ] Mobile responsive design verified
 - [ ] Contact form tested
 - [ ] AI chatbot responding correctly
-- [ ] Codeforces/LeetCode data loading
+ - [ ] LeetCode data loading
 - [ ] Theme toggle working
 - [ ] All links and navigation working
 

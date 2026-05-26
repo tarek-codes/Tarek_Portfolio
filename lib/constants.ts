@@ -10,8 +10,7 @@ export const PERSONAL_INFO = {
   degree: "Bachelor of Science (BSc.) in Computer Science and Engineering",
   cgpa: "3.37",
   graduation: "January 2026",
-  profileImageUrl: "/profile-v2.jpg",
-  codeforcesHandle: "",
+  profileImageUrl: "https://scontent.frjh4-1.fna.fbcdn.net/v/t39.30808-6/508802925_2148028938977790_6415131291663194547_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=diwiySa_lmsQ7kNvwHSKOkw&_nc_oc=AdqPUvPUlHYcQKRGhVZMHIxt-m7svEU1nKeGJoWPWeUlYDR8MMkel0ewAd3d6CiHIC0&_nc_zt=23&_nc_ht=scontent.frjh4-1.fna&_nc_gid=gy4hi2ukPGYze4JGCsWBCQ&_nc_ss=7b289&oh=00_Af7DAQl3lcIWOh0F4ETtt0Ealw1eE2_MrKyXV68_gsHtMQ&oe=6A1AD9BC",
   leetcodeHandle: "2ManyFaces",
   codechefHandle: "",
   githubUrl: "https://github.com/2ManyFaces",
@@ -20,7 +19,6 @@ export const PERSONAL_INFO = {
   facebookUrl: "https://www.facebook.com/Tarek112001/",
   instagramUrl: "https://www.instagram.com/tarek.ig",
   discordUrl: "tarek.dc",
-  codeforcesUrl: "",
   leetcodeUrl: "https://leetcode.com/u/2ManyFaces/",
   codechefUrl: "",
 };
@@ -45,13 +43,13 @@ export type AboutCardLayoutKey = "default" | "feature";
 
 export type AboutCardContent =
   | {
-    kind: "paragraph";
-    text: string;
-  }
+      kind: "paragraph";
+      text: string;
+    }
   | {
-    kind: "list";
-    items: string[];
-  };
+      kind: "list";
+      items: string[];
+    };
 
 export interface AboutCard {
   id: string;
@@ -85,11 +83,7 @@ export const ABOUT_CARDS: AboutCard[] = [
     layout: "default",
     content: {
       kind: "list",
-      items: [
-        PERSONAL_INFO.degree,
-        PERSONAL_INFO.university,
-        "2022 – 2026",
-      ],
+      items: [PERSONAL_INFO.degree, PERSONAL_INFO.university, "2022 – 2026"],
     },
   },
   {
@@ -160,8 +154,16 @@ export const SKILLS = {
     { name: "Python", level: "Advanced", category: "Programming Language" },
     { name: "HTML", level: "Intermediate", category: "Programming Language" },
     { name: "CSS", level: "Intermediate", category: "Programming Language" },
-    { name: "JavaScript", level: "Intermediate", category: "Programming Language" },
-    { name: "TypeScript", level: "Intermediate", category: "Programming Language" },
+    {
+      name: "JavaScript",
+      level: "Intermediate",
+      category: "Programming Language",
+    },
+    {
+      name: "TypeScript",
+      level: "Intermediate",
+      category: "Programming Language",
+    },
     { name: "PHP", level: "Intermediate", category: "Programming Language" },
     { name: "C", level: "Intermediate", category: "Programming Language" },
     { name: "C++", level: "Intermediate", category: "Programming Language" },
@@ -191,7 +193,6 @@ export const SKILLS = {
     { name: "System Design", level: "Intermediate", category: "Fundamental" },
     { name: "OS", level: "Advanced", category: "Fundamental" },
     { name: "Networking", level: "Intermediate", category: "Fundamental" },
-
   ],
 };
 
@@ -255,7 +256,8 @@ export const PROJECTS: Project[] = [
     description:
       "Mushroom edibility classification using ML on the UCI Mushroom Dataset (8,124 samples, 22 features). Includes EDA, feature engineering with label encoding, and training of multiple models evaluated by accuracy, F1-score, recall, and AUC.",
     techStack: ["NumPy", "Pandas", "Matplotlib", "Seaborn", "Scikit-learn"],
-    githubUrl: "https://github.com/2ManyFaces/MycoPredict-Mushroom-Edibility-Prediction-Using-ML",
+    githubUrl:
+      "https://github.com/2ManyFaces/MycoPredict-Mushroom-Edibility-Prediction-Using-ML",
     githubRepo: "2ManyFaces/MycoPredict-Mushroom-Edibility-Prediction-Using-ML",
     liveUrl: null,
     featured: true,
@@ -270,8 +272,16 @@ export const PROJECTS: Project[] = [
     title: "Word2Sense",
     description:
       "Comparative study of word representations (BoW, TF-IDF, GloVe, Skip-gram) with ML and neural models on ~340k QA pairs across 10 categories. Best result: BiLSTM + Skip-gram → 0.725 accuracy.",
-    techStack: ["NumPy", "Pandas", "Matplotlib", "TensorFlow", "Keras", "Scikit-learn"],
-    githubUrl: "https://github.com/2ManyFaces/Word2Sense_Multi-Class-Text-Classification",
+    techStack: [
+      "NumPy",
+      "Pandas",
+      "Matplotlib",
+      "TensorFlow",
+      "Keras",
+      "Scikit-learn",
+    ],
+    githubUrl:
+      "https://github.com/2ManyFaces/Word2Sense_Multi-Class-Text-Classification",
     githubRepo: "2ManyFaces/Word2Sense_Multi-Class-Text-Classification",
     liveUrl: null,
     featured: true,
@@ -287,7 +297,8 @@ export const PROJECTS: Project[] = [
     description:
       "Comprehensive pet adoption and management system with health tracking, REST APIs, JWT authentication, role-based dashboards, and real-time chat via Socket.IO. Built collaboratively in an agile 4-member team.",
     techStack: ["Node.js", "Express.js", "Tailwind CSS", "MongoDB"],
-    githubUrl: "https://github.com/2ManyFaces/PetSphere_CSE471_Section06_Group07",
+    githubUrl:
+      "https://github.com/2ManyFaces/PetSphere_CSE471_Section06_Group07",
     githubRepo: "2ManyFaces/PetSphere_CSE471_Section06_Group07",
     liveUrl: null,
     featured: true,
@@ -314,7 +325,6 @@ export const PROJECTS: Project[] = [
   },
 ];
 
-
 export type AchievementType =
   | "competition"
   | "scholarship"
@@ -339,7 +349,6 @@ export interface Achievement {
 }
 
 export const ACHIEVEMENTS: Achievement[] = [
-
   {
     title: "Introduction to Git",
     organization: "DataCamp",
@@ -354,7 +363,8 @@ export const ACHIEVEMENTS: Achievement[] = [
     title: "Supervised Learning with Scikit-learn",
     organization: "DataCamp",
     date: "2024",
-    description: "Certification in building and evaluating supervised machine learning models",
+    description:
+      "Certification in building and evaluating supervised machine learning models",
     link: null,
     certificateImage: null,
     type: "certification",
@@ -364,7 +374,8 @@ export const ACHIEVEMENTS: Achievement[] = [
     title: "AI Fundamentals",
     organization: "DataCamp",
     date: "2024",
-    description: "Certification in fundamental concepts of Artificial Intelligence",
+    description:
+      "Certification in fundamental concepts of Artificial Intelligence",
     link: null,
     certificateImage: null,
     type: "certification",
@@ -384,20 +395,22 @@ export const ACHIEVEMENTS: Achievement[] = [
     title: "93% in English (Mentors' After SSC Speaking Course)",
     organization: "Mentors",
     date: "2018",
-    description: "Exceptional performance in the Mentors After SSC English program",
+    description:
+      "Exceptional performance in the Mentors After SSC English program",
     link: null,
     certificateImage: null,
-    type: "academic",
+    type: "certification",
     viewType: "link",
   },
   {
     title: "Duke of Edinburgh's International Award - Bronze",
     organization: "The Duke of Edinburgh's Award Foundation",
     date: "2022",
-    description: "Bronze level achievement in the international youth awards program",
+    description:
+      "Bronze level achievement in the international youth awards program",
     link: null,
     certificateImage: null,
-    type: "scholarship",
+    type: "certification",
     viewType: "link",
   },
 ];
@@ -417,7 +430,7 @@ export const EXPERIENCE = [
   },
   {
     title: "Trainee Technology Specialist",
-    organization: "Betopia Limted",
+    organization: "Betopia Limited",
     location: "Dhaka, Bangladesh",
     startDate: "February 2026",
     endDate: "Present",
@@ -427,7 +440,6 @@ export const EXPERIENCE = [
     ],
     type: "work",
   },
-
 ];
 
 export const ORGANIZING_VOLUNTEERING: {

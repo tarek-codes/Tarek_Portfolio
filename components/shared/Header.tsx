@@ -12,6 +12,7 @@ import {
   FolderKanban,
   Trophy,
   Mail,
+  BadgeCheck,
 } from "lucide-react";
 import { useTheme } from "@/components/providers/ThemeProvider";
 import { useLanguage } from "@/components/providers/LanguageProvider";
@@ -24,7 +25,7 @@ export const navigation = [
   { key: "experience", href: "#experience", icon: Briefcase },
   { key: "skills", href: "#skills", icon: Code2 },
   { key: "projects", href: "#projects", icon: FolderKanban },
-  { key: "achievements", href: "#achievements", icon: Trophy },
+  { key: "certifications", href: "#certifications", icon: BadgeCheck },
   { key: "contact", href: "#contact", icon: Mail },
 ] as const;
 
@@ -107,16 +108,23 @@ export default function Header() {
             : { type: "spring", stiffness: 220, damping: 22, delay: 0.1 }
         }
       >
-        <div className="rounded-[999px] bg-linear-to-r from-ctp-surface1/55 via-ctp-surface0/15 to-ctp-surface1/55 p-px">
-          <nav className="isolate flex items-center gap-1 rounded-[999px] bg-ctp-base/55 px-2 py-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.07)] backdrop-blur-2xl">
-            <a
+        <div className="rounded-[999px] bg-linear-to-r from-ctp-surface1/30 via-ctp-surface0/10 to-ctp-surface1/30 p-[1px] shadow-sm">
+          <nav className="isolate flex items-center gap-1.5 rounded-[999px] bg-ctp-base/70 px-3 py-2 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] backdrop-blur-2xl">
+            <motion.a
               href="#hero"
-              className="rounded-full px-3 py-1.5 text-sm font-display font-bold text-ctp-red transition-colors hover:text-ctp-flamingo"
+              whileHover={hoverMotion}
+              whileTap={tapMotion}
+              transition={springTransition}
+              className={`relative rounded-full px-3 py-2 text-base font-medium transition-colors text-ctp-subtext0 hover:text-ctp-text`}
+              aria-label={copy.nav.home}
             >
-              2ManyFaces
-            </a>
+              <span className="relative z-10 inline-flex items-center gap-3">
+                <span className="nav-logo-mark">T.</span>
+                <span className="sr-only">{copy.nav.home}</span>
+              </span>
+            </motion.a>
 
-            <div className="mx-1 h-5 w-px bg-ctp-surface0/40" />
+            <div className="mx-1 h-6 w-px bg-ctp-surface0/40" />
 
             {navigation.map((item) => {
               const isActive = activeSection === item.href.replace("#", "");
@@ -129,7 +137,7 @@ export default function Header() {
                   whileHover={hoverMotion}
                   whileTap={tapMotion}
                   transition={springTransition}
-                  className={`relative rounded-full px-3 py-1.5 text-sm font-medium transition-colors ${
+                  className={`relative rounded-full px-4 py-2 text-base font-medium transition-colors ${
                     isActive
                       ? "text-ctp-red"
                       : "text-ctp-subtext0 hover:text-ctp-text"
@@ -147,7 +155,7 @@ export default function Header() {
               );
             })}
 
-            <div className="mx-1 h-5 w-px bg-ctp-surface0/40" />
+            <div className="mx-1 h-6 w-px bg-ctp-surface0/40" />
 
             <motion.button
               type="button"
@@ -155,11 +163,11 @@ export default function Header() {
               whileHover={reducedMotion ? undefined : { y: -2, scale: 1.02 }}
               whileTap={tapMotion}
               transition={springTransition}
-              className="rounded-full p-2 text-ctp-subtext0 transition-colors hover:bg-ctp-surface0/55 hover:text-ctp-text"
+              className="rounded-full p-2.5 text-ctp-subtext0 transition-colors hover:bg-ctp-surface0/55 hover:text-ctp-text"
               aria-label={copy.common.toggleLanguage}
             >
               <Globe
-                className={`h-4 w-4 ${locale === "bn" ? "text-ctp-maroon" : ""}`}
+                className={`h-5 w-5 ${locale === "bn" ? "text-ctp-maroon" : ""}`}
               />
             </motion.button>
 
@@ -168,7 +176,7 @@ export default function Header() {
               whileHover={reducedMotion ? undefined : { y: -2, scale: 1.04 }}
               whileTap={tapMotion}
               transition={springTransition}
-              className="rounded-full p-2 text-ctp-subtext0 transition-colors hover:bg-ctp-surface0/55 hover:text-ctp-text"
+              className="rounded-full p-2.5 text-ctp-subtext0 transition-colors hover:bg-ctp-surface0/55 hover:text-ctp-text"
               aria-label="Toggle theme"
             >
               <AnimatePresence mode="wait">
@@ -180,7 +188,7 @@ export default function Header() {
                     exit={{ rotate: 90, opacity: 0 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <Sun className="h-4 w-4" />
+                    <Sun className="h-5 w-5" />
                   </motion.div>
                 ) : (
                   <motion.div
@@ -190,7 +198,7 @@ export default function Header() {
                     exit={{ rotate: -90, opacity: 0 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <Moon className="h-4 w-4" />
+                    <Moon className="h-5 w-5" />
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -215,7 +223,7 @@ export default function Header() {
         }
       >
         <div className="rounded-[999px] bg-linear-to-r from-ctp-surface1/55 via-ctp-surface0/15 to-ctp-surface1/55 p-px">
-          <div className="flex items-center justify-between rounded-[999px] bg-ctp-base/70 px-2 py-2 shadow-[0_14px_30px_-22px_rgba(17,17,27,0.95)] backdrop-blur-2xl">
+          <div className="flex items-center justify-between rounded-[999px] bg-ctp-base/70 px-3 py-2.5 shadow-[0_14px_30px_-22px_rgba(17,17,27,0.95)] backdrop-blur-2xl">
             {navigation.map((item) => {
               const isActive = activeSection === item.href.replace("#", "");
               const label = copy.nav[item.key];
@@ -229,7 +237,7 @@ export default function Header() {
                   }
                   whileTap={tapMotion}
                   transition={springTransition}
-                  className={`relative rounded-full p-2 transition-colors ${
+                  className={`relative rounded-full p-2.5 transition-colors ${
                     isActive
                       ? "text-ctp-red"
                       : "text-ctp-subtext0 hover:text-ctp-text"
@@ -243,7 +251,7 @@ export default function Header() {
                       transition={springTransition}
                     />
                   )}
-                  <Icon className="relative z-10 h-4 w-4" />
+                  <Icon className="relative z-10 h-5 w-5" />
                 </motion.a>
               );
             })}
@@ -253,6 +261,3 @@ export default function Header() {
     </>
   );
 }
-
-
-

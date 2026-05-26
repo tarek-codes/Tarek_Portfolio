@@ -1,51 +1,18 @@
 # Floating Stats API Usage Guide
 
-This document explains how the floating competitive-programming stats panel loads and displays data, including source APIs, fallbacks, and extension points.
+This document explains how the floating competitive-programming stats panel loads and displays LeetCode data, including source APIs, fallbacks, and extension points.
 
 ## Feature Overview
 
 UI component: `components/features/stats/FloatingStats.tsx`
 
-The floating stats panel shows:
-
-- Codeforces rating, max rating, rank, max rank
-- LeetCode solved count and global ranking
+The floating stats panel shows LeetCode solved count and global ranking.
 
 The panel is opened from a floating action button and fetches data lazily (on first open).
 
 ## Data Sources
 
-### Codeforces
-
-Helper: `lib/api/codeforces.ts`
-
-Used function:
-
-- `getCodeforcesUser(handle)`
-
-External endpoint called by helper:
-
-- `https://codeforces.com/api/user.info?handles=<handle>`
-
-Return contract used by UI:
-
-```ts
-export interface CodeforcesUser {
-  handle: string;
-  rating?: number;
-  maxRating?: number;
-  rank?: string;
-  maxRank?: string;
-  avatar: string;
-  titlePhoto: string;
-}
-```
-
-Failure behavior:
-
-- Logs error
-- Returns `null`
-- UI falls back to safe placeholders (`0` / `Unrated`)
+The Codeforces integration has been removed from the project. The floating panel now focuses solely on LeetCode.
 
 ### LeetCode
 
@@ -77,9 +44,9 @@ Failure behavior:
 
 1. User clicks floating button.
 2. Panel opens.
-3. Component fetches Codeforces + LeetCode in `Promise.all`.
+3. Component fetches LeetCode data when the panel is opened.
 4. Data is stored in local state.
-5. `hasFetched` prevents repeated fetches during the same session.
+5. Optional guards prevent repeated fetches during the same session.
 
 Key states:
 
@@ -110,9 +77,7 @@ Handles and profile links are read from:
 
 Used keys:
 
-- `codeforcesHandle`
 - `leetcodeHandle`
-- `codeforcesUrl`
 - `leetcodeUrl`
 
 ## Error Handling Model
@@ -130,13 +95,9 @@ This keeps the floating panel responsive even during third-party outages.
 Using helpers directly in another component:
 
 ```ts
-import { getCodeforcesUser } from "@/lib/api/codeforces";
 import { getLeetCodeStats } from "@/lib/api/leetcode";
 
-const [cf, lc] = await Promise.all([
-  getCodeforcesUser("SharifdotG"),
-  getLeetCodeStats("SharifdotG"),
-]);
+const lc = await getLeetCodeStats("SharifdotG");
 ```
 
 Always handle nullable/fallback responses in UI.

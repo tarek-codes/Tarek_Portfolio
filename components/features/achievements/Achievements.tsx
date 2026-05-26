@@ -1,20 +1,13 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import {
   BadgeCheck,
-  BookOpen,
-  Calendar,
-  ChevronDown,
-  ExternalLink,
-  FileImage,
-  GraduationCap,
-  Heart,
-  Medal,
-  Star,
-  Trophy,
+  ChevronLeft,
+  ChevronRight,
+  Grid3x3,
   X,
   type LucideIcon,
 } from "lucide-react";
@@ -23,7 +16,6 @@ import SectionTitle from "@/components/ui/SectionTitle";
 import {
   ACHIEVEMENTS,
   type Achievement,
-  type AchievementType,
 } from "@/lib/constants";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import {
@@ -193,14 +185,14 @@ function AchievementCard({
       }`}
     >
       <div
-        className={`pointer-events-none absolute -right-16 -top-16 h-36 w-36 rounded-full ${style.glow} blur-3xl transition-opacity duration-300 ${
+        className={`pointer-events-none absolute -right-16 -top-16 h-36 w-36 rounded-full ${style.glow} transition-opacity duration-300 ${
           reducedMotion
             ? isFeatured
               ? "opacity-45"
               : "opacity-0"
             : isFeatured
-              ? "opacity-55 group-hover:opacity-70"
-              : "opacity-0 group-hover:opacity-85"
+            ? "opacity-55 group-hover:opacity-70"
+            : "opacity-0 group-hover:opacity-85"
         }`}
       />
 
@@ -287,6 +279,8 @@ export default function Achievements() {
   const [selectedAchievement, setSelectedAchievement] =
     useState<Achievement | null>(null);
   const [showMoreAchievements, setShowMoreAchievements] = useState(false);
+  const [certificationViewMode, setCertificationViewMode] = useState<"slideshow" | "grid">("slideshow");
+  const [certificationSlideIndex, setCertificationSlideIndex] = useState(0);
 
   const orderedAchievements = useMemo(
     () =>
@@ -304,6 +298,43 @@ export default function Achievements() {
     INITIAL_VISIBLE_ACHIEVEMENTS,
   );
 
+  // Certifications logic
+  const certifications = useMemo(
+    () => ACHIEVEMENTS.filter((a) => a.type === "certification"),
+    []
+  );
+
+  const sortedCertifications = useMemo(
+    () => [
+      ...certifications.sort(
+        (a, b) => Number(Boolean(b.featured)) - Number(Boolean(a.featured))
+      ),
+    ],
+    [certifications]
+  );
+
+  const featuredCertifications = sortedCertifications.filter(
+    (c) => c.featured
+  );
+  const displayCertifications =
+    featuredCertifications.length > 0
+      ? featuredCertifications
+      : sortedCertifications.slice(0, 1);
+
+  const nextCertSlide = () => {
+    setCertificationSlideIndex(
+      (prev) => (prev + 1) % displayCertifications.length
+    );
+  };
+
+  const prevCertSlide = () => {
+    setCertificationSlideIndex(
+      (prev) =>
+        (prev - 1 + displayCertifications.length) %
+        displayCertifications.length
+    );
+  };
+
   useEffect(() => {
     if (!selectedAchievement) {
       return;
@@ -320,104 +351,275 @@ export default function Achievements() {
   }, [selectedAchievement]);
 
   return (
-    <Section id="achievements" className="relative overflow-x-clip">
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -top-10 right-0 h-52 w-52 rounded-full bg-ctp-red/10 blur-3xl" />
-        <div className="absolute -bottom-12 left-6 h-56 w-56 rounded-full bg-ctp-red/10 blur-3xl" />
+    <Section id="certifications" className="relative">
+      <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute -top-10 left-0 h-60 w-60 rounded-full bg-ctp-flamingo/10 opacity-12" />
+        <div className="absolute -bottom-10 right-0 h-60 w-60 rounded-full bg-ctp-flamingo/8 opacity-10" />
+      </div>
+
+      {/* Watermark */}
+      <div
+        className="pointer-events-none absolute inset-0 -z-10 flex items-center justify-center overflow-hidden"
+        aria-hidden="true"
+      >
+        <span className="font-display select-none text-[7rem] font-black uppercase leading-none text-ctp-flamingo/10 opacity-12 sm:text-[10rem] lg:text-[15rem] xl:text-[18rem] mix-blend-overlay">
+          CERTS
+        </span>
       </div>
 
       <SectionTitle
-        badge={copy.achievements.badge}
-        title={copy.achievements.title}
-        highlightWord={locale === "bn" ? "অর্জন" : "Achievements"}
-        subtitle={copy.achievements.subtitle}
+        badge="Certifications"
+        title="Professional Certifications"
+        highlightWord="Certifications"
+        subtitle="Industry-recognized certifications and credentials"
       />
 
-      <motion.div
-        className="mx-auto grid max-w-6xl gap-4 sm:grid-cols-2 lg:grid-cols-3"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-60px" }}
-        variants={getContainerVariants(reducedMotion)}
-      >
-        {primaryAchievements.map((achievement, index) => (
-          <AchievementCard
-            key={achievement.title}
-            achievement={achievement}
-            reducedMotion={reducedMotion}
-            index={index}
-            locale={locale}
-            onOpenCertificate={setSelectedAchievement}
-          />
-        ))}
-      </motion.div>
+      {/* View Toggle */}
+      <div className="mb-8 flex justify-center gap-2">
+        <motion.button
+          onClick={() => setCertificationViewMode("slideshow")}
+          whileHover={reducedMotion ? undefined : { y: -2 }}
+          whileTap={{ scale: 0.97 }}
+          className={`inline-flex items-center gap-2 rounded-full px-5 py-2.5 font-medium text-sm transition-all duration-200 ${
+            certificationViewMode === "slideshow"
+              ? "bg-ctp-flamingo text-white shadow-lg shadow-ctp-flamingo/30"
+              : "border border-ctp-surface1 bg-ctp-surface0/40 text-ctp-subtext0 hover:bg-ctp-surface0/60 hover:text-ctp-text"
+          }`}
+        >
+          ▶ Slideshow
+        </motion.button>
 
-      {additionalAchievements.length > 0 && (
-        <div className="max-w-6xl mx-auto mt-8">
-          <div className="text-center">
-            <button
-              type="button"
-              onClick={() => setShowMoreAchievements((value) => !value)}
-              className="group mx-auto inline-flex items-center gap-2 rounded-full border border-ctp-surface0/60 bg-ctp-surface0/25 px-4 py-2 text-sm font-medium text-ctp-subtext0 transition-[color,border-color,background-color] duration-200 hover:border-ctp-surface1 hover:bg-ctp-surface0/40 hover:text-ctp-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ctp-red/60 focus-visible:ring-offset-2 focus-visible:ring-offset-ctp-base"
-              aria-expanded={showMoreAchievements}
-              aria-controls="more-achievements-panel"
-            >
-              {copy.achievements.moreAchievements} (
-              {locale === "bn"
-                ? additionalAchievements.length.toLocaleString("bn-BD")
-                : additionalAchievements.length}
-              )
-              <ChevronDown
-                className={`h-4 w-4 transition-transform duration-300 ${showMoreAchievements ? "rotate-180" : ""}`}
-              />
-            </button>
-          </div>
+        <motion.button
+          onClick={() => setCertificationViewMode("grid")}
+          whileHover={reducedMotion ? undefined : { y: -2 }}
+          whileTap={{ scale: 0.97 }}
+          className={`inline-flex items-center gap-2 rounded-full px-5 py-2.5 font-medium text-sm transition-all duration-200 ${
+            certificationViewMode === "grid"
+              ? "bg-ctp-flamingo text-white shadow-lg shadow-ctp-flamingo/30"
+              : "border border-ctp-surface1 bg-ctp-surface0/40 text-ctp-subtext0 hover:bg-ctp-surface0/60 hover:text-ctp-text"
+          }`}
+        >
+          <Grid3x3 className="h-4 w-4" />
+          Grid View
+        </motion.button>
+      </div>
 
-          <AnimatePresence>
-            {showMoreAchievements && (
-              <motion.div
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: "auto", opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: reducedMotion ? 0.24 : 0.36, ease }}
-                className="overflow-hidden"
-                id="more-achievements-panel"
-              >
-                <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                  {additionalAchievements.map((achievement, index) => {
-                    return (
-                      <motion.div
-                        key={achievement.title}
-                        initial={{
-                          opacity: 0,
-                          y: reducedMotion ? 0 : 16,
-                          filter: reducedMotion ? "none" : "blur(4px)",
-                        }}
-                        animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                        transition={{
-                          delay: reducedMotion ? 0 : index * 0.03,
-                          duration: reducedMotion ? 0.26 : 0.34,
-                          ease,
-                        }}
-                      >
-                        <AchievementCard
-                          achievement={achievement}
-                          reducedMotion={reducedMotion}
-                          index={index}
-                          locale={locale}
-                          onOpenCertificate={setSelectedAchievement}
-                        />
-                      </motion.div>
-                    );
-                  })}
+      <AnimatePresence mode="wait">
+        {/* Slideshow View */}
+        {certificationViewMode === "slideshow" && displayCertifications.length > 0 && (
+          <motion.div
+            key="slideshow"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3, ease }}
+            className="mx-auto max-w-4xl"
+          >
+            <div className="group relative">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={certificationSlideIndex}
+                  initial={{
+                    opacity: 0,
+                    x: reducedMotion ? 0 : 40,
+                  }}
+                  animate={{
+                    opacity: 1,
+                    x: 0,
+                  }}
+                  exit={{
+                    opacity: 0,
+                    x: reducedMotion ? 0 : -40,
+                  }}
+                  transition={{
+                    duration: reducedMotion ? 0.2 : 0.4,
+                    ease,
+                  }}
+                  className="overflow-hidden rounded-2xl border border-ctp-surface1/60 bg-ctp-surface0/30 backdrop-blur-sm"
+                >
+                  <div className="space-y-6 p-8">
+                    <div className="flex items-start gap-6">
+                      <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-ctp-flamingo/15">
+                        <BadgeCheck className="h-8 w-8 text-ctp-flamingo" />
+                      </div>
+
+                      <div className="flex-1">
+                        <h3 className="text-xl font-bold text-ctp-text">
+                          {displayCertifications[certificationSlideIndex]?.title}
+                        </h3>
+                        <p className="mt-1 text-sm text-ctp-subtext0">
+                          {translateDynamicText(
+                            locale,
+                            displayCertifications[certificationSlideIndex]?.organization || ""
+                          )}
+                        </p>
+                        <p className="mt-2 leading-relaxed text-ctp-subtext1">
+                          {translateDynamicText(
+                            locale,
+                            displayCertifications[certificationSlideIndex]?.description || ""
+                          )}
+                        </p>
+                        <div className="mt-4 flex items-center gap-3">
+                          <span className="inline-block rounded-full bg-ctp-flamingo/15 px-3 py-1 text-xs font-medium text-ctp-flamingo">
+                            {displayCertifications[certificationSlideIndex]?.date}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+
+              {/* Navigation Arrows */}
+              {displayCertifications.length > 1 && (
+                <>
+                  <motion.button
+                    type="button"
+                    onClick={prevCertSlide}
+                    whileHover={
+                      reducedMotion
+                        ? undefined
+                        : { scale: 1.1, x: -4 }
+                    }
+                    whileTap={{ scale: 0.95 }}
+                    className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-ctp-flamingo/20 p-2 text-ctp-flamingo backdrop-blur-sm transition-colors hover:bg-ctp-flamingo/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ctp-flamingo/60 focus-visible:ring-offset-2 focus-visible:ring-offset-ctp-base"
+                    aria-label="Previous certification"
+                  >
+                    <ChevronLeft className="h-5 w-5" />
+                  </motion.button>
+
+                  <motion.button
+                    type="button"
+                    onClick={nextCertSlide}
+                    whileHover={
+                      reducedMotion
+                        ? undefined
+                        : { scale: 1.1, x: 4 }
+                    }
+                    whileTap={{ scale: 0.95 }}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-ctp-flamingo/20 p-2 text-ctp-flamingo backdrop-blur-sm transition-colors hover:bg-ctp-flamingo/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ctp-flamingo/60 focus-visible:ring-offset-2 focus-visible:ring-offset-ctp-base"
+                    aria-label="Next certification"
+                  >
+                    <ChevronRight className="h-5 w-5" />
+                  </motion.button>
+                </>
+              )}
+
+              {/* Slide Indicators */}
+              {displayCertifications.length > 1 && (
+                <div className="mt-6 flex justify-center gap-2">
+                  {displayCertifications.map((_, index) => (
+                    <motion.button
+                      key={index}
+                      type="button"
+                      onClick={() => setCertificationSlideIndex(index)}
+                      whileHover={
+                        reducedMotion ? undefined : { scale: 1.2 }
+                      }
+                      whileTap={{ scale: 0.95 }}
+                      className={`h-2 rounded-full transition-all duration-200 ${
+                        index === certificationSlideIndex
+                          ? "w-8 bg-ctp-flamingo"
+                          : "w-2 bg-ctp-surface1/50 hover:bg-ctp-surface1"
+                      }`}
+                      aria-label={`Go to certification ${index + 1}`}
+                    />
+                  ))}
                 </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-      )}
+              )}
+              {/* Visible slider control (always rendered with slideshow) */}
+              {displayCertifications.length > 1 && (
+                <div className="mt-4 mx-auto max-w-xl px-6">
+                  <input
+                    aria-label="Certification slider"
+                    type="range"
+                    min={0}
+                    max={displayCertifications.length - 1}
+                    value={certificationSlideIndex}
+                    onChange={(e) => setCertificationSlideIndex(Number(e.target.value))}
+                    className="w-full h-1 appearance-none rounded-full bg-ctp-surface1/40 accent-ctp-flamingo/80 hover:accent-ctp-flamingo"
+                  />
+                  <div className="mt-2 flex items-center justify-between text-xs text-ctp-subtext0">
+                    <span>{certificationSlideIndex + 1}</span>
+                    <span>
+                      {displayCertifications.length} / Slides
+                    </span>
+                  </div>
+                </div>
+              )}
+            </div>
+          </motion.div>
+        )}
 
-      {/* Certificate Modal */}
+        {/* Grid View */}
+        {certificationViewMode === "grid" && (
+          <motion.div
+            key="grid"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3, ease }}
+            className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+          >
+            {sortedCertifications.map((cert, index) => (
+              <motion.article
+                key={cert.title}
+                initial={{
+                  opacity: 0,
+                  y: reducedMotion ? 0 : 16,
+                  filter: reducedMotion ? "none" : "blur(4px)",
+                }}
+                animate={{
+                  opacity: 1,
+                  y: 0,
+                  filter: "blur(0px)",
+                }}
+                transition={{
+                  delay: reducedMotion ? 0 : index * 0.06,
+                  duration: reducedMotion ? 0.2 : 0.36,
+                  ease,
+                }}
+                whileHover={
+                  reducedMotion
+                    ? undefined
+                    : {
+                        y: -4,
+                      }
+                }
+                className="group relative overflow-hidden rounded-2xl border border-ctp-surface0/60 bg-ctp-surface0/30 p-5 backdrop-blur-sm transition-all duration-300 hover:border-ctp-surface1 hover:bg-ctp-surface0/45"
+              >
+                <div className="pointer-events-none absolute -right-12 -top-12 h-32 w-32 rounded-full bg-ctp-flamingo/10 transition-opacity duration-300 opacity-0 group-hover:opacity-100" />
+
+                <div className="relative z-10">
+                  <div className="flex items-start gap-3 mb-3">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-ctp-flamingo/15">
+                      <BadgeCheck className="h-5 w-5 text-ctp-flamingo" />
+                    </div>
+                    {cert.featured && (
+                      <span className="ml-auto inline-flex items-center rounded-full border border-ctp-surface1/60 bg-ctp-surface0/50 px-2.5 py-1 text-[11px] font-medium text-ctp-subtext0">
+                        Featured
+                      </span>
+                    )}
+                  </div>
+
+                  <h3 className="text-sm font-semibold leading-snug text-ctp-text line-clamp-2">
+                    {cert.title}
+                  </h3>
+                  <p className="mt-1 text-xs text-ctp-subtext0">
+                    {translateDynamicText(locale, cert.organization)}
+                  </p>
+                  <span className="mt-2 inline-block rounded-full bg-ctp-flamingo/15 px-2.5 py-1 text-[10px] font-medium text-ctp-flamingo">
+                    {translateDynamicText(locale, cert.date)}
+                  </span>
+                  <p className="mt-3 text-xs leading-relaxed text-ctp-subtext1 line-clamp-2">
+                    {translateDynamicText(locale, cert.description)}
+                  </p>
+                </div>
+              </motion.article>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
       <AnimatePresence>
         {selectedAchievement?.certificateImage && (
           <motion.div
@@ -485,6 +687,3 @@ export default function Achievements() {
     </Section>
   );
 }
-
-
-

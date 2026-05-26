@@ -5,7 +5,13 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "userpic.codeforces.org",
+        hostname: "drive.google.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "scontent.frjh4-1.fna.fbcdn.net",
+        pathname: "/**",
       },
     ],
   },

@@ -162,8 +162,8 @@ const getCardLayout = (project: ProjectItem, index: number) => {
 
   return {
     prominent,
-    spanClass: prominent 
-      ? "md:col-span-2 lg:col-span-3" 
+    spanClass: prominent
+      ? "md:col-span-2 lg:col-span-3"
       : "md:col-span-1 lg:col-span-2",
     imageClass: prominent ? "h-60 sm:h-64" : "h-52 sm:h-56",
     descClampClass: prominent ? "line-clamp-4" : "line-clamp-2",
@@ -234,7 +234,26 @@ export default function Projects() {
   }, []);
 
   return (
-    <Section id="projects" className="relative overflow-hidden">
+    <Section id="projects" className="relative">
+      {/* Ambient */}
+      <div
+        className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
+        aria-hidden="true"
+      >
+        <div className="absolute -top-10 right-0 h-56 w-56 rounded-full bg-ctp-red/8 opacity-12" />
+        <div className="absolute -bottom-10 left-0 h-56 w-56 rounded-full bg-ctp-maroon/8 opacity-10" />
+      </div>
+
+      {/* Watermark */}
+      <div
+        className="pointer-events-none absolute inset-0 -z-10 flex items-center justify-center overflow-hidden"
+        aria-hidden="true"
+      >
+        <span className="font-display select-none text-[4.5rem] font-black uppercase leading-none text-ctp-red/6 opacity-10 sm:text-[7rem] lg:text-[10rem] xl:text-[13rem] mix-blend-overlay">
+          PROJECTS
+        </span>
+      </div>
+
       <SectionTitle
         badge={copy.projects.badge}
         title={copy.projects.title}
@@ -308,8 +327,8 @@ export default function Projects() {
             >
               <div className={`absolute inset-x-0 top-0 h-px ${status.rail}`} />
               <div
-                className={`pointer-events-none absolute -right-20 -top-20 h-40 w-40 rounded-full ${status.glow} opacity-0 blur-3xl transition-opacity duration-300 ${
-                  reducedMotion ? "" : "group-hover:opacity-100"
+                className={`pointer-events-none absolute -right-20 -top-20 h-40 w-40 rounded-full ${status.glow} opacity-0 transition-transform duration-300 ${
+                  reducedMotion ? "" : "group-hover:opacity-100 group-hover:scale-110"
                 }`}
               />
 
@@ -346,7 +365,7 @@ export default function Projects() {
               {/* Body */}
               <div className="flex flex-1 flex-col p-5 sm:p-6">
                 <div className="mb-2.5 flex items-center justify-between gap-2">
-                  <span className="text-xs text-ctp-overlay0 font-mono">
+                  <span className="text-xs text-ctp-overlay0 font-display">
                     {translateDynamicText(locale, project.category)}
                   </span>
                   <span
@@ -483,6 +502,3 @@ export default function Projects() {
     </Section>
   );
 }
-
-
-

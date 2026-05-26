@@ -10,7 +10,7 @@ A modern personal portfolio built with Next.js 16 App Router, React 19, TypeScri
 
 - Mobile-first responsive sections with motion
 - Floating AI chatbot with streaming responses
-- Floating competitive programming stats panel (Codeforces + LeetCode)
+- Floating competitive programming stats panel (LeetCode only)
 - Contact form API integration via Resend
 
 ## Tech Stack

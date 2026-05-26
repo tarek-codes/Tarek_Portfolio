@@ -61,13 +61,13 @@ export default function Footer() {
               variants={itemVariants}
               className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between"
             >
-              <p className="text-center text-sm text-ctp-subtext0 lg:text-left">
+              <p className="text-center text-base text-ctp-subtext0 lg:text-left">
                 &copy; {currentYear} Tarek Alam Bhuiyan
               </p>
 
               <nav
                 aria-label="Footer quick links"
-                className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2"
+                className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2"
               >
                 {quickLinks.map((item) => (
                   <motion.a
@@ -82,7 +82,7 @@ export default function Footer() {
                           }
                     }
                     transition={{ duration: 0.2, ease }}
-                    className="group text-sm text-ctp-subtext0 transition-colors hover:text-ctp-text"
+                    className="group text-base text-ctp-subtext0 transition-colors hover:text-ctp-text font-medium"
                   >
                     {copy.nav[item.key]}
                     <span className="mt-1 block h-px origin-left scale-x-0 bg-ctp-red transition-transform duration-300 group-hover:scale-x-100" />
@@ -115,10 +115,10 @@ export default function Footer() {
                   }
                   whileTap={reducedMotion ? undefined : { scale: 0.96 }}
                   transition={{ duration: 0.2, ease }}
-                  className="rounded-lg border border-ctp-surface0/60 bg-ctp-surface0/30 p-2 text-ctp-subtext0 transition-colors hover:border-ctp-surface1 hover:text-ctp-text"
+                  className="rounded-lg border border-ctp-surface0/60 bg-ctp-surface0/30 p-2.5 text-ctp-subtext0 transition-colors hover:border-ctp-surface1 hover:text-ctp-text"
                   aria-label="GitHub"
                 >
-                  <Github className="h-4 w-4" />
+                  <Github className="h-5 w-5" />
                 </motion.a>
                 <motion.a
                   href={PERSONAL_INFO.linkedinUrl}
@@ -134,10 +134,10 @@ export default function Footer() {
                   }
                   whileTap={reducedMotion ? undefined : { scale: 0.96 }}
                   transition={{ duration: 0.2, ease }}
-                  className="rounded-lg border border-ctp-surface0/60 bg-ctp-surface0/30 p-2 text-ctp-subtext0 transition-colors hover:border-ctp-surface1 hover:text-ctp-text"
+                  className="rounded-lg border border-ctp-surface0/60 bg-ctp-surface0/30 p-2.5 text-ctp-subtext0 transition-colors hover:border-ctp-surface1 hover:text-ctp-text"
                   aria-label="LinkedIn"
                 >
-                  <Linkedin className="h-4 w-4" />
+                  <Linkedin className="h-5 w-5" />
                 </motion.a>
                 <motion.a
                   href={`mailto:${PERSONAL_INFO.email}`}
@@ -151,14 +151,14 @@ export default function Footer() {
                   }
                   whileTap={reducedMotion ? undefined : { scale: 0.96 }}
                   transition={{ duration: 0.2, ease }}
-                  className="rounded-lg border border-ctp-surface0/60 bg-ctp-surface0/30 p-2 text-ctp-subtext0 transition-colors hover:border-ctp-surface1 hover:text-ctp-text"
+                  className="rounded-lg border border-ctp-surface0/60 bg-ctp-surface0/30 p-2.5 text-ctp-subtext0 transition-colors hover:border-ctp-surface1 hover:text-ctp-text"
                   aria-label="Email"
                 >
-                  <Mail className="h-4 w-4" />
+                  <Mail className="h-5 w-5" />
                 </motion.a>
               </div>
 
-              <p className="text-center text-xs text-ctp-overlay0 sm:text-right">
+              <p className="text-center text-sm text-ctp-overlay0 sm:text-right">
                 {copy.footer.builtWith}
               </p>
             </motion.div>
@@ -168,6 +168,3 @@ export default function Footer() {
     </footer>
   );
 }
-
-
-
