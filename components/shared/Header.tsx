@@ -25,7 +25,7 @@ export const navigation = [
   { key: "experience", href: "#experience", icon: Briefcase },
   { key: "skills", href: "#skills", icon: Code2 },
   { key: "projects", href: "#projects", icon: FolderKanban },
-  { key: "certifications", href: "#certifications", icon: BadgeCheck },
+  { key: "achievements", href: "#achievements", icon: Trophy },
   { key: "contact", href: "#contact", icon: Mail },
 ] as const;
 
@@ -93,118 +93,85 @@ export default function Header() {
     <>
       {/* Desktop Navbar — Floating centered pill */}
       <motion.header
-        className={`fixed left-1/2 top-5 z-50 hidden -translate-x-1/2 transition-shadow duration-300 lg:block ${
-          isScrolled ? "shadow-[0_20px_46px_-28px_rgba(17,17,27,0.9)]" : ""
+        className={`fixed left-1/2 top-6 z-50 hidden -translate-x-1/2 transition-all duration-500 lg:block ${
+          isScrolled ? "translate-y-0" : "translate-y-0"
         }`}
         initial={
-          reducedMotion ? { opacity: 0 } : { y: -20, opacity: 0, scale: 0.97 }
+          reducedMotion ? { opacity: 0 } : { y: -40, opacity: 0, scale: 0.95 }
         }
-        animate={
-          reducedMotion ? { opacity: 1 } : { y: 0, opacity: 1, scale: 1 }
-        }
-        transition={
-          reducedMotion
-            ? { duration: 0.2, ease }
-            : { type: "spring", stiffness: 220, damping: 22, delay: 0.1 }
-        }
+        animate={{ y: 0, opacity: 1, scale: 1 }}
+        transition={{ ...springTransition, delay: 0.2 }}
       >
-        <div className="rounded-[999px] bg-linear-to-r from-ctp-surface1/30 via-ctp-surface0/10 to-ctp-surface1/30 p-[1px] shadow-sm">
-          <nav className="isolate flex items-center gap-1.5 rounded-[999px] bg-ctp-base/70 px-3 py-2 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] backdrop-blur-2xl">
-            <motion.a
-              href="#hero"
-              whileHover={hoverMotion}
-              whileTap={tapMotion}
-              transition={springTransition}
-              className={`relative rounded-full px-3 py-2 text-base font-medium transition-colors text-ctp-subtext0 hover:text-ctp-text`}
-              aria-label={copy.nav.home}
-            >
-              <span className="relative z-10 inline-flex items-center gap-3">
-                <span className="nav-logo-mark">T.</span>
-                <span className="sr-only">{copy.nav.home}</span>
-              </span>
-            </motion.a>
+  <nav className="glass-strong flex items-center gap-1 rounded-[2rem] px-2.5 py-2 border border-ctp-surface1/40 shadow-[0_18px_40px_-30px_rgba(17,17,27,0.85)]">
+          {navigation.map((item) => {
+            const isActive = activeSection === item.href.replace("#", "");
+            return (
+              <motion.a
+                key={item.key}
+                href={item.href}
+                className={`relative flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold transition-all duration-300 ${
+                  isActive
+                    ? "text-ctp-crust"
+                    : "text-ctp-subtext0 hover:text-ctp-red hover:bg-ctp-red/5"
+                }`}
+                whileHover={hoverMotion}
+                whileTap={tapMotion}
+              >
+                {isActive && (
+                  <motion.div
+                    layoutId="activeTab"
+                    className="absolute inset-0 z-0 rounded-full bg-ctp-red shadow-[0_4px_12px_rgba(220,38,38,0.4)]"
+                    transition={springTransition}
+                  />
+                )}
+                {item.key === "home" ? (
+                  <span className="relative z-10 font-display text-base tracking-[0.2em] uppercase">
+                    {getCopy(locale).nav[item.key as keyof typeof copy.nav]}
+                  </span>
+                ) : (
+                  <>
+                    <item.icon className="relative z-10 h-4 w-4" />
+                    <span className="relative z-10">
+                      {getCopy(locale).nav[item.key as keyof typeof copy.nav]}
+                    </span>
+                  </>
+                )}
+              </motion.a>
+            );
+          })}
 
-            <div className="mx-1 h-6 w-px bg-ctp-surface0/40" />
+          <div className="mx-2 h-6 w-px bg-ctp-surface1/50" />
 
-            {navigation.map((item) => {
-              const isActive = activeSection === item.href.replace("#", "");
-              const label = copy.nav[item.key];
-              return (
-                <motion.a
-                  key={item.key}
-                  href={item.href}
-                  aria-label={label}
-                  whileHover={hoverMotion}
-                  whileTap={tapMotion}
-                  transition={springTransition}
-                  className={`relative rounded-full px-4 py-2 text-base font-medium transition-colors ${
-                    isActive
-                      ? "text-ctp-red"
-                      : "text-ctp-subtext0 hover:text-ctp-text"
-                  }`}
-                >
-                  {isActive && (
-                    <motion.div
-                      layoutId="activeNavDesktop"
-                      className="absolute inset-0.5 rounded-full border border-ctp-red/25 bg-ctp-red/12"
-                      transition={springTransition}
-                    />
-                  )}
-                  <span className="relative z-10">{label}</span>
-                </motion.a>
-              );
-            })}
-
-            <div className="mx-1 h-6 w-px bg-ctp-surface0/40" />
-
-            <motion.button
-              type="button"
+          <div className="flex items-center gap-1 px-1">
+            <button
               onClick={toggleLocale}
-              whileHover={reducedMotion ? undefined : { y: -2, scale: 1.02 }}
-              whileTap={tapMotion}
-              transition={springTransition}
-              className="rounded-full p-2.5 text-ctp-subtext0 transition-colors hover:bg-ctp-surface0/55 hover:text-ctp-text"
-              aria-label={copy.common.toggleLanguage}
+              className="flex h-10 w-10 items-center justify-center rounded-full text-ctp-subtext0 transition-all hover:bg-ctp-red/10 hover:text-ctp-red"
+              title={copy.common.toggleLanguage}
             >
-              <Globe
-                className={`h-5 w-5 ${locale === "bn" ? "text-ctp-maroon" : ""}`}
-              />
-            </motion.button>
-
-            <motion.button
+              <Globe className="h-5 w-5" />
+            </button>
+            <button
               onClick={toggleTheme}
-              whileHover={reducedMotion ? undefined : { y: -2, scale: 1.04 }}
-              whileTap={tapMotion}
-              transition={springTransition}
-              className="rounded-full p-2.5 text-ctp-subtext0 transition-colors hover:bg-ctp-surface0/55 hover:text-ctp-text"
-              aria-label="Toggle theme"
+              className="flex h-10 w-10 items-center justify-center rounded-full text-ctp-subtext0 transition-all hover:bg-ctp-red/10 hover:text-ctp-red"
             >
               <AnimatePresence mode="wait">
-                {theme === "dark" ? (
-                  <motion.div
-                    key="sun"
-                    initial={{ rotate: -90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: 90, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
+                <motion.div
+                  key={theme}
+                  initial={{ opacity: 0, rotate: -90, scale: 0.8 }}
+                  animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                  exit={{ opacity: 0, rotate: 90, scale: 0.8 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  {theme === "dark" ? (
                     <Sun className="h-5 w-5" />
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="moon"
-                    initial={{ rotate: 90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: -90, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
+                  ) : (
                     <Moon className="h-5 w-5" />
-                  </motion.div>
-                )}
+                  )}
+                </motion.div>
               </AnimatePresence>
-            </motion.button>
-          </nav>
-        </div>
+            </button>
+          </div>
+        </nav>
       </motion.header>
 
       {/* Mobile Navbar — Bottom-docked icon-only pill */}

@@ -229,7 +229,7 @@ export default function Chatbot() {
                                       }
 
                                       return (
-                                        <code className="rounded bg-ctp-crust/40 px-1 py-0.5 font-display text-xs text-ctp-text">
+                                        <code className="rounded bg-ctp-crust/40 px-1 py-0.5 font-mono text-xs text-ctp-text">
                                           {children}
                                         </code>
                                       );
@@ -315,6 +315,3 @@ export default function Chatbot() {
     </>
   );
 }
-
-
-

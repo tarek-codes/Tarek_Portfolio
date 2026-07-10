@@ -302,7 +302,7 @@ function InfiniteScrollingLogos() {
                   >
                     <div className="relative flex h-16 w-16 items-center justify-center p-2">
                       {failedImages.has(logoKey) ? (
-                        <span className="text-xs font-semibold text-ctp-red">
+                        <span className="text-sm font-semibold text-ctp-red">
                           {logo.name}
                         </span>
                       ) : (
@@ -330,7 +330,7 @@ function InfiniteScrollingLogos() {
                         isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 6 }
                       }
                       transition={{ duration: 0.16, ease }}
-                      className="pointer-events-none absolute -bottom-7 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md border border-ctp-surface0 bg-ctp-crust px-3 py-1 text-xs font-medium text-ctp-text"
+                      className="pointer-events-none absolute -bottom-7 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md border border-ctp-surface0 bg-ctp-crust px-3 py-1 text-sm font-medium text-ctp-text"
                     >
                       {logo.name}
                     </motion.div>
@@ -427,7 +427,7 @@ export default function CodeSkills() {
                     <div
                       className={`pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full ${sector.glow} opacity-30`}
                     />
-                    <p className="font-display text-[10px] tracking-[0.25em] uppercase text-ctp-overlay0 mb-3">
+                    <p className="font-display text-[11px] tracking-[0.25em] uppercase text-ctp-overlay0 mb-3">
                       SECTOR {sector.sectorNum}
                     </p>
                     <div className="flex items-center gap-3">
@@ -436,7 +436,7 @@ export default function CodeSkills() {
                       >
                         <SectorIcon className={`h-5 w-5 ${sector.color}`} />
                       </div>
-                      <h3 className="font-display text-sm font-bold uppercase tracking-widest text-ctp-text leading-tight">
+                      <h3 className="font-display text-base font-bold uppercase tracking-widest text-ctp-text leading-tight">
                         {sector.label}
                       </h3>
                     </div>
@@ -480,10 +480,10 @@ export default function CodeSkills() {
 
                         {/* Name + description */}
                         <div className="min-w-0 flex-1">
-                          <p className="text-sm font-semibold text-ctp-text leading-tight truncate">
+                          <p className="text-base font-semibold text-ctp-text leading-tight truncate">
                             {skill.name}
                           </p>
-                          <p className="text-[10px] font-display uppercase tracking-wider text-ctp-overlay0 truncate mt-0.5">
+                          <p className="text-xs font-display uppercase tracking-wider text-ctp-overlay0 truncate mt-0.5">
                             {SKILL_DESCRIPTIONS[skill.name] ?? skill.category}
                           </p>
                         </div>

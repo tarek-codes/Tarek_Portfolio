@@ -15,9 +15,10 @@ import {
   Star,
   BookOpen,
   Heart,
-  Calendar,
   FileImage,
   ExternalLink,
+  Layers,
+  Tv,
   type LucideIcon,
 } from "lucide-react";
 import Section from "@/components/ui/Section";
@@ -111,174 +112,42 @@ const getTypeStyles = (
   };
 };
 
-const INITIAL_VISIBLE_ACHIEVEMENTS = 9;
+const getCredentialId = (cert: Achievement) => {
+  if (cert.link) {
+    const driveIdMatch = cert.link.match(/\/d\/([a-zA-Z0-9_-]+)/);
+    if (driveIdMatch && driveIdMatch[1]) {
+      return `#${driveIdMatch[1].substring(0, 8).toUpperCase()}`;
+    }
+  }
+  let hash = 0;
+  for (let i = 0; i < cert.title.length; i++) {
+    hash = cert.title.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  const idStr = Math.abs(hash).toString(16).substring(0, 8).toUpperCase();
+  return `#${idStr}`;
+};
 
-const getContainerVariants = (reducedMotion: boolean) => ({
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      delayChildren: reducedMotion ? 0 : 0.04,
-      staggerChildren: reducedMotion ? 0.03 : 0.06,
-    },
-  },
-});
-
-const getCardVariants = (reducedMotion: boolean) => ({
-  hidden: {
-    opacity: 0,
-    y: reducedMotion ? 0 : 22,
-    filter: reducedMotion ? "none" : "blur(6px)",
-  },
-  visible: (custom: { featured: boolean; index: number }) => ({
-    opacity: 1,
-    y: 0,
-    filter: "blur(0px)",
-    transition: {
-      duration: reducedMotion ? 0.28 : custom.featured ? 0.48 : 0.4,
-      ease,
-      delay: reducedMotion
-        ? 0
-        : custom.featured
-          ? custom.index * 0.015
-          : custom.index * 0.008,
-    },
-  }),
-});
-
-interface AchievementCardProps {
-  achievement: Achievement;
-  reducedMotion: boolean;
-  index: number;
-  locale: Locale;
-  onOpenCertificate: (achievement: Achievement) => void;
-}
-
-function AchievementCard({
-  achievement,
-  reducedMotion,
-  index,
-  locale,
-  onOpenCertificate,
-}: AchievementCardProps) {
-  const copy = getCopy(locale);
-  const style = getTypeStyles(locale)[achievement.type];
-  const Icon = style.icon;
-  const isFeatured = Boolean(achievement.featured);
-
-  const iconHoverClasses = reducedMotion
-    ? ""
-    : "group-hover:-translate-y-0.5 group-hover:scale-105";
-  const iconRotateClasses =
-    reducedMotion ||
-    achievement.type === "volunteer" ||
-    achievement.type === "training"
-      ? ""
-      : "group-hover:rotate-6";
-
-  return (
-    <motion.article
-      custom={{ featured: isFeatured, index }}
-      variants={getCardVariants(reducedMotion)}
-      whileHover={
-        reducedMotion
-          ? undefined
-          : {
-              y: -4,
-            }
-      }
-      transition={{ duration: 0.25, ease }}
-      className={`group relative h-full overflow-hidden rounded-2xl border p-5 backdrop-blur-sm transition-[border-color,background-color,transform] duration-300 ${
-        isFeatured
-          ? "min-h-57 border-ctp-surface1/70 bg-ctp-surface0/45"
-          : "min-h-51 border-ctp-surface0/60 bg-ctp-surface0/30 hover:border-ctp-surface1 hover:bg-ctp-surface0/45"
-      }`}
-    >
-      <div
-        className={`pointer-events-none absolute -right-16 -top-16 h-36 w-36 rounded-full ${style.glow} transition-opacity duration-300 ${
-          reducedMotion
-            ? isFeatured
-              ? "opacity-45"
-              : "opacity-0"
-            : isFeatured
-            ? "opacity-55 group-hover:opacity-70"
-            : "opacity-0 group-hover:opacity-85"
-        }`}
-      />
-
-      <div className="mb-3 flex flex-wrap items-center gap-2">
-        <span
-          className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-medium ${style.bg} ${style.color}`}
-        >
-          <span className={`h-1.5 w-1.5 rounded-full ${style.accent}`} />
-          {style.label}
-        </span>
-
-        {isFeatured && (
-          <span className="inline-flex items-center rounded-full border border-ctp-surface1/60 bg-ctp-surface0/50 px-2.5 py-1 text-[11px] font-medium text-ctp-subtext0">
-            {copy.achievements.featured}
-          </span>
-        )}
-      </div>
-
-      <div className="flex h-full items-start gap-3">
-        <div
-          className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-transform duration-300 ${style.bg} ${iconHoverClasses}`}
-        >
-          <Icon
-            className={`h-4 w-4 transition-transform duration-300 ${style.color} ${iconRotateClasses}`}
-          />
-        </div>
-
-        <div className="flex min-w-0 flex-1 flex-col">
-          <h3 className="text-sm font-semibold leading-snug text-ctp-text line-clamp-2">
-            {achievement.title}
-          </h3>
-          <p className="mt-1 text-xs text-ctp-subtext0">
-            {translateDynamicText(locale, achievement.organization)}
-          </p>
-          <span className="mt-1 flex items-center gap-1 text-xs text-ctp-overlay0">
-            <Calendar className="h-3 w-3" />
-            {translateDynamicText(locale, achievement.date)}
-          </span>
-
-          {isFeatured && (
-            <p className="mt-2 text-xs leading-relaxed text-ctp-subtext1 line-clamp-2">
-              {translateDynamicText(locale, achievement.description)}
-            </p>
-          )}
-
-          <div className="mt-auto pt-3">
-            {achievement.viewType === "link" && achievement.link && (
-              <a
-                href={achievement.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-xs text-ctp-red transition-colors hover:text-ctp-flamingo focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ctp-red/60 focus-visible:ring-offset-2 focus-visible:ring-offset-ctp-base rounded"
-              >
-                {copy.achievements.view}
-                <ExternalLink className="h-3 w-3" />
-              </a>
-            )}
-
-            {achievement.viewType === "image" &&
-              achievement.certificateImage && (
-                <button
-                  type="button"
-                  onClick={() => onOpenCertificate(achievement)}
-                  className="inline-flex items-center gap-1 text-xs text-ctp-red transition-colors hover:text-ctp-flamingo focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ctp-red/60 focus-visible:ring-offset-2 focus-visible:ring-offset-ctp-base rounded"
-                  aria-label={`${copy.achievements.viewCertificateFor} ${achievement.title}`}
-                >
-                  {copy.achievements.certificate}
-                  <FileImage className="h-3 w-3" />
-                </button>
-              )}
-          </div>
-        </div>
-      </div>
-    </motion.article>
-  );
-}
+const getEyebrowLabel = (type: AchievementType, locale: Locale) => {
+  const isBn = locale === "bn";
+  switch (type) {
+    case "competition":
+      return isBn ? "/ প্রতিযোগিতামূলক অর্জন" : "/ COMPETITION RECORD";
+    case "certification":
+      return isBn ? "/ অর্জিত সার্টিফিকেট" : "/ STATEMENT OF ACCOMPLISHMENT";
+    case "training":
+      return isBn ? "/ প্রশিক্ষণ প্রোগ্রাম" : "/ TRAINING ACCOMPLISHMENT";
+    case "scholarship":
+      return isBn ? "/ একাডেমিক স্কলারশিপ" : "/ SCHOLARSHIP AWARD";
+    case "academic":
+      return isBn ? "/ একাডেমিক সম্মাননা" : "/ ACADEMIC DISTINCTION";
+    case "rating":
+      return isBn ? "/ অর্জিত রেটিং" : "/ RATING MILESTONE";
+    case "volunteer":
+      return isBn ? "/ স্বেচ্ছাসেবক রেকর্ড" : "/ VOLUNTEERING RECORD";
+    default:
+      return isBn ? "/ অর্জন" : "/ ACHIEVEMENT RECORD";
+  }
+};
 
 export default function Achievements() {
   const prefersReducedMotion = useReducedMotion();
@@ -288,52 +157,44 @@ export default function Achievements() {
 
   const [selectedAchievement, setSelectedAchievement] =
     useState<Achievement | null>(null);
-  const [showMoreAchievements, setShowMoreAchievements] = useState(false);
-  const [certificationViewMode, setCertificationViewMode] = useState<"slideshow" | "grid">("slideshow");
+  const [certificationViewMode, setCertificationViewMode] = useState<
+    "slideshow" | "grid"
+  >("slideshow");
   const [certificationSlideIndex, setCertificationSlideIndex] = useState(0);
+  const [achievementFilter, setAchievementFilter] = useState<
+    "all" | "competition" | "certification" | "training"
+  >("all");
 
-  const orderedAchievements = useMemo(
-    () =>
-      [...ACHIEVEMENTS].sort(
-        (a, b) => Number(Boolean(b.featured)) - Number(Boolean(a.featured)),
-      ),
-    [],
-  );
-
-  const primaryAchievements = orderedAchievements.slice(
-    0,
-    INITIAL_VISIBLE_ACHIEVEMENTS,
-  );
-  const additionalAchievements = orderedAchievements.slice(
-    INITIAL_VISIBLE_ACHIEVEMENTS,
-  );
-
-  // Certifications logic
+  // Certifications logic filtered by tab state
   const certifications = useMemo(
-    () => ACHIEVEMENTS.filter((a) => a.type === "certification"),
-    []
+    () => {
+      const filtered = ACHIEVEMENTS.filter((a) =>
+        ["certification", "competition", "training"].includes(a.type),
+      );
+      if (achievementFilter === "all") return filtered;
+      return filtered.filter((a) => a.type === achievementFilter);
+    },
+    [achievementFilter],
   );
 
   const sortedCertifications = useMemo(
     () => [
       ...certifications.sort(
-        (a, b) => Number(Boolean(b.featured)) - Number(Boolean(a.featured))
+        (a, b) => Number(Boolean(b.featured)) - Number(Boolean(a.featured)),
       ),
     ],
-    [certifications]
+    [certifications],
   );
 
-  const featuredCertifications = sortedCertifications.filter(
-    (c) => c.featured
-  );
-  const displayCertifications =
-    featuredCertifications.length > 0
-      ? featuredCertifications
-      : sortedCertifications.slice(0, 1);
+  const displayCertifications = sortedCertifications;
+
+  useEffect(() => {
+    setCertificationSlideIndex(0);
+  }, [achievementFilter]);
 
   const nextCertSlide = () => {
     setCertificationSlideIndex(
-      (prev) => (prev + 1) % displayCertifications.length
+      (prev) => (prev + 1) % displayCertifications.length,
     );
   };
 
@@ -341,7 +202,7 @@ export default function Achievements() {
     setCertificationSlideIndex(
       (prev) =>
         (prev - 1 + displayCertifications.length) %
-        displayCertifications.length
+        displayCertifications.length,
     );
   };
 
@@ -361,7 +222,8 @@ export default function Achievements() {
   }, [selectedAchievement]);
 
   return (
-    <Section id="certifications" className="relative">
+    <Section id="achievements" className="relative">
+      {/* Background decorations */}
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute -top-10 left-0 h-60 w-60 rounded-full bg-ctp-flamingo/10 opacity-12" />
         <div className="absolute -bottom-10 right-0 h-60 w-60 rounded-full bg-ctp-flamingo/8 opacity-10" />
@@ -373,193 +235,292 @@ export default function Achievements() {
         aria-hidden="true"
       >
         <span className="font-display select-none text-[7rem] font-black uppercase leading-none text-ctp-flamingo/10 opacity-12 sm:text-[10rem] lg:text-[15rem] xl:text-[18rem] mix-blend-overlay">
-          CERTS
+          {locale === "bn" ? "অর্জন" : "ACHIEVEMENTS"}
         </span>
       </div>
 
       <SectionTitle
-        badge="Certifications"
-        title="Professional Certifications"
-        highlightWord="Certifications"
-        subtitle="Industry-recognized certifications and credentials"
+        badge={copy.achievements.badge}
+        title={copy.achievements.title}
+        highlightWord={locale === "bn" ? "অর্জন" : "Achievements"}
+        subtitle={copy.achievements.subtitle}
       />
 
-      {/* View Toggle */}
-      <div className="mb-8 flex justify-center gap-2">
-        <motion.button
-          onClick={() => setCertificationViewMode("slideshow")}
-          whileHover={reducedMotion ? undefined : { y: -2 }}
-          whileTap={{ scale: 0.97 }}
-          className={`inline-flex items-center gap-2 rounded-full px-5 py-2.5 font-medium text-sm transition-all duration-200 ${
-            certificationViewMode === "slideshow"
-              ? "bg-ctp-flamingo text-white shadow-lg shadow-ctp-flamingo/30"
-              : "border border-ctp-surface1 bg-ctp-surface0/40 text-ctp-subtext0 hover:bg-ctp-surface0/60 hover:text-ctp-text"
-          }`}
-        >
-          ▶ Slideshow
-        </motion.button>
+      {/* Filters and View Mode Controls */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10 max-w-7xl mx-auto px-4">
+        {/* Filter Tabs */}
+        <div className="flex flex-wrap gap-2.5 justify-center md:justify-start">
+          {([
+            { key: "all", label: locale === "bn" ? "সব" : "All", icon: Layers },
+            { key: "competition", label: copy.achievements.competition, icon: Trophy },
+            { key: "certification", label: locale === "bn" ? "সার্টিফিকেট" : "Certificates", icon: BadgeCheck },
+            { key: "training", label: copy.achievements.training, icon: GraduationCap }
+          ] as const).map((item) => {
+            const Icon = item.icon;
+            const isActive = achievementFilter === item.key;
+            return (
+              <button
+                key={item.key}
+                onClick={() => setAchievementFilter(item.key)}
+                aria-pressed={isActive}
+                className={`group relative flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-bold uppercase tracking-wider transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ctp-flamingo/60 ${
+                  isActive
+                    ? "text-white"
+                    : "text-ctp-subtext0 hover:text-ctp-text bg-ctp-surface0/40 hover:bg-ctp-surface0/60 border border-white/5"
+                }`}
+              >
+                {isActive && (
+                  <motion.div
+                    layoutId="activeTabGlow"
+                    className="absolute inset-0 rounded-xl bg-ctp-red shadow-lg shadow-ctp-red/20"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
+                <span className="relative z-10 flex items-center gap-1.5">
+                  <Icon className="h-3.5 w-3.5" />
+                  {item.label}
+                </span>
+              </button>
+            );
+          })}
+        </div>
 
-        <motion.button
-          onClick={() => setCertificationViewMode("grid")}
-          whileHover={reducedMotion ? undefined : { y: -2 }}
-          whileTap={{ scale: 0.97 }}
-          className={`inline-flex items-center gap-2 rounded-full px-5 py-2.5 font-medium text-sm transition-all duration-200 ${
-            certificationViewMode === "grid"
-              ? "bg-ctp-flamingo text-white shadow-lg shadow-ctp-flamingo/30"
-              : "border border-ctp-surface1 bg-ctp-surface0/40 text-ctp-subtext0 hover:bg-ctp-surface0/60 hover:text-ctp-text"
-          }`}
-        >
-          <Grid3x3 className="h-4 w-4" />
-          Grid View
-        </motion.button>
+        {/* View Toggle */}
+        <div className="flex justify-center shrink-0">
+          <div className="flex items-center gap-1 rounded-full border border-white/5 bg-ctp-crust/50 p-1 shadow-inner">
+            <button
+              type="button"
+              onClick={() => setCertificationViewMode("slideshow")}
+              className={`relative flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-bold uppercase tracking-wider transition-all duration-300 focus-visible:outline-none ${
+                certificationViewMode === "slideshow"
+                  ? "bg-ctp-red text-white shadow-md shadow-ctp-red/20"
+                  : "text-ctp-subtext0 hover:text-ctp-text"
+              }`}
+            >
+              <Tv className="h-3.5 w-3.5" />
+              {locale === "bn" ? "স্লাইডশো" : "Slideshow"}
+            </button>
+            <button
+              type="button"
+              onClick={() => setCertificationViewMode("grid")}
+              className={`relative flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-bold uppercase tracking-wider transition-all duration-300 focus-visible:outline-none ${
+                certificationViewMode === "grid"
+                  ? "bg-ctp-red text-white shadow-md shadow-ctp-red/20"
+                  : "text-ctp-subtext0 hover:text-ctp-text"
+              }`}
+            >
+              <Grid3x3 className="h-3.5 w-3.5" />
+              {locale === "bn" ? "গ্রিড" : "Grid View"}
+            </button>
+          </div>
+        </div>
       </div>
 
       <AnimatePresence mode="wait">
         {/* Slideshow View */}
-        {certificationViewMode === "slideshow" && displayCertifications.length > 0 && (
-          <motion.div
-            key="slideshow"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3, ease }}
-            className="mx-auto max-w-4xl"
-          >
-            <div className="group relative">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={certificationSlideIndex}
-                  initial={{
-                    opacity: 0,
-                    x: reducedMotion ? 0 : 40,
-                  }}
-                  animate={{
-                    opacity: 1,
-                    x: 0,
-                  }}
-                  exit={{
-                    opacity: 0,
-                    x: reducedMotion ? 0 : -40,
-                  }}
-                  transition={{
-                    duration: reducedMotion ? 0.2 : 0.4,
-                    ease,
-                  }}
-                  className="overflow-hidden rounded-2xl border border-ctp-surface1/60 bg-ctp-surface0/30 backdrop-blur-sm"
-                >
-                  <div className="space-y-6 p-8">
-                    <div className="flex items-start gap-6">
-                      <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-ctp-flamingo/15">
-                        <BadgeCheck className="h-8 w-8 text-ctp-flamingo" />
-                      </div>
+        {certificationViewMode === "slideshow" &&
+          displayCertifications.length > 0 && (
+            <motion.div
+              key="slideshow"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3, ease }}
+              className="mx-auto max-w-7xl px-4"
+            >
+              <div className="group relative">
+                <AnimatePresence mode="wait">
+                  {(() => {
+                    const currentCert = displayCertifications[certificationSlideIndex];
+                    if (!currentCert) return null;
+                    const currentStyle = getTypeStyles(locale)[currentCert.type];
+                    const CurrentIcon = currentStyle.icon;
+                    return (
+                      <motion.div
+                        key={certificationSlideIndex}
+                        initial={{
+                          opacity: 0,
+                          x: reducedMotion ? 0 : 40,
+                        }}
+                        animate={{
+                          opacity: 1,
+                          x: 0,
+                        }}
+                        exit={{
+                          opacity: 0,
+                          x: reducedMotion ? 0 : -40,
+                        }}
+                        transition={{
+                          duration: reducedMotion ? 0.2 : 0.4,
+                          ease,
+                        }}
+                        className="overflow-hidden rounded-3xl border border-white/5 bg-[#0b0c10]/80 shadow-[0_20px_50px_rgba(0,0,0,0.5)] backdrop-blur-xl relative flex flex-col md:flex-row min-h-[30rem] md:min-h-[26rem] p-6 md:p-10 gap-8 items-center"
+                      >
+                        {/* Glow effect in slideshow */}
+                        <div className={`pointer-events-none absolute -right-16 -top-16 h-36 w-36 rounded-full ${currentStyle.glow} opacity-30`} />
 
-                      <div className="flex-1">
-                        <h3 className="text-xl font-bold text-ctp-text">
-                          {displayCertifications[certificationSlideIndex]?.title}
-                        </h3>
-                        <p className="mt-1 text-sm text-ctp-subtext0">
-                          {translateDynamicText(
-                            locale,
-                            displayCertifications[certificationSlideIndex]?.organization || ""
+                        {/* Left Column: Image or Gradient */}
+                        <div className="relative w-full md:w-5/12 aspect-[4/3] rounded-2xl overflow-hidden bg-black/40 border border-white/10 shadow-lg shrink-0">
+                          {currentCert.certificateImage ? (
+                            <Image
+                              src={currentCert.certificateImage}
+                              alt={currentCert.title}
+                              fill
+                              className="object-contain p-2 transition-transform duration-500 cursor-pointer hover:scale-[1.02]"
+                              sizes="(max-width: 768px) 100vw, 400px"
+                              onClick={() => setSelectedAchievement(currentCert)}
+                            />
+                          ) : (
+                            <div className={`w-full h-full flex flex-col items-center justify-center bg-gradient-to-br ${currentCert.type === "competition" ? "from-ctp-red/15 to-ctp-maroon/5" : currentCert.type === "training" ? "from-ctp-flamingo/15 to-ctp-pink/5" : "from-ctp-pink/15 to-ctp-red/5"}`}>
+                              <CurrentIcon className={`h-20 w-20 opacity-35 ${currentStyle.color}`} />
+                            </div>
                           )}
-                        </p>
-                        <p className="mt-2 leading-relaxed text-ctp-subtext1">
-                          {translateDynamicText(
-                            locale,
-                            displayCertifications[certificationSlideIndex]?.description || ""
-                          )}
-                        </p>
-                        <div className="mt-4 flex items-center gap-3">
-                          <span className="inline-block rounded-full bg-ctp-flamingo/15 px-3 py-1 text-xs font-medium text-ctp-flamingo">
-                            {displayCertifications[certificationSlideIndex]?.date}
-                          </span>
                         </div>
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
 
-              {/* Navigation Arrows */}
-              {displayCertifications.length > 1 && (
-                <>
-                  <motion.button
-                    type="button"
-                    onClick={prevCertSlide}
-                    whileHover={
-                      reducedMotion
-                        ? undefined
-                        : { scale: 1.1, x: -4 }
-                    }
-                    whileTap={{ scale: 0.95 }}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-ctp-flamingo/20 p-2 text-ctp-flamingo backdrop-blur-sm transition-colors hover:bg-ctp-flamingo/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ctp-flamingo/60 focus-visible:ring-offset-2 focus-visible:ring-offset-ctp-base"
-                    aria-label="Previous certification"
-                  >
-                    <ChevronLeft className="h-5 w-5" />
-                  </motion.button>
+                        {/* Right Column: Details */}
+                        <div className="flex-1 w-full flex flex-col justify-between self-stretch relative z-10">
+                          <div>
+                            {/* Eyebrow Label */}
+                            <span className="font-display text-[10px] font-bold tracking-[0.2em] text-ctp-red block mb-2 uppercase">
+                              {getEyebrowLabel(currentCert.type, locale)}
+                            </span>
 
-                  <motion.button
-                    type="button"
-                    onClick={nextCertSlide}
-                    whileHover={
-                      reducedMotion
-                        ? undefined
-                        : { scale: 1.1, x: 4 }
-                    }
-                    whileTap={{ scale: 0.95 }}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-ctp-flamingo/20 p-2 text-ctp-flamingo backdrop-blur-sm transition-colors hover:bg-ctp-flamingo/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ctp-flamingo/60 focus-visible:ring-offset-2 focus-visible:ring-offset-ctp-base"
-                    aria-label="Next certification"
-                  >
-                    <ChevronRight className="h-5 w-5" />
-                  </motion.button>
-                </>
-              )}
+                            {/* Title */}
+                            <h3 className="text-2xl md:text-3xl font-black tracking-wide text-ctp-red uppercase leading-snug mb-6">
+                              {currentCert.title}
+                            </h3>
 
-              {/* Slide Indicators */}
-              {displayCertifications.length > 1 && (
-                <div className="mt-6 flex justify-center gap-2">
-                  {displayCertifications.map((_, index) => (
+                            {/* Details Table */}
+                            <div className="space-y-4">
+                              {/* Awarded To */}
+                              <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-white/5 pb-3 gap-2">
+                                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-ctp-overlay0">
+                                  {locale === "bn" ? "প্রদান করা হয়েছে" : "AWARDED TO"}
+                                </span>
+                                <span className="text-xs font-bold text-white bg-white/5 border border-white/10 px-3 py-1 rounded-md uppercase tracking-wider inline-block">
+                                  {locale === "bn" ? "তারেক আলম ভুইয়া" : "TAREK ALAM BHUIYAN"}
+                                </span>
+                              </div>
+
+                              {/* Provider */}
+                              <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-white/5 pb-3 gap-2">
+                                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-ctp-overlay0">
+                                  {locale === "bn" ? "সরবরাহকারী" : "PROVIDER"}
+                                </span>
+                                <span className="text-xs font-bold text-white uppercase tracking-wider">
+                                  {translateDynamicText(locale, currentCert.organization)}
+                                </span>
+                              </div>
+
+                              {/* Completed */}
+                              <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-white/5 pb-3 gap-2">
+                                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-ctp-overlay0">
+                                  {locale === "bn" ? "সম্পন্ন হয়েছে" : "COMPLETED"}
+                                </span>
+                                <span className="text-xs font-bold text-white uppercase tracking-wider">
+                                  {translateDynamicText(locale, currentCert.date)}
+                                </span>
+                              </div>
+
+                              {/* Credential ID */}
+                              <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-white/5 pb-3 gap-2">
+                                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-ctp-overlay0">
+                                  {locale === "bn" ? "ক্রেডেনশিয়াল আইডি" : "CREDENTIAL ID"}
+                                </span>
+                                <span className="text-xs font-mono font-bold text-white/80">
+                                  {getCredentialId(currentCert)}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* CTA Button */}
+                          <div className="mt-8">
+                            {currentCert.link ? (
+                              <a
+                                href={currentCert.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-full py-3.5 px-6 rounded-xl bg-white text-black font-extrabold hover:bg-slate-100 transition-all duration-300 flex items-center justify-center gap-2 text-xs tracking-widest uppercase shadow-lg hover:shadow-white/5"
+                              >
+                                {locale === "bn" ? "ক্রেডেনশিয়াল যাচাই করুন" : "VERIFY CREDENTIAL"}
+                                <ExternalLink className="h-4 w-4" />
+                              </a>
+                            ) : currentCert.certificateImage ? (
+                              <button
+                                type="button"
+                                onClick={() => setSelectedAchievement(currentCert)}
+                                className="w-full py-3.5 px-6 rounded-xl bg-white text-black font-extrabold hover:bg-slate-100 transition-all duration-300 flex items-center justify-center gap-2 text-xs tracking-widest uppercase shadow-lg hover:shadow-white/5"
+                              >
+                                {locale === "bn" ? "সার্টিফিকেট দেখুন" : "VIEW CERTIFICATE"}
+                                <FileImage className="h-4 w-4" />
+                              </button>
+                            ) : (
+                              <div className="text-xs text-ctp-overlay0 italic text-center">
+                                {locale === "bn" ? "কোনো লিংক উপলব্ধ নেই" : "No verification link available"}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </motion.div>
+                    );
+                  })()}
+                </AnimatePresence>
+
+                {/* Navigation Arrows */}
+                {displayCertifications.length > 1 && (
+                  <>
                     <motion.button
-                      key={index}
                       type="button"
-                      onClick={() => setCertificationSlideIndex(index)}
+                      onClick={prevCertSlide}
                       whileHover={
-                        reducedMotion ? undefined : { scale: 1.2 }
+                        reducedMotion ? undefined : { scale: 1.1 }
                       }
                       whileTap={{ scale: 0.95 }}
-                      className={`h-2 rounded-full transition-all duration-200 ${
-                        index === certificationSlideIndex
-                          ? "w-8 bg-ctp-flamingo"
-                          : "w-2 bg-ctp-surface1/50 hover:bg-ctp-surface1"
-                      }`}
-                      aria-label={`Go to certification ${index + 1}`}
-                    />
-                  ))}
-                </div>
-              )}
-              {/* Visible slider control (always rendered with slideshow) */}
-              {displayCertifications.length > 1 && (
-                <div className="mt-4 mx-auto max-w-xl px-6">
-                  <input
-                    aria-label="Certification slider"
-                    type="range"
-                    min={0}
-                    max={displayCertifications.length - 1}
-                    value={certificationSlideIndex}
-                    onChange={(e) => setCertificationSlideIndex(Number(e.target.value))}
-                    className="w-full h-1 appearance-none rounded-full bg-ctp-surface1/40 accent-ctp-flamingo/80 hover:accent-ctp-flamingo"
-                  />
-                  <div className="mt-2 flex items-center justify-between text-xs text-ctp-subtext0">
-                    <span>{certificationSlideIndex + 1}</span>
-                    <span>
-                      {displayCertifications.length} / Slides
-                    </span>
+                      className="absolute left-4 md:-left-6 top-1/2 -translate-y-1/2 z-20 rounded-full bg-black/60 hover:bg-black/80 border border-white/10 p-3 text-white backdrop-blur-md transition-all shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ctp-red/60"
+                      aria-label="Previous certification"
+                    >
+                      <ChevronLeft className="h-5 w-5" />
+                    </motion.button>
+
+                    <motion.button
+                      type="button"
+                      onClick={nextCertSlide}
+                      whileHover={
+                        reducedMotion ? undefined : { scale: 1.1 }
+                      }
+                      whileTap={{ scale: 0.95 }}
+                      className="absolute right-4 md:-right-6 top-1/2 -translate-y-1/2 z-20 rounded-full bg-black/60 hover:bg-black/80 border border-white/10 p-3 text-white backdrop-blur-md transition-all shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ctp-red/60"
+                      aria-label="Next certification"
+                    >
+                      <ChevronRight className="h-5 w-5" />
+                    </motion.button>
+                  </>
+                )}
+
+                {/* Slide Indicators */}
+                {displayCertifications.length > 1 && (
+                  <div className="mt-8 flex justify-center gap-2">
+                    {displayCertifications.map((_, index) => (
+                      <motion.button
+                        key={index}
+                        type="button"
+                        onClick={() => setCertificationSlideIndex(index)}
+                        whileHover={reducedMotion ? undefined : { scale: 1.2 }}
+                        whileTap={{ scale: 0.95 }}
+                        className={`h-2 rounded-full transition-all duration-200 ${
+                          index === certificationSlideIndex
+                            ? "w-8 bg-ctp-red"
+                            : "w-2 bg-ctp-surface1/50 hover:bg-ctp-surface1"
+                        }`}
+                        aria-label={`Go to certification ${index + 1}`}
+                      />
+                    ))}
                   </div>
-                </div>
-              )}
-            </div>
-          </motion.div>
-        )}
+                )}
+              </div>
+            </motion.div>
+          )}
 
         {/* Grid View */}
         {certificationViewMode === "grid" && (
@@ -569,67 +530,124 @@ export default function Achievements() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3, ease }}
-            className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+            className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto px-4"
           >
-            {sortedCertifications.map((cert, index) => (
-              <motion.article
-                key={cert.title}
-                initial={{
-                  opacity: 0,
-                  y: reducedMotion ? 0 : 16,
-                  filter: reducedMotion ? "none" : "blur(4px)",
-                }}
-                animate={{
-                  opacity: 1,
-                  y: 0,
-                  filter: "blur(0px)",
-                }}
-                transition={{
-                  delay: reducedMotion ? 0 : index * 0.06,
-                  duration: reducedMotion ? 0.2 : 0.36,
-                  ease,
-                }}
-                whileHover={
-                  reducedMotion
-                    ? undefined
-                    : {
-                        y: -4,
-                      }
-                }
-                className="group relative overflow-hidden rounded-2xl border border-ctp-surface0/60 bg-ctp-surface0/30 p-5 backdrop-blur-sm transition-all duration-300 hover:border-ctp-surface1 hover:bg-ctp-surface0/45"
-              >
-                <div className="pointer-events-none absolute -right-12 -top-12 h-32 w-32 rounded-full bg-ctp-flamingo/10 transition-opacity duration-300 opacity-0 group-hover:opacity-100" />
+            {sortedCertifications.map((cert, index) => {
+              const certStyle = getTypeStyles(locale)[cert.type];
+              const CertIcon = certStyle.icon;
+              return (
+                <motion.article
+                  key={cert.title}
+                  initial={{
+                    opacity: 0,
+                    y: reducedMotion ? 0 : 16,
+                    filter: reducedMotion ? "none" : "blur(4px)",
+                  }}
+                  animate={{
+                    opacity: 1,
+                    y: 0,
+                    filter: "blur(0px)",
+                  }}
+                  transition={{
+                    delay: reducedMotion ? 0 : index * 0.06,
+                    duration: reducedMotion ? 0.2 : 0.36,
+                    ease,
+                  }}
+                  whileHover={
+                    reducedMotion
+                      ? undefined
+                      : {
+                          y: -6,
+                        }
+                  }
+                  className="group relative overflow-hidden rounded-2xl border border-ctp-surface0 bg-ctp-surface0/20 backdrop-blur-sm transition-all duration-300 hover:border-ctp-surface1/80 hover:bg-ctp-surface0/35 flex flex-col h-full shadow-md hover:shadow-lg"
+                >
+                  <div className={`pointer-events-none absolute -right-12 -top-12 h-32 w-32 rounded-full ${certStyle.glow} transition-opacity duration-300 opacity-0 group-hover:opacity-100`} />
 
-                <div className="relative z-10">
-                  <div className="flex items-start gap-3 mb-3">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-ctp-flamingo/15">
-                      <BadgeCheck className="h-5 w-5 text-ctp-flamingo" />
-                    </div>
-                    {cert.featured && (
-                      <span className="ml-auto inline-flex items-center rounded-full border border-ctp-surface1/60 bg-ctp-surface0/50 px-2.5 py-1 text-[11px] font-medium text-ctp-subtext0">
-                        Featured
-                      </span>
+                  {/* Header Banner */}
+                  <div className="relative h-44 w-full overflow-hidden bg-ctp-surface0/60 border-b border-ctp-surface0/50">
+                    {cert.certificateImage ? (
+                      <>
+                        <Image
+                          src={cert.certificateImage}
+                          alt={cert.title}
+                          fill
+                          className="object-cover object-top transition-transform duration-500 group-hover:scale-105 cursor-pointer"
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                          onClick={() => setSelectedAchievement(cert)}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-ctp-base/40 via-transparent to-transparent opacity-60 pointer-events-none" />
+                      </>
+                    ) : (
+                      <div className={`w-full h-full flex items-center justify-center bg-gradient-to-br ${cert.type === "competition" ? "from-ctp-red/10 to-ctp-maroon/5" : cert.type === "training" ? "from-ctp-flamingo/10 to-ctp-pink/5" : "from-ctp-pink/10 to-ctp-red/5"}`}>
+                        <CertIcon className={`h-12 w-12 opacity-35 ${certStyle.color} transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3`} />
+                      </div>
                     )}
                   </div>
 
-                  <h3 className="text-sm font-semibold leading-snug text-ctp-text line-clamp-2">
-                    {cert.title}
-                  </h3>
-                  <p className="mt-1 text-xs text-ctp-subtext0">
-                    {translateDynamicText(locale, cert.organization)}
-                  </p>
-                  <span className="mt-2 inline-block rounded-full bg-ctp-flamingo/15 px-2.5 py-1 text-[10px] font-medium text-ctp-flamingo">
-                    {translateDynamicText(locale, cert.date)}
-                  </span>
-                  <p className="mt-3 text-xs leading-relaxed text-ctp-subtext1 line-clamp-2">
-                    {translateDynamicText(locale, cert.description)}
-                  </p>
-                </div>
-              </motion.article>
-            ))}
+                  {/* Body Content */}
+                  <div className="p-5 flex-1 flex flex-col justify-between relative z-10">
+                    <div>
+                      <div className="flex flex-wrap items-center gap-2 mb-3">
+                        <span
+                          className={`inline-flex items-center gap-1.5 rounded-full px-2 py-0.5 text-[10px] font-medium ${certStyle.bg} ${certStyle.color}`}
+                        >
+                          <span className={`h-1 w-1 rounded-full ${certStyle.accent}`} />
+                          {certStyle.label}
+                        </span>
+                        {cert.featured && (
+                          <span className="inline-flex items-center rounded-full border border-ctp-surface1/60 bg-ctp-surface0/50 px-2 py-0.5 text-[10px] font-medium text-ctp-subtext0">
+                            {copy.achievements.featured}
+                          </span>
+                        )}
+                        <span className={`ml-auto text-[11px] font-medium text-ctp-overlay0`}>
+                          {translateDynamicText(locale, cert.date)}
+                        </span>
+                      </div>
+
+                      <h3 className="text-sm font-bold leading-snug text-ctp-text line-clamp-2 group-hover:text-ctp-red transition-colors duration-200">
+                        {cert.title}
+                      </h3>
+                      <p className="mt-1 text-xs font-semibold text-ctp-subtext0">
+                        {translateDynamicText(locale, cert.organization)}
+                      </p>
+                      <p className="mt-3 text-xs leading-relaxed text-ctp-subtext1 line-clamp-3">
+                        {translateDynamicText(locale, cert.description)}
+                      </p>
+                    </div>
+
+                    <div className="mt-5 pt-3 border-t border-ctp-surface0/40 flex items-center justify-between">
+                      {cert.viewType === "image" && cert.certificateImage ? (
+                        <button
+                          type="button"
+                          onClick={() => setSelectedAchievement(cert)}
+                          className="inline-flex items-center gap-1.5 text-xs text-ctp-red transition-colors hover:text-ctp-flamingo font-semibold focus-visible:outline-none rounded"
+                        >
+                          {copy.achievements.certificate}
+                          <FileImage className="h-3.5 w-3.5" />
+                        </button>
+                      ) : cert.viewType === "link" && cert.link ? (
+                        <a
+                          href={cert.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 text-xs text-ctp-red transition-colors hover:text-ctp-flamingo font-semibold focus-visible:outline-none rounded"
+                        >
+                          {copy.achievements.view}
+                          <ExternalLink className="h-3.5 w-3.5" />
+                        </a>
+                      ) : (
+                        <span className="text-[10px] text-ctp-overlay0 italic">No external link</span>
+                      )}
+                    </div>
+                  </div>
+                </motion.article>
+              );
+            })}
           </motion.div>
         )}
       </AnimatePresence>
+
       <AnimatePresence>
         {selectedAchievement?.certificateImage && (
           <motion.div

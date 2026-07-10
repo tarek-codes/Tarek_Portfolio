@@ -34,7 +34,7 @@ export default function SectionTitle({
     return (
       <>
         {parts[0]}
-        <span className="animate-text-gradient">{highlightWord}</span>
+        <span className="text-gradient-red">{highlightWord}</span>
         {parts[1]}
       </>
     );
@@ -42,32 +42,37 @@ export default function SectionTitle({
 
   return (
     <motion.div
-      className={`text-center max-w-3xl mx-auto mb-16 flex flex-col ${alignmentClasses[align]}`}
+      className={`text-center max-w-4xl mx-auto mb-20 flex flex-col ${alignmentClasses[align]}`}
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
+      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
     >
       {badge && (
         <motion.div
-          className="inline-flex items-center gap-2 px-5 py-2.5 bg-ctp-surface0/40 backdrop-blur-md border border-ctp-surface1/60 rounded-full shadow-sm text-sm font-medium mb-8"
+          className="inline-flex items-center gap-2 px-4 py-1.5 bg-ctp-red/5 backdrop-blur-md border border-ctp-red/20 rounded-full text-[10px] md:text-xs font-bold mb-6 tracking-widest text-ctp-red"
           initial={{ scale: 0.9, opacity: 0 }}
           whileInView={{ scale: 1, opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.1, type: "spring", stiffness: 220, damping: 20 }}
+          transition={{
+            delay: 0.1,
+            type: "spring",
+            stiffness: 220,
+            damping: 20,
+          }}
         >
-          <Sparkles className="w-4 h-4 text-ctp-red animate-pulse" />
-          <span className="text-ctp-text tracking-wide">{badge.toUpperCase()}</span>
+          <Sparkles className="w-3 h-3 md:w-3.5 md:h-3.5" />
+          <span>{badge.toUpperCase()}</span>
         </motion.div>
       )}
 
-      <h2 className="text-4xl md:text-5xl lg:text-7xl font-display font-bold text-ctp-text tracking-tight mb-6 !leading-[1.15]">
+      <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-black text-ctp-text tracking-tight mb-6 !leading-[1.05]">
         {renderTitle()}
       </h2>
 
       {subtitle && (
         <motion.p
-          className="text-lg md:text-xl text-ctp-subtext1 max-w-2xl mx-auto leading-relaxed"
+          className="text-lg md:text-xl text-ctp-subtext0 max-w-2xl mx-auto leading-relaxed font-medium opacity-80"
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}

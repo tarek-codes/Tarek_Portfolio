@@ -185,7 +185,7 @@ export default function Contact() {
       />
 
       <motion.div
-        className="mx-auto mb-8 max-w-5xl"
+        className="mx-auto mb-8 max-w-7xl"
         initial={{ opacity: 0, y: reducedMotion ? 0 : 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-60px" }}
@@ -208,7 +208,7 @@ export default function Contact() {
         <div className="absolute bottom-0 right-0 h-56 w-56 rounded-full bg-ctp-maroon/10 opacity-10" />
       </div>
 
-      <div className="grid lg:grid-cols-2 gap-10 max-w-5xl mx-auto">
+      <div className="grid lg:grid-cols-2 gap-10 max-w-7xl mx-auto">
         {/* Left: Info & Socials */}
         <motion.div
           className="space-y-6"

@@ -22,6 +22,33 @@ export async function POST(req: Request) {
     }
 
     const locale = resolveLocale(body.locale);
+
+    // Dynamic demo fallback if API key is missing
+    const apiKey = process.env.OPENROUTER_API_KEY;
+    if (!apiKey || apiKey === "your_openrouter_api_key_here" || apiKey.trim() === "") {
+      const encoder = new TextEncoder();
+      const mockText =
+        locale === "bn"
+          ? "হ্যালো! আমি তারেকের এআই অ্যাসিস্ট্যান্ট। পরিবেশ ভেরিয়েবলে OpenRouter API Key কনফিগার করা না থাকায় চ্যাটবটটি বর্তমানে ডেমো মোডে আছে। সরাসরি তারেকের সাথে tarekalambhuiyan@gmail.com এ যোগাযোগ করতে পারেন অথবা নিচের যোগাযোগ ফর্মটি ব্যবহার করতে পারেন!"
+          : "Hi there! I am Tarek's AI assistant. The chatbot is currently in demo mode because the OpenRouter API Key is not configured in the environment variables. Feel free to contact Tarek directly at tarekalambhuiyan@gmail.com or use the contact form below!";
+
+      const customStream = new ReadableStream({
+        async start(controller) {
+          // Vercel AI Stream Protocol v1 chunk format: 0:"text"\n
+          const textChunk = `0:${JSON.stringify(mockText)}\n`;
+          controller.enqueue(encoder.encode(textChunk));
+          controller.close();
+        },
+      });
+
+      return new Response(customStream, {
+        headers: {
+          "Content-Type": "text/plain; charset=utf-8",
+          "x-vercel-ai-stream-protocol": "v1",
+        },
+      });
+    }
+
     const responseLanguageInstruction =
       locale === "bn"
         ? "Respond in Bengali. Keep technical terms and proper nouns (e.g., Next.js, React, Codeforces) in English when that is clearer."
@@ -35,23 +62,23 @@ You are an AI assistant for Tarek Alam Bhuiyan. Use only the facts below and ans
 ### Personal Information
   - Name: Tarek Alam Bhuiyan (aka 2ManyFaces)
   - Location: Mohammadpur, Dhaka, Bangladesh
-  - Role: Trainee Technology Specialist, Data Scientist, ML Engineer
+  - Role: Junior AI Engineer, Data Scientist, ML Engineer
   - Email: tarekalambhuiyan@gmail.com
   - Education: BSc in CSE from BRAC University (2022-2026)
   - Profile: Computer Science undergraduate with hands-on experience in ML, Data Science, NLP, and full-stack development.
-
-### Online Presence
-  - GitHub: https://github.com/2ManyFaces
-  - LinkedIn: https://linkedin.com/in/tarekalambhuiyan
-  - LeetCode: https://leetcode.com/u/2ManyFaces/
-
-### Core Skills
-  - Languages: Python, JavaScript, SQL, C, C++
-  - Frameworks/Tools: Node.js, Express.js, Tailwind CSS, TensorFlow, Keras, Scikit-learn
-  - Databases: PostgreSQL,MySQL, MongoDB
-
-### Professional Experience
-  - Trainee Technology Specialist (Software, Data & AI) at Betopia Limited (Feb 2026 - Present)
+ 
+ ### Online Presence
+   - GitHub: https://github.com/2ManyFaces
+   - LinkedIn: https://linkedin.com/in/tarekalambhuiyan
+   - LeetCode: https://leetcode.com/u/2ManyFaces/
+ 
+ ### Core Skills
+   - Languages: Python, JavaScript, SQL, C, C++
+   - Frameworks/Tools: Node.js, Express.js, Tailwind CSS, TensorFlow, Keras, Scikit-learn
+   - Databases: PostgreSQL,MySQL, MongoDB
+ 
+ ### Professional Experience
+   - Junior AI Engineer (Software, Data & AI) at Betopia Limited (Feb 2026 - Present)
 
 ### Key Projects
   - MycoPredict: Mushroom edibility classification using ML (UCI dataset). Stack: NumPy, Pandas, Matplotlib, Seaborn, Scikit-learn.

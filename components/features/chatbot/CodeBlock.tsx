@@ -132,6 +132,3 @@ export default function CodeBlock({ code, language }: CodeBlockProps) {
     </div>
   );
 }
-
-
-

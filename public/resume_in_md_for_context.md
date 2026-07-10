@@ -8,7 +8,7 @@ Computer Science undergraduate with hands-on experience in Machine Learning, Dat
 
 ## Experience
 
-● **Trainee Technology Specialist** , Betopia Limited (^) **(February 2026 - Present)**
+● **Junior AI Engineer** , Betopia Limited (^) **(February 2026 - Present)**
 
 ## Skills
 
@@ -24,5 +24,5 @@ Computer Science undergraduate with hands-on experience in Machine Learning, Dat
 
 **BRAC University** (2022-2026)
 BSc (Eng.) in Computer Science and Engineering
-CGPA (Present): **3.37** / 4.00 
+CGPA (Present): **3.36** / 4.00 
 

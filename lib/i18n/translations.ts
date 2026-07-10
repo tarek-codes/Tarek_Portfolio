@@ -173,7 +173,7 @@ export const translations: Record<Locale, TranslationSchema> = {
         "ML & Data Science | CSE Student at BRAC University | Full-Stack Developer",
     },
     nav: {
-      home: "Home",
+      home: "Trk.",
       about: "About",
       experience: "Experience",
       skills: "Skills",
@@ -188,7 +188,7 @@ export const translations: Record<Locale, TranslationSchema> = {
     hero: {
       hello: "Hello, I'm",
       roleLine:
-        "Trainee Technology Specialist @ Betopia Limited",
+        "Junior AI Engineer @ Betopia Limited",
       viewWork: "View My Work",
       resume: "Resume",
       location: "Dhaka, Bangladesh",
@@ -242,10 +242,10 @@ export const translations: Record<Locale, TranslationSchema> = {
       liveRepo: "Live Repo",
     },
     achievements: {
-      badge: "Milestones",
+      badge: "Achievements",
       title: "Achievements & Recognition",
       subtitle:
-        "Milestones in competitive programming, academics, and community service",
+        "Milestones in competitive programming, academics, courses, and certifications",
       competition: "Competition",
       scholarship: "Scholarship",
       academic: "Academic",
@@ -318,7 +318,7 @@ export const translations: Record<Locale, TranslationSchema> = {
         "ML ও Data Science | ব্র্যাক ইউনিভার্সিটি CSE শিক্ষার্থী | ফুল-স্ট্যাক ডেভেলপার",
     },
     nav: {
-      home: "হোম",
+      home: "Trk.",
       about: "পরিচিতি",
       experience: "এক্সপেরিয়েন্স",
       skills: "স্কিলস",
@@ -333,7 +333,7 @@ export const translations: Record<Locale, TranslationSchema> = {
     hero: {
       hello: "হ্যালো, আমি",
       roleLine:
-        "ট্রেইনি টেকনোলজি স্পেশালিস্ট @ বিটোপিয়া লিমিটেড",
+        "জুনিয়র এআই ইঞ্জিনিয়ার @ বিটোপিয়া লিমিটেড",
       viewWork: "আমার কাজ দেখুন",
       resume: "রেজুমে",
       location: "ঢাকা, বাংলাদেশ",
@@ -387,10 +387,10 @@ export const translations: Record<Locale, TranslationSchema> = {
       liveRepo: "লাইভ রিপো",
     },
     achievements: {
-      badge: "মাইলস্টোন",
+      badge: "অর্জন",
       title: "অর্জন ও স্বীকৃতি",
       subtitle:
-        "প্রতিযোগিতা, একাডেমিক এবং কমিউনিটি কাজের গুরুত্বপূর্ণ মাইলস্টোন",
+        "প্রতিযোগিতা, একাডেমিক কোর্স এবং সার্টিফিকেশনের অর্জনসমূহ",
       competition: "প্রতিযোগিতা",
       scholarship: "বৃত্তি",
       academic: "একাডেমিক",
@@ -463,6 +463,25 @@ const dynamicBnMap: Record<string, string> = {
   Bio: "বায়ো",
   Academic: "একাডেমিক",
   Education: "শিক্ষা",
+  "ML Engineer": "এমএল ইঞ্জিনিয়ার",
+  "Software Engineer": "সফটওয়্যার ইঞ্জিনিয়ার",
+  "Data Analyst": "ডেটা অ্যানালিস্ট",
+  "Data Engineer": "ডেটা ইঞ্জিনিয়ার",
+  "AI/ML Researcher": "এআই/এমএল গবেষক",
+  "SQA Engineer": "এসকিউএ ইঞ্জিনিয়ার",
+  "Data Engineering & Analysis": "ডেটা ইঞ্জিনিয়ারিং ও অ্যানালিসিস",
+  "Machine Learning & Deep Learning": "মেশিন লার্নিং ও ডিপ লার্নিং",
+  "Natural Language Processing": "ন্যাচারাল ল্যাঙ্গুয়েজ প্রসেসিং",
+  "Full-stack Web Development": "ফুল-স্ট্যাক ওয়েব ডেভেলপমেন্ট",
+  "BRAC University": "ব্র্যাক ইউনিভার্সিটি",
+  "Bachelor of Science (BSc.) in Computer Science and Engineering": "কম্পিউটার সায়েন্স অ্যান্ড ইঞ্জিনিয়ারিংয়ে ব্যাচেলর অব সায়েন্স (বিএসসি)",
+  "CGPA: 3.36": "সিজিপিএ: ৩.৩৬",
+  "Mohammadpur, Dhaka - 1207": "মোহাম্মদপুর, ঢাকা - ১২০৭",
+  "CORE INTERESTS": "মূল আগ্রহ",
+  "TARGET ROLES": "লক্ষ্য ভূমিকা",
+  "GIT CONTRIBUTION MATRIX": "গিট কন্ট্রিবিউশন ম্যাট্রিক্স",
+  "SEEKING": "খুঁজছি",
+  "LIVE_SYNC": "লাইভ সিঙ্ক",
   Performance: "পারফরম্যান্স",
   "Competitive Programming": "কম্পিটিটিভ প্রোগ্রামিং",
   Availability: "প্রাপ্যতা",
@@ -484,14 +503,26 @@ const dynamicBnMap: Record<string, string> = {
   "AI/ML and systems design": "এআই/এমএল এবং সিস্টেম ডিজাইন",
   "Open-source and developer tooling": "ওপেন-সোর্স ও ডেভেলপার টুলিং",
   "Teaching and problem solving": "টিচিং এবং প্রবলেম সলভিং",
-  "Trainee Technology Specialist at Betopia Limited, selected among the top 40 candidates for the Betopia Tech Recruitment Program (BTRP), working on software, data, and AI-related solutions.":
-    "বিটোপিয়া লিমিটেডের ট্রেইনি টেকনোলজি স্পেশালিস্ট, বেটোপিয়া টেক রিক্রুটমেন্ট প্রোগ্রামের (BTRP) শীর্ষ ৪০ জন প্রার্থীর মধ্যে নির্বাচিত, সফটওয়্যার, ডেটা এবং এআই-সম্পর্কিত সমাধান নিয়ে কাজ করছি।",
-  "Trainee Technology Specialist – Software, Data & AI Solutions":
-    "ট্রেইনি টেকনোলজি স্পেশালিস্ট – সফটওয়্যার, ডেটা এবং এআই সমাধান",
+  "Junior AI Engineer at Betopia Limited, selected among the top 40 candidates for the Betopia Tech Recruitment Program (BTRP), working on software, data, and AI-related solutions.":
+    "বিটোপিয়া লিমিটেডের জুনিয়র এআই ইঞ্জিনিয়ার, বেটোপিয়া টেক রিক্রুটমেন্ট প্রোগ্রামের (BTRP) শীর্ষ ৪০ জন প্রার্থীর মধ্যে নির্বাচিত, সফটওয়্যার, ডেটা এবং এআই-সম্পর্কিত সমাধান নিয়ে কাজ করছি।",
+  "Junior AI Engineer – Software, Data & AI Solutions":
+    "জুনিয়র এআই ইঞ্জিনিয়ার – সফটওয়্যার, ডেটা এবং এআই সমাধান",
   "Selected among the top 40 candidates for the Betopia Tech Recruitment Program (BTRP)":
     "বিটোপিয়া টেক রিক্রুটমেন্ট প্রোগ্রামের (BTRP) শীর্ষ ৪০ জন প্রার্থীর মধ্যে নির্বাচিত",
   "Working on software, data, and AI-related solutions":
     "সফটওয়্যার, ডেটা এবং এআই-সম্পর্কিত সমাধান নিয়ে কাজ করছি।",
+  "BSc in Computer Science and Engineering (Current CGPA: 3.36).":
+    "কম্পিউটার সায়েন্স অ্যান্ড ইঞ্জিনিয়ারিংয়ে বিএসসি (বর্তমান সিজিপিএ: ৩.৩৬)।",
+  "Specialized in Machine Learning, Deep Learning, NLP, and Databases.":
+    "মেশিন লার্নিং, ডিপ লার্নিং, NLP এবং ডেটাবেজ সিস্টেমে বিশেষ ফোকাস।",
+  "Active in competitive programming, hackathons, and research projects.":
+    "কম্পিটিটিভ প্রোগ্রামিং, হ্যাকাথন এবং গবেষণা প্রজেক্টে সক্রিয় অংশগ্রহণ।",
+  "Develop and deploy scalable machine learning models and NLP pipelines in production.":
+    "প্রোডাকশনে স্কেলেবল মেশিন লার্নিং মডেল ও NLP পাইপলাইন তৈরি ও ডেপ্লয় করা।",
+  "Build full-stack web applications and robust APIs with engineering teams.":
+    "ইঞ্জিনিয়ারিং টিমের সাথে ফুল-স্ট্যাক ওয়েব অ্যাপ্লিকেশন এবং রিলায়েবল API তৈরি করা।",
+  "Optimize data pipelines and system performance under the BTRP program.":
+    "BTRP প্রোগ্রামের অধীনে ডেটা পাইপলাইন এবং সিস্টেমের কার্যক্ষমতা অপ্টিমাইজ করা।",
   "Computer Science undergraduate with hands-on experience in Machine Learning, Data Science, NLP, and full-stack development. Skilled in Python, JavaScript, and SQL, passionate about solving real-world problems using data-driven approaches.":
     "মেশিন লার্নিং, ডেটা সায়েন্স, এনএলপি এবং ফুল-স্ট্যাক ডেভেলপমেন্টে বাস্তব অভিজ্ঞতাসম্পন্ন কম্পিউটার সায়েন্স আন্ডারগ্রাজুয়েট। পাইথন, জাভাস্ক্রিপ্ট এবং এসকিউএল-এ দক্ষ, ডেটা-চালিত পদ্ধতির মাধ্যমে বাস্তব-জগতের সমস্যা সমাধানে আগ্রহী।",
   "BSc (Eng.) in Computer Science and Engineering":
@@ -502,6 +533,7 @@ const dynamicBnMap: Record<string, string> = {
     "২টি ভাইস চ্যান্সেলর অ্যাওয়ার্ড এবং ৪টি ডিনস অ্যাওয়ার্ড অর্জন",
   "Focus areas: Software Engineering, Web Development, AI/ML, Data Structures & Algorithms":
     "ফোকাস এরিয়া: সফটওয়্যার ইঞ্জিনিয়ারিং, ওয়েব ডেভেলপমেন্ট, এআই/এমএল, ডেটা স্ট্রাকচার ও অ্যালগরিদম",
+  "Junior AI Engineer": "জুনিয়র এআই ইঞ্জিনিয়ার",
   "Trainee Software Engineer (Intern)":
     "ট্রেইনি সফটওয়্যার ইঞ্জিনিয়ার (ইন্টার্ন)",
   "Working on full-stack web development projects with an experienced team":
@@ -640,6 +672,23 @@ const dynamicBnMap: Record<string, string> = {
   "Supervised Learning with Scikit-learn": "সুপারভাইজড লার্নিং উইথ সাইকিট-লার্ন",
   "Certification in version control and collaboration using Git": "গিট ব্যবহার করে ভার্সন কন্ট্রোল এবং কোলাবরেশনের ওপর সার্টিফিকেশন",
   "Certification in building and evaluating supervised machine learning models": "সুপারভাইজড মেশিন লার্নিং মডেল তৈরি এবং মূল্যায়নের ওপর সার্টিফিকেশন",
+  "MIST Neofetch Hackathon - Programming Hero": "MIST নিওফেচ হ্যাকাথন - প্রোগ্রামিং হিরো",
+  "Military Institute of Science and Technology (MIST)": "মিলিটারি ইনস্টিটিউট অব সায়েন্স অ্যান্ড টেকনোলজি (MIST)",
+  "Programming competition achievement at the MIST Neofetch Hackathon.": "MIST নিওফেচ হ্যাকাথনে প্রোগ্রামিং প্রতিযোগিতা অর্জন।",
+  "BUCC Intrahacktive Hackathon - Database Wizard": "BUCC ইন্ট্রাহ্যাক্টিভ হ্যাকাথন - ডেটাবেজ উইজার্ড",
+  "BRAC University Computer Club (BUCC)": "ব্র্যাক ইউনিভার্সিটি কম্পিউটার ক্লাব (BUCC)",
+  "Database design and implementation wizard award at the BUCC Intrahacktive Hackathon.": "BUCC ইন্ট্রাহ্যাক্টিভ হ্যাকাথনে ডেটাবেজ ডিজাইন এবং ইমপ্লিমেন্টেশন উইজার্ড পুরস্কার।",
+  "Skills for Industry Competitiveness & Innovation Program (SICIP) - ML/DL": "স্কিলস ফর ইন্ডাস্ট্রি কম্পিটিটিভনেস অ্যান্ড ইনোভেশন প্রোগ্রাম (SICIP) - ML/DL",
+  "Ministry Of Finance & Asian Development Bank (ADB)": "অর্থ মন্ত্রণালয় এবং এশীয় উন্নয়ন ব্যাংক (ADB)",
+  "Professional training program focused on Machine Learning and Deep Learning concepts.": "মেশিন লার্নিং এবং ডিপ লার্নিং ধারণার ওপর ফোকাস করা পেশাদার প্রশিক্ষণ প্রোগ্রাম।",
+  "Intermediate Git": "ইন্টারমিডিয়েট গিট",
+  "Certification in version control, branching, merging, and collaboration using Git.": "গিট ব্যবহার করে সংস্করণ নিয়ন্ত্রণ, ব্রাঞ্চিং, মার্জিং এবং সহযোগিতায় সার্টিফিকেশন।",
+  "Certification in fundamental concepts, applications, and ethics of Artificial Intelligence.": "আর্টিফিশিয়াল ইন্টেলিজেন্সের মৌলিক ধারণা, প্রয়োগ এবং নীতিমালার ওপর সার্টিফিকেশন।",
+  "Certification in intermediate level SQL queries, joins, and analysis.": "ইন্টারমিডিয়েট লেভেল এসকিউএল কোয়েরি, জয়েন এবং বিশ্লেষণের ওপর সার্টিফিকেশন।",
+  "Database Design": "ডেটাবেজ ডিজাইন",
+  "Certification in database schemas, normalization, and relational database design.": "ডেটাবেজ স্কিমা, নরমালাইজেশন এবং রিলেশনাল ডেটাবেজ ডিজাইনে সার্টিফিকেশন।",
+  "Introduction to Deep Learning with PyTorch": "ইন্ট্রোডাকশন টু ডিপ লার্নিং উইথ পাইটর্চ",
+  "Certification in neural networks, backpropagation, and deep learning using PyTorch.": "PyTorch ব্যবহার করে নিউরাল নেটওয়ার্ক, ব্যাকপ্রোপাগেশন এবং ডিপ লার্নিংয়ে সার্টিফিকেশন।",
 };
 
 const escapeRegex = (value: string) =>

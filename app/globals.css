@@ -40,8 +40,56 @@
     --color-ctp-blue: #dc2626;
     --color-ctp-lavender: #f43f5e;
 
+    /* Custom Transitions */
+    --transition-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+
     /* Spacing */
-    --spacing-section: 6rem;
+    --spacing-section: 8rem;
+}
+
+/* Base Styles */
+@layer base {
+    * {
+        scrollbar-width: thin;
+        scrollbar-color: var(--color-ctp-surface1) transparent;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        @apply bg-ctp-base text-ctp-text selection:bg-ctp-red/30 selection:text-ctp-red;
+        font-feature-settings: "ss01", "ss03", "cv08", "cv11";
+    }
+
+    :focus-visible {
+        outline: 2px solid var(--color-ctp-red);
+        outline-offset: 3px;
+    }
+}
+
+/* Modern Glass & Glow Utilities */
+@layer utilities {
+    .glass {
+        @apply backdrop-blur-xl bg-ctp-mantle/60 border border-ctp-surface0/40;
+    }
+
+    .glass-strong {
+        @apply backdrop-blur-2xl bg-ctp-crust/80 border border-ctp-surface0/70;
+    }
+
+    .glow-red {
+        box-shadow: 0 0 30px -10px var(--color-ctp-red);
+    }
+
+    .glow-red-strong {
+        box-shadow: 0 0 50px -5px var(--color-ctp-red);
+    }
+
+    .text-gradient-red {
+        @apply bg-linear-to-r from-ctp-red via-ctp-peach to-ctp-red bg-clip-text text-transparent;
+    }
 }
 
 /* Light Theme Variables (Catppuccin Latte) */
@@ -129,12 +177,12 @@ body {
     background-image:
         radial-gradient(
             circle 1000px at 50% -10%,
-            rgba(220, 38, 38, 0.12),
+            rgba(220, 38, 38, 0.08),
             transparent
         ),
         radial-gradient(
             circle 800px at 100% 90%,
-            rgba(153, 27, 27, 0.08),
+            rgba(153, 27, 27, 0.05),
             transparent
         );
     background-attachment: fixed;
@@ -396,17 +444,45 @@ html.locale-bn body {
 
 /* Developer-style custom cursor */
 body {
-    cursor: url('/cursors/red-arrow.svg') 1 1, auto;
+    cursor: url('/cursors/red-arrow.svg') 3 3, auto;
 }
 
 /* Keep pointer cursor for interactive elements */
-a, button, input, textarea, select, summary {
-    cursor: pointer;
+a, button, [role="button"], input, textarea, select, summary {
+    cursor: url('/cursors/red-arrow.svg') 3 3, pointer;
+    transition:
+        color 220ms var(--transition-smooth),
+        background-color 220ms var(--transition-smooth),
+        border-color 220ms var(--transition-smooth),
+        box-shadow 220ms var(--transition-smooth),
+        transform 220ms var(--transition-smooth),
+        opacity 220ms var(--transition-smooth);
+}
+
+input, textarea {
+    cursor: url('/cursors/red-caret.svg') 16 16, text;
+}
+
+a:hover,
+button:hover,
+[role="button"]:hover {
+    transform: translateY(-1px);
 }
 
 /* Respect reduced motion for cursor-sensitive users (subtle pulse disabled) */
 @media (prefers-reduced-motion: reduce) {
     body {
         cursor: auto;
+    }
+
+    a, button, [role="button"], input, textarea, select, summary {
+        cursor: pointer;
+        transition: none;
+    }
+
+    a:hover,
+    button:hover,
+    [role="button"]:hover {
+        transform: none;
     }
 }

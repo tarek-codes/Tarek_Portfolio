@@ -226,79 +226,82 @@ function ExperienceCard({
   return (
     <motion.div
       variants={cardVariants(rm)}
-      className="group relative overflow-hidden rounded-2xl border border-ctp-surface0/60 bg-ctp-surface0/20 p-6 backdrop-blur-sm transition-[border-color,box-shadow] duration-300 hover:border-ctp-surface1 hover:shadow-lg hover:shadow-ctp-crust/20 sm:p-8"
+      className="group relative overflow-hidden rounded-3xl border border-ctp-surface0/60 bg-gradient-to-br from-ctp-surface0/20 via-ctp-surface0/10 to-ctp-mantle/30 p-6 backdrop-blur-xl transition-all duration-300 hover:border-ctp-red/35 hover:bg-ctp-surface0/15 hover:shadow-[0_20px_50px_-25px_rgba(237,135,150,0.15)] sm:p-8 flex flex-col justify-between"
     >
       {/* Corner glow */}
       <div
-          className={`pointer-events-none absolute -right-12 -top-12 h-32 w-32 rounded-full transition-opacity duration-300 opacity-0 group-hover:opacity-100 ${
-            isWork ? "bg-ctp-red/15" : "bg-ctp-maroon/15"
-          }`}
+        className={`pointer-events-none absolute -right-12 -top-12 h-32 w-32 rounded-full transition-opacity duration-300 opacity-0 group-hover:opacity-100 ${
+          isWork ? "bg-ctp-red/15" : "bg-ctp-maroon/15"
+        }`}
       />
 
-      {/* Date range */}
-      <p
-        className={`mb-3 font-display text-sm font-medium ${
-          isWork ? "text-ctp-red" : "text-ctp-maroon"
-        }`}
-      >
-        / {translateDynamicText(locale, exp.startDate)} –{" "}
-        {translateDynamicText(locale, exp.endDate)}
-      </p>
-
-      <div className="mb-4 flex flex-col-reverse justify-between gap-4 sm:flex-row sm:items-start">
-        <h3 className="font-display text-2xl font-black tracking-wide text-ctp-text sm:text-3xl lg:text-4xl">
-          {translateDynamicText(locale, exp.organization)}
-        </h3>
-        <div className="flex justify-end sm:block">
-          <OrgLogo organization={exp.organization} type={exp.type} />
+      <div>
+        {/* Date range & status badge */}
+        <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+          <p
+            className={`font-display text-sm font-semibold tracking-wide ${
+              isWork ? "text-ctp-red" : "text-ctp-maroon"
+            }`}
+          >
+            / {translateDynamicText(locale, exp.startDate)} –{" "}
+            {translateDynamicText(locale, exp.endDate)}
+          </p>
+          <StatusBadge endDate={exp.endDate} type={exp.type} />
         </div>
-      </div>
 
-      {/* Role / degree */}
-      <p className="mb-4 text-base text-ctp-subtext0">
-        {translateDynamicText(locale, exp.title)}
-      </p>
+        {/* Title, organization name and logo */}
+        <div className="mb-4 flex flex-col-reverse justify-between gap-4 sm:flex-row sm:items-start">
+          <div>
+            <h3 className="font-display text-xl font-black tracking-wide text-ctp-text sm:text-2xl">
+              {translateDynamicText(locale, exp.organization)}
+            </h3>
+            <p className="text-sm font-semibold text-ctp-subtext0 mt-1">
+              {translateDynamicText(locale, exp.title)}
+            </p>
+          </div>
+          <div className="flex shrink-0 justify-end sm:block">
+            <OrgLogo organization={exp.organization} type={exp.type} />
+          </div>
+        </div>
 
-      {/* Meta row: location + status */}
-      <div className="mb-5 flex flex-wrap items-center gap-3">
-        <span className="flex items-center gap-1.5 text-xs text-ctp-overlay0">
+        {/* Location row */}
+        <div className="mb-6 flex items-center gap-1.5 text-xs font-semibold text-ctp-overlay0">
           <MapPin className="h-3.5 w-3.5" />
           {translateDynamicText(locale, exp.location)}
-        </span>
-        <StatusBadge endDate={exp.endDate} type={exp.type} />
-      </div>
+        </div>
 
-      {/* Implementation / details header */}
-      <div className="mb-3 flex items-center gap-3">
-        <span className="font-display text-[10px] tracking-[0.18em] uppercase text-ctp-overlay0">
-          {implementationLabel}
-        </span>
-        <div className="h-px flex-1 bg-ctp-surface1/40" />
-      </div>
+        {/* Implementation / details header */}
+        <div className="mb-4 flex items-center gap-3">
+          <span className="font-display text-xs font-bold tracking-[0.15em] uppercase text-ctp-overlay0">
+            {implementationLabel}
+          </span>
+          <div className="h-px flex-1 bg-ctp-surface1/40" />
+        </div>
 
-      {/* Bullet points */}
-      <motion.ul
-        className="space-y-2"
-        variants={stagger(0.1, rm)}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-      >
-        {exp.description.map((item) => (
-          <motion.li
-            key={item}
-            variants={rowVariants(rm)}
-            className="flex items-start gap-2.5 text-sm leading-relaxed text-ctp-subtext0"
-          >
-            <span
-              className={`mt-[0.4rem] h-1.5 w-1.5 shrink-0 rounded-full ${
-                isWork ? "bg-ctp-red" : "bg-ctp-maroon"
-              }`}
-            />
-            <span>{translateDynamicText(locale, item)}</span>
-          </motion.li>
-        ))}
-      </motion.ul>
+        {/* Bullet points */}
+        <motion.ul
+          className="space-y-3"
+          variants={stagger(0.1, rm)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          {exp.description.map((item) => (
+            <motion.li
+              key={item}
+              variants={rowVariants(rm)}
+              className="flex items-start gap-2.5 text-sm leading-relaxed text-ctp-subtext0"
+            >
+              <span
+                className={`mt-[0.5rem] h-1.5 w-1.5 shrink-0 rounded-full ${
+                  isWork ? "bg-ctp-red" : "bg-ctp-maroon"
+                }`}
+              />
+              <span>{translateDynamicText(locale, item)}</span>
+            </motion.li>
+          ))}
+        </motion.ul>
+      </div>
     </motion.div>
   );
 }
@@ -374,66 +377,69 @@ export default function Experience() {
         subtitle={copy.experience.subtitle}
       />
 
-      <div className="mx-auto max-w-3xl space-y-12">
-        {/* ── Work Experience ──────────────────────────────────────── */}
-        {workExperience.length > 0 && (
-          <div>
-            <GroupHeader icon={Briefcase} label="Work Experience" rm={rm} />
-            <motion.div
-              className="space-y-5"
-              variants={stagger(0.04, rm)}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-60px" }}
-            >
-              {workExperience.map((exp) => (
-                <ExperienceCard
-                  key={`${exp.title}-${exp.startDate}`}
-                  exp={exp}
-                  rm={rm}
-                  locale={locale}
-                  isWork={true}
-                />
-              ))}
-            </motion.div>
-          </div>
-        )}
+      <div className="mx-auto max-w-7xl space-y-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+          {/* ── Work Experience ──────────────────────────────────────── */}
+          {workExperience.length > 0 && (
+            <div className="flex flex-col">
+              <GroupHeader icon={Briefcase} label="Work Experience" rm={rm} />
+              <motion.div
+                className="flex-1 flex flex-col gap-6"
+                variants={stagger(0.04, rm)}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-60px" }}
+              >
+                {workExperience.map((exp) => (
+                  <ExperienceCard
+                    key={`${exp.title}-${exp.startDate}`}
+                    exp={exp}
+                    rm={rm}
+                    locale={locale}
+                    isWork={true}
+                  />
+                ))}
+              </motion.div>
+            </div>
+          )}
 
-        {/* ── Education ────────────────────────────────────────────── */}
-        {educationExperience.length > 0 && (
-          <div>
-            <GroupHeader icon={GraduationCap} label="Education" rm={rm} />
-            <motion.div
-              className="space-y-5"
-              variants={stagger(0.04, rm)}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-60px" }}
-            >
-              {educationExperience.map((exp) => (
-                <ExperienceCard
-                  key={`${exp.title}-${exp.startDate}`}
-                  exp={exp}
-                  rm={rm}
-                  locale={locale}
-                  isWork={false}
-                />
-              ))}
-            </motion.div>
-          </div>
-        )}
+          {/* ── Education ────────────────────────────────────────────── */}
+          {educationExperience.length > 0 && (
+            <div className="flex flex-col">
+              <GroupHeader icon={GraduationCap} label="Education" rm={rm} />
+              <motion.div
+                className="flex-1 flex flex-col gap-6"
+                variants={stagger(0.04, rm)}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-60px" }}
+              >
+                {educationExperience.map((exp) => (
+                  <ExperienceCard
+                    key={`${exp.title}-${exp.startDate}`}
+                    exp={exp}
+                    rm={rm}
+                    locale={locale}
+                    isWork={false}
+                  />
+                ))}
+              </motion.div>
+            </div>
+          )}
+        </div>
 
         {/* ── Other types (teaching, etc.) ─────────────────────────── */}
         {orderedExperience
           .filter((e) => e.type !== "work" && e.type !== "education")
           .map((exp) => (
-            <ExperienceCard
-              key={`${exp.title}-${exp.startDate}`}
-              exp={exp}
-              rm={rm}
-              locale={locale}
-              isWork={false}
-            />
+            <div key={`${exp.title}-${exp.startDate}`} className="mx-auto max-w-3xl">
+              <ExperienceCard
+                exp={exp}
+                rm={rm}
+                locale={locale}
+                isWork={false}
+              />
+            </div>
           ))}
 
         {/* ── Organising & Volunteering toggle ─────────────────────── */}

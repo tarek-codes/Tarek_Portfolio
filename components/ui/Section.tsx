@@ -9,7 +9,7 @@ const Section = forwardRef<HTMLElement, SectionProps>(
     return (
       <section
         ref={ref}
-        className={`py-16 sm:py-20 md:py-24 lg:py-28 relative ${className}`}
+        className={`py-10 sm:py-12 md:py-14 lg:py-16 relative ${className}`}
         {...props}
       >
         <div

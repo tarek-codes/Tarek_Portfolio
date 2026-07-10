@@ -11,7 +11,7 @@ import {
   ExternalLink,
   Trophy,
 } from "lucide-react";
-import { getLeetCodeStats, type LeetCodeStats } from "@/lib/api/leetcode";
+import { type LeetCodeStats } from "@/lib/api/leetcode";
 import { PERSONAL_INFO } from "@/lib/constants";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import { getCopy } from "@/lib/i18n/translations";
@@ -96,7 +96,11 @@ export default function FloatingStats() {
     async function fetchLeetOnExpand() {
       setLoading(true);
       try {
-        const leetcode = await getLeetCodeStats(PERSONAL_INFO.leetcodeHandle);
+        const response = await fetch(
+          `/api/leetcode-stats?username=${encodeURIComponent(PERSONAL_INFO.leetcodeHandle)}`,
+        );
+        if (!response.ok) throw new Error("Failed to fetch LeetCode stats");
+        const leetcode = await response.json();
         if (!active) return;
         setLeetcodeData(leetcode);
       } catch (err) {
@@ -118,7 +122,11 @@ export default function FloatingStats() {
     let active = true;
     async function fetchLeet() {
       try {
-        const leetcode = await getLeetCodeStats(PERSONAL_INFO.leetcodeHandle);
+        const response = await fetch(
+          `/api/leetcode-stats?username=${encodeURIComponent(PERSONAL_INFO.leetcodeHandle)}`,
+        );
+        if (!response.ok) throw new Error("Failed to fetch LeetCode stats");
+        const leetcode = await response.json();
         if (!active) return;
         setLeetcodeData(leetcode);
         setHasFetchedLeet(true);
@@ -162,11 +170,20 @@ export default function FloatingStats() {
               aria-label={copy.stats.openStatsAria}
             >
               {/* Inline LeetCode icon */}
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-5 w-5 text-ctp-red">
-                <path fill="currentColor" d="M3 12c0-4.97 4.03-9 9-9s9 4.03 9 9-4.03 9-9 9S3 16.97 3 12zm10.47-3.53l-2.1 2.1 4.24 4.24 2.12-2.12-4.26-4.22zM7.05 7.05L9 9l2.12-2.12L9.17 4.9 7.05 7.05z" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                className="h-5 w-5 text-ctp-red"
+              >
+                <path
+                  fill="currentColor"
+                  d="M3 12c0-4.97 4.03-9 9-9s9 4.03 9 9-4.03 9-9 9S3 16.97 3 12zm10.47-3.53l-2.1 2.1 4.24 4.24 2.12-2.12-4.26-4.22zM7.05 7.05L9 9l2.12-2.12L9.17 4.9 7.05 7.05z"
+                />
               </svg>
               <span className="text-xs font-medium text-ctp-text">
-                {hasFetchedLeet && leetcodeData ? `${leetcodeData.totalSolved}` : "--"}
+                {hasFetchedLeet && leetcodeData
+                  ? `${leetcodeData.totalSolved}`
+                  : "--"}
               </span>
             </motion.button>
           )}
@@ -318,9 +335,7 @@ export default function FloatingStats() {
                           className="rounded-2xl border border-ctp-surface0/60 bg-ctp-base/70 p-3"
                         >
                           <div className="mb-2 flex items-center gap-2">
-                            <item.icon
-                              className={`h-4 w-4 ${item.color}`}
-                            />
+                            <item.icon className={`h-4 w-4 ${item.color}`} />
                             <span className="text-xs uppercase tracking-[0.18em] text-ctp-overlay0">
                               {item.label}
                             </span>
@@ -341,6 +356,3 @@ export default function FloatingStats() {
     </>
   );
 }
-
-
-

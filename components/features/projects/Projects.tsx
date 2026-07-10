@@ -158,15 +158,11 @@ const getMetaVariants = (reducedMotion: boolean): Variants => ({
 });
 
 const getCardLayout = (project: ProjectItem, index: number) => {
-  const prominent = Boolean(project.featured);
-
   return {
-    prominent,
-    spanClass: prominent
-      ? "md:col-span-2 lg:col-span-3"
-      : "md:col-span-1 lg:col-span-2",
-    imageClass: prominent ? "h-60 sm:h-64" : "h-52 sm:h-56",
-    descClampClass: prominent ? "line-clamp-4" : "line-clamp-2",
+    prominent: false,
+    spanClass: "",
+    imageClass: "h-44 sm:h-48",
+    descClampClass: "line-clamp-3",
   };
 };
 
@@ -272,7 +268,7 @@ export default function Projects() {
               key={f}
               onClick={() => setFilter(f)}
               aria-pressed={filter === f}
-              className={`group flex items-center gap-2.5 rounded-xl px-6 py-2.5 text-sm font-medium transition-all duration-300 focus-visible:ring-2 focus-visible:ring-ctp-red focus-visible:ring-offset-2 focus-visible:ring-offset-ctp-base ${
+              className={`group flex items-center gap-2.5 rounded-xl px-6 py-2.5 text-base font-bold transition-all duration-300 focus-visible:ring-2 focus-visible:ring-ctp-red focus-visible:ring-offset-2 focus-visible:ring-offset-ctp-base ${
                 filter === f
                   ? "bg-ctp-red text-ctp-crust shadow-[0_0_20px_-5px_rgba(237,135,150,0.4)]"
                   : "text-ctp-subtext0 hover:text-ctp-text bg-ctp-surface0/40 hover:bg-ctp-surface0/60"
@@ -289,7 +285,7 @@ export default function Projects() {
 
       {/* Grid */}
       <motion.div
-        className="mx-auto grid max-w-6xl grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-6"
+        className="mx-auto grid max-w-6xl grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-60px" }}
@@ -317,18 +313,20 @@ export default function Projects() {
                   : {
                       y: -4,
                       scale: 1.006,
-                      rotateX: layout.prominent ? 1.1 : 0.8,
-                      rotateY: layout.prominent ? -1.1 : -0.8,
+                      rotateX: 0.6,
+                      rotateY: -0.6,
                     }
               }
               transition={{ duration: reducedMotion ? 0.22 : 0.26, ease }}
               style={{ transformPerspective: 1200 }}
-              className={`group relative isolate flex h-full flex-col overflow-hidden rounded-2xl border border-ctp-surface0/70 bg-ctp-surface0/35 backdrop-blur-sm transition-[border-color,background-color] duration-300 hover:border-ctp-surface1 hover:bg-ctp-surface0/45 ${layout.spanClass}`}
+              className="group relative isolate flex h-full flex-col overflow-hidden rounded-2xl border border-ctp-surface0/70 bg-ctp-surface0/35 backdrop-blur-sm transition-[border-color,background-color] duration-300 hover:border-ctp-surface1 hover:bg-ctp-surface0/45 w-full"
             >
               <div className={`absolute inset-x-0 top-0 h-px ${status.rail}`} />
               <div
                 className={`pointer-events-none absolute -right-20 -top-20 h-40 w-40 rounded-full ${status.glow} opacity-0 transition-transform duration-300 ${
-                  reducedMotion ? "" : "group-hover:opacity-100 group-hover:scale-110"
+                  reducedMotion
+                    ? ""
+                    : "group-hover:opacity-100 group-hover:scale-110"
                 }`}
               />
 
@@ -363,7 +361,7 @@ export default function Projects() {
               </div>
 
               {/* Body */}
-              <div className="flex flex-1 flex-col p-5 sm:p-6">
+              <div className="flex flex-1 flex-col p-4 sm:p-5">
                 <div className="mb-2.5 flex items-center justify-between gap-2">
                   <span className="text-xs text-ctp-overlay0 font-display">
                     {translateDynamicText(locale, project.category)}
@@ -378,7 +376,7 @@ export default function Projects() {
                   </span>
                 </div>
 
-                <h3 className="mb-2 text-lg font-display font-bold text-ctp-text transition-colors group-hover:text-ctp-red sm:text-[1.2rem]">
+                <h3 className="mb-2 text-lg font-display font-bold text-ctp-text transition-colors group-hover:text-ctp-red sm:text-xl">
                   {project.title}
                   <span className="mt-1 block h-px origin-left scale-x-0 bg-linear-to-r from-ctp-red via-ctp-maroon to-ctp-pink transition-transform duration-300 group-hover:scale-x-100" />
                 </h3>
