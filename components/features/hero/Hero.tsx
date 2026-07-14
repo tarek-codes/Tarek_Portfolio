@@ -146,8 +146,8 @@ export default function Hero() {
               className="mb-6 text-5xl font-black tracking-tighter text-ctp-text sm:text-6xl md:text-7xl lg:text-8xl !leading-[0.9] text-center"
               variants={itemVariants}
             >
-              <span className="block">{heroName.first}</span>
-              <span className="text-gradient-red block">{heroName.second}</span>
+              <span className="text-gradient-red block">{heroName.first}</span>
+              <span className="block">{heroName.second}</span>
             </motion.h1>
 
             <motion.p

@@ -115,7 +115,7 @@ export default async function RootLayout({
       suppressHydrationWarning
       className={`${bricolage.variable} ${dmSans.variable} ${jetbrainsMono.variable} ${initialLocale === "bn" ? "locale-bn" : ""}`}
     >
-      <body className={`${dmSans.className} antialiased`}>
+      <body className={`${dmSans.className} antialiased`} suppressHydrationWarning>
         <ThemeProvider>
           <LanguageProvider initialLocale={initialLocale}>
             <Header />

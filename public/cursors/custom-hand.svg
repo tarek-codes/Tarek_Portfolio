@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <!-- Hand Group: Rotated -45deg, Scaled, and Positioned so the Index Finger Tip (64, 40) is at (22, 20) -->
+  <g transform="translate(22, 20) scale(0.6) translate(-64, -40) rotate(-45 64 40)">
+    
+    <!-- 5 Clicking Rays (Vibrant Red) -->
+    <g stroke="#ff3b30" stroke-width="6" stroke-linecap="round">
+      <line x1="64" y1="20" x2="64" y2="10" />
+      <line x1="49" y1="27" x2="42" y2="20" />
+      <line x1="79" y1="27" x2="86" y2="20" />
+      <line x1="38" y1="40" x2="28" y2="40" />
+      <line x1="90" y1="40" x2="100" y2="40" />
+    </g>
+
+    <!-- 3D Shadow Hand Body (Darker Red) -->
+    <path d="M 56 80 
+             L 56 48 
+             A 8 8 0 0 1 72 48 
+             L 72 75 
+             A 8 8 0 0 1 88 75 
+             L 88 80 
+             A 8 8 0 0 1 104 80 
+             L 104 90 
+             A 8 8 0 0 1 120 90 
+             L 120 115 
+             C 120 135, 100 150, 75 150 
+             C 50 150, 44 140, 36 125 
+             L 24 100 
+             C 18 90, 30 80, 40 90 
+             L 56 100 
+             L 56 80 Z" 
+          fill="#c21a1b" 
+          transform="translate(5, 7)" />
+
+    <!-- Front Face Hand Body (Vibrant Red) -->
+    <path d="M 56 80 
+             L 56 48 
+             A 8 8 0 0 1 72 48 
+             L 72 75 
+             A 8 8 0 0 1 88 75 
+             L 88 80 
+             A 8 8 0 0 1 104 80 
+             L 104 90 
+             A 8 8 0 0 1 120 90 
+             L 120 115 
+             C 120 135, 100 150, 75 150 
+             C 50 150, 44 140, 36 125 
+             L 24 100 
+             C 18 90, 30 80, 40 90 
+             L 56 100 
+             L 56 80 Z" 
+          fill="#ff3b30" />
+  </g>
+</svg>

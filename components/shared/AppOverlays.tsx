@@ -24,6 +24,11 @@ const Chatbot = dynamic(() => import("@/components/features/chatbot/Chatbot"), {
   loading: () => null,
 });
 
+const CustomCursor = dynamic(() => import("@/components/shared/CustomCursor"), {
+  ssr: false,
+  loading: () => null,
+});
+
 export default function AppOverlays() {
   const [showHeavyOverlays, setShowHeavyOverlays] = useState(false);
 
@@ -55,6 +60,7 @@ export default function AppOverlays() {
 
   return (
     <>
+      <CustomCursor />
       <ScrollToTop />
       <FloatingThemeToggle />
       <FloatingLanguageToggle />

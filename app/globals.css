@@ -87,8 +87,42 @@
         box-shadow: 0 0 50px -5px var(--color-ctp-red);
     }
 
+    @keyframes flow-glow {
+        0%, 100% {
+            background-position: 0% 50%;
+            filter: drop-shadow(0 0 8px rgba(153, 0, 0, 0.45));
+        }
+        14% {
+            filter: drop-shadow(0 0 22px rgba(230, 0, 0, 0.9));
+        }
+        24% {
+            filter: drop-shadow(0 0 12px rgba(153, 0, 0, 0.55));
+        }
+        34% {
+            filter: drop-shadow(0 0 26px rgba(230, 0, 0, 0.95));
+        }
+        50% {
+            background-position: 100% 50%;
+            filter: drop-shadow(0 0 10px rgba(153, 0, 0, 0.45));
+        }
+    }
+
     .text-gradient-red {
-        @apply bg-linear-to-r from-ctp-red via-ctp-peach to-ctp-red bg-clip-text text-transparent;
+        background-image: linear-gradient(
+            90deg,
+            #990000 0%,
+            #be123c 25%,
+            #dc2626 50%,
+            #ff3b30 70%,
+            #dc2626 80%,
+            #be123c 90%,
+            #990000 100%
+        );
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: flow-glow 4s ease-in-out infinite;
     }
 }
 
@@ -444,12 +478,12 @@ html.locale-bn body {
 
 /* Developer-style custom cursor */
 body {
-    cursor: url('/cursors/red-arrow.svg') 3 3, auto;
+    cursor: url('/cursors/custom-pointer.svg') 6 6, auto;
 }
 
 /* Keep pointer cursor for interactive elements */
 a, button, [role="button"], input, textarea, select, summary {
-    cursor: url('/cursors/red-arrow.svg') 3 3, pointer;
+    cursor: url('/cursors/custom-pointer.svg') 6 6, pointer;
     transition:
         color 220ms var(--transition-smooth),
         background-color 220ms var(--transition-smooth),
@@ -461,6 +495,14 @@ a, button, [role="button"], input, textarea, select, summary {
 
 input, textarea {
     cursor: url('/cursors/red-caret.svg') 16 16, text;
+}
+
+/* Hide default cursor when client-side custom cursor is active */
+@media (pointer: fine) {
+    body.custom-cursor-active,
+    body.custom-cursor-active * {
+        cursor: none !important;
+    }
 }
 
 a:hover,
@@ -478,6 +520,11 @@ button:hover,
     a, button, [role="button"], input, textarea, select, summary {
         cursor: pointer;
         transition: none;
+    }
+
+    body.custom-cursor-active,
+    body.custom-cursor-active * {
+        cursor: auto !important;
     }
 
     a:hover,

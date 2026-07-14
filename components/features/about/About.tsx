@@ -19,6 +19,7 @@ import { ABOUT_CARDS, PERSONAL_INFO } from "@/lib/constants";
 import Image from "next/image";
 import { useLanguage } from "@/components/providers/LanguageProvider";
 import { getCopy, translateDynamicText } from "@/lib/i18n/translations";
+import BorderBeam from "@/components/ui/BorderBeam";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -79,7 +80,6 @@ export default function About() {
   const prefersReducedMotion = useReducedMotion();
   const rm = Boolean(prefersReducedMotion);
   const { locale } = useLanguage();
-  const [heatmapError, setHeatmapError] = useState(false);
 
   const bioCard = ABOUT_CARDS.find((c) => c.id === "bio");
   const currentCard = ABOUT_CARDS.find((c) => c.id === "current");
@@ -123,7 +123,7 @@ export default function About() {
 
       {/* Bento Grid Layout */}
       <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-stretch max-w-6xl mx-auto">
-        
+
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -134,7 +134,7 @@ export default function About() {
           {/* Background pattern */}
           <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-70" />
           <div className="pointer-events-none absolute -right-12 -top-12 h-32 w-32 rounded-full bg-ctp-red/10 blur-3xl transition-opacity duration-300 opacity-0 group-hover:opacity-100" />
-          
+
           <div>
             <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
               <span className="rounded-full border border-ctp-red/20 bg-ctp-red/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.24em] text-ctp-red">
@@ -201,7 +201,7 @@ export default function About() {
           className="group relative overflow-hidden rounded-3xl border border-ctp-surface0/60 bg-gradient-to-br from-ctp-surface0/20 via-ctp-surface0/10 to-ctp-mantle/30 p-5 backdrop-blur-md transition-all duration-300 hover:border-ctp-red/35 hover:bg-ctp-surface0/15 hover:shadow-[0_20px_50px_-25px_rgba(237,135,150,0.15)] sm:p-6 lg:col-span-1 md:col-span-2 flex flex-col justify-between"
         >
           <div className="pointer-events-none absolute -right-12 -top-12 h-32 w-32 rounded-full bg-ctp-red/10 blur-3xl transition-opacity duration-300 opacity-0 group-hover:opacity-100" />
-          
+
           <div>
             <div className="mb-4 flex items-center justify-between">
               <h3 className="font-display text-[10px] font-semibold tracking-[0.24em] uppercase text-ctp-overlay0">
@@ -241,46 +241,6 @@ export default function About() {
           </div>
         </motion.div>
 
-        {/* Card 6: GitHub Contribution Matrix (Spans 3 cols on desktop, 2 on tablet) */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-60px" }}
-          variants={fadeUp(0.1, rm)}
-          className="group relative overflow-hidden rounded-3xl border border-ctp-surface1/60 bg-gradient-to-br from-ctp-surface0/40 via-ctp-mantle/40 to-ctp-crust/60 p-5 shadow-[0_20px_45px_-30px_rgba(17,17,27,0.9)] backdrop-blur-sm transition-all duration-300 hover:border-ctp-red/35 hover:shadow-[0_20px_50px_-25px_rgba(237,135,150,0.15)] sm:p-6 lg:col-span-3 md:col-span-2"
-        >
-          <div className="pointer-events-none absolute -right-12 -top-12 h-32 w-32 rounded-full bg-ctp-red/10 blur-3xl transition-opacity duration-300 opacity-0 group-hover:opacity-100" />
-          <div className="mb-3 flex items-center justify-between">
-            <span className="font-display text-[10px] tracking-[0.22em] uppercase text-ctp-overlay0">
-              {translateDynamicText(locale, "GIT CONTRIBUTION MATRIX")}
-            </span>
-            <span className="flex items-center gap-1.5 font-display text-[10px] tracking-[0.1em] text-emerald-400">
-              <span className="relative flex h-1.5 w-1.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
-              </span>
-              {translateDynamicText(locale, "LIVE_SYNC")}
-            </span>
-          </div>
-          <div className="overflow-hidden rounded-xl border border-ctp-surface1/60 bg-ctp-crust/70 p-4 shadow-inner shadow-black/30 backdrop-blur-sm">
-            {heatmapError ? (
-              <div className="flex h-20 items-center justify-center gap-2 text-xs text-ctp-overlay0">
-                <span className="font-display tracking-wider">
-                  github.com/2ManyFaces
-                </span>
-              </div>
-            ) : (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src="https://ghchart.rshah.org/dc2626/2ManyFaces"
-                alt="GitHub contribution graph for 2ManyFaces"
-                className="h-auto w-full rounded-lg opacity-80 transition-opacity hover:opacity-100"
-                onError={() => setHeatmapError(true)}
-              />
-            )}
-          </div>
-        </motion.div>
-        
       </div>
     </Section>
   );
