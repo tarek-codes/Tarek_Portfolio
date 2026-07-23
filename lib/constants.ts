@@ -13,7 +13,7 @@ export const PERSONAL_INFO = {
   profileImageUrl: "https://lh3.googleusercontent.com/d/11rMBcQOVUOjbQ0KIZxW9KskRy_g5E_BD",
   leetcodeHandle: "2ManyFaces",
   codechefHandle: "",
-  githubUrl: "https://github.com/2ManyFaces",
+  githubUrl: "https://github.com/tarek-codes",
   linkedinUrl: "https://www.linkedin.com/in/tarekalambhuiyan",
   twitterUrl: "https://x.com/Tarek11X",
   facebookUrl: "https://www.facebook.com/Tarek112001/",
