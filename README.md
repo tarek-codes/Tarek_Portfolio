@@ -4,7 +4,7 @@ A modern personal portfolio built with Next.js 16 App Router, React 19, TypeScri
 
 ## Live Site
 
-- Production: [www.sharifdotg.me](https://www.sharifdotg.me)
+- Production: [Tarek Alam Bhuiyan](tarek-dev.vercel.app)
 
 ## Screenshots and Highlights
 
@@ -57,8 +57,6 @@ public/
 ### Installation
 
 ```bash
-git clone https://github.com/SharifdotG/portfolio-dotg.git
-cd portfolio-dotg
 bun install
 cp .env.local.example .env.local
 ```
@@ -71,10 +69,6 @@ Set these in `.env.local`:
 OPENROUTER_API_KEY=your_openrouter_api_key
 RESEND_API_KEY=your_resend_api_key
 
-# Optional
-RESEND_FROM=Sharif Portfolio <onboarding@resend.dev>
-RESEND_TO=sharifmdyousuf007@gmail.com
-GITHUB_TOKEN=your_github_token
 ```
 
 ### Run
@@ -141,11 +135,6 @@ Home page composition:
 
 - `app/page.tsx`
 
-## Contributing and Community
-
-- Contributing guide: [CONTRIBUTING.md](CONTRIBUTING.md)
-- Code of conduct: [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
-- License: [LICENSE](LICENSE)
 
 ## Troubleshooting
 
